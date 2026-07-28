@@ -13,6 +13,125 @@ interface AffidavitFormAppProps {
   statutoryReference: string;
 }
 
+// ─── Heirship-specific types ────────────────────────────────────────────────
+
+interface Marriage {
+  spouseName: string;
+  marriageDate: string;
+  endDate: string;
+  howEnded: 'death' | 'divorce' | 'still-married' | '';
+}
+
+interface Child {
+  fullName: string;
+  dob: string;
+  status: 'living' | 'deceased' | '';
+  relation: 'biological' | 'adopted' | '';
+  grandchildren: string; // comma-separated names if child is deceased
+}
+
+interface Sibling {
+  fullName: string;
+  status: 'living' | 'deceased' | '';
+}
+
+interface HeirshipData {
+  // Deceased
+  deceasedName: string;
+  deceasedDOB: string;
+  dateOfDeath: string;
+  countyOfDeath: string;
+  stateOfDeath: string;
+  // Marital history
+  marriages: Marriage[];
+  // Children
+  children: Child[];
+  // Parents
+  fatherName: string;
+  fatherStatus: 'living' | 'deceased' | '';
+  motherName: string;
+  motherStatus: 'living' | 'deceased' | '';
+  // Siblings
+  siblings: Sibling[];
+  noSiblings: boolean;
+  // Probate
+  noProbate: boolean;
+  probateDescription: string;
+  // Residence
+  lastAddress: string;
+  lastCity: string;
+  lastCounty: string;
+  lastState: string;
+  lastZip: string;
+  residenceFromDate: string;
+  // Property / Assets
+  propertyDescription: string;
+  // Witnesses
+  witness1Name: string;
+  witness1Address: string;
+  witness1HowLong: string;
+  witness1Relationship: string;
+  witness2Name: string;
+  witness2Address: string;
+  witness2HowLong: string;
+  witness2Relationship: string;
+}
+
+const emptyMarriage = (): Marriage => ({
+  spouseName: '',
+  marriageDate: '',
+  endDate: '',
+  howEnded: '',
+});
+
+const emptyChild = (): Child => ({
+  fullName: '',
+  dob: '',
+  status: '',
+  relation: '',
+  grandchildren: '',
+});
+
+const emptySibling = (): Sibling => ({
+  fullName: '',
+  status: '',
+});
+
+const emptyHeirship = (): HeirshipData => ({
+  deceasedName: '',
+  deceasedDOB: '',
+  dateOfDeath: '',
+  countyOfDeath: '',
+  stateOfDeath: 'Texas',
+  marriages: [emptyMarriage()],
+  children: [emptyChild()],
+  fatherName: '',
+  fatherStatus: '',
+  motherName: '',
+  motherStatus: '',
+  siblings: [emptySibling()],
+  noSiblings: false,
+  noProbate: true,
+  probateDescription: '',
+  lastAddress: '',
+  lastCity: '',
+  lastCounty: '',
+  lastState: 'Texas',
+  lastZip: '',
+  residenceFromDate: '',
+  propertyDescription: '',
+  witness1Name: '',
+  witness1Address: '',
+  witness1HowLong: '',
+  witness1Relationship: '',
+  witness2Name: '',
+  witness2Address: '',
+  witness2HowLong: '',
+  witness2Relationship: '',
+});
+
+// ─── Non-heirship simple fields ─────────────────────────────────────────────
+
 const fieldConfigs: Record<string, Array<{ key: string; label: string; placeholder?: string; type?: string }>> = {
   'small-estate-affidavit': [
     { key: 'deceasedName', label: 'Full name of the deceased', placeholder: 'Jane Smith' },
@@ -21,16 +140,6 @@ const fieldConfigs: Record<string, Array<{ key: string; label: string; placehold
     { key: 'propertyDescription', label: 'Description of assets to transfer', placeholder: 'Bank account at Chase Bank, account ending 1234' },
     { key: 'heirName', label: 'Your full name (heir / claimant)', placeholder: 'John Smith' },
     { key: 'heirRelationship', label: 'Your relationship to the deceased', placeholder: 'Son / Daughter / Spouse' },
-  ],
-  'affidavit-of-heirship': [
-    { key: 'deceasedName', label: 'Full name of the deceased', placeholder: 'Jane Smith' },
-    { key: 'dateOfDeath', label: 'Date of death', type: 'date' },
-    { key: 'county', label: 'Texas county where property is located', placeholder: 'e.g. Harris' },
-    { key: 'propertyDescription', label: 'Property description (from deed)', placeholder: 'Lot 12, Block 3, Oak Ridge Subdivision...' },
-    { key: 'heirName', label: 'Heir\'s full name', placeholder: 'John Smith' },
-    { key: 'heirRelationship', label: 'Relationship to deceased', placeholder: 'Son' },
-    { key: 'witness1Name', label: 'First witness full name', placeholder: 'Mary Johnson (disinterested party)' },
-    { key: 'witness2Name', label: 'Second witness full name', placeholder: 'Robert Williams (disinterested party)' },
   ],
   'tod-deed': [
     { key: 'grantorName', label: 'Your full legal name (grantor / property owner)', placeholder: 'Jane Smith' },
@@ -47,11 +156,477 @@ const documentDescriptions: Record<string, string> = {
   'tod-deed': 'A Transfer on Death Deed (TOD Deed) allows you to designate a beneficiary who will receive your real property when you die, without going through probate. You set it up now, and it takes effect at your death.',
 };
 
-export default function AffidavitFormApp({ documentType, state, county, eligibilityThreshold, waitingDays = 0, statutoryReference }: AffidavitFormAppProps) {
+// ─── Heirship sub-step components ────────────────────────────────────────────
+
+function inputCls() {
+  return 'w-full px-4 py-3 border border-[#D4CCC0] rounded-lg text-[#2C2C2A] focus:outline-none focus:ring-2 focus:ring-[#8B6914] focus:border-transparent bg-white';
+}
+function labelCls() {
+  return 'block text-sm font-medium text-[#2C2C2A] mb-1.5';
+}
+function sectionHeadingCls() {
+  return 'font-serif text-lg text-[#2D5016] mb-4';
+}
+function addBtnCls() {
+  return 'mt-3 px-4 py-2 border border-[#2D5016] text-[#2D5016] rounded-lg text-sm font-medium hover:bg-[#2D5016] hover:text-[#F7F4EF] transition-colors';
+}
+function removeBtnCls() {
+  return 'text-xs text-[#C0392B] hover:underline mt-1';
+}
+function selectCls() {
+  return 'w-full px-4 py-3 border border-[#D4CCC0] rounded-lg text-[#2C2C2A] focus:outline-none focus:ring-2 focus:ring-[#8B6914] bg-white';
+}
+
+// Sub-step A: Deceased basic info
+function DeceasedStep({ data, onChange }: { data: HeirshipData; onChange: (d: HeirshipData) => void }) {
+  const set = (key: keyof HeirshipData, val: string) => onChange({ ...data, [key]: val });
+  return (
+    <div className="space-y-5">
+      <h3 className={sectionHeadingCls()}>Deceased person's information</h3>
+      <div>
+        <label className={labelCls()}>Full legal name</label>
+        <input className={inputCls()} value={data.deceasedName} onChange={e => set('deceasedName', e.target.value)} placeholder="Jane Marie Smith" />
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className={labelCls()}>Date of birth</label>
+          <input type="date" className={inputCls()} value={data.deceasedDOB} onChange={e => set('deceasedDOB', e.target.value)} />
+        </div>
+        <div>
+          <label className={labelCls()}>Date of death</label>
+          <input type="date" className={inputCls()} value={data.dateOfDeath} onChange={e => set('dateOfDeath', e.target.value)} />
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className={labelCls()}>County of death</label>
+          <input className={inputCls()} value={data.countyOfDeath} onChange={e => set('countyOfDeath', e.target.value)} placeholder="e.g. Harris" />
+        </div>
+        <div>
+          <label className={labelCls()}>State of death</label>
+          <input className={inputCls()} value={data.stateOfDeath} onChange={e => set('stateOfDeath', e.target.value)} placeholder="Texas" />
+        </div>
+      </div>
+      <h3 className={sectionHeadingCls() + ' mt-6'}>Last known residence</h3>
+      <div>
+        <label className={labelCls()}>Street address</label>
+        <input className={inputCls()} value={data.lastAddress} onChange={e => set('lastAddress', e.target.value)} placeholder="123 Main St" />
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="col-span-2">
+          <label className={labelCls()}>City</label>
+          <input className={inputCls()} value={data.lastCity} onChange={e => set('lastCity', e.target.value)} placeholder="Houston" />
+        </div>
+        <div>
+          <label className={labelCls()}>County</label>
+          <input className={inputCls()} value={data.lastCounty} onChange={e => set('lastCounty', e.target.value)} placeholder="Harris" />
+        </div>
+        <div>
+          <label className={labelCls()}>ZIP</label>
+          <input className={inputCls()} value={data.lastZip} onChange={e => set('lastZip', e.target.value)} placeholder="77002" />
+        </div>
+      </div>
+      <div>
+        <label className={labelCls()}>State</label>
+        <input className={inputCls()} value={data.lastState} onChange={e => set('lastState', e.target.value)} placeholder="Texas" />
+      </div>
+      <div>
+        <label className={labelCls()}>Resided at this address from (date)</label>
+        <input type="date" className={inputCls()} value={data.residenceFromDate} onChange={e => set('residenceFromDate', e.target.value)} />
+      </div>
+    </div>
+  );
+}
+
+// Sub-step B: Marital history
+function MarriagesStep({ data, onChange }: { data: HeirshipData; onChange: (d: HeirshipData) => void }) {
+  const updateMarriage = (i: number, key: keyof Marriage, val: string) => {
+    const updated = data.marriages.map((m, idx) => idx === i ? { ...m, [key]: val } : m);
+    onChange({ ...data, marriages: updated });
+  };
+  const addMarriage = () => onChange({ ...data, marriages: [...data.marriages, emptyMarriage()] });
+  const removeMarriage = (i: number) => onChange({ ...data, marriages: data.marriages.filter((_, idx) => idx !== i) });
+
+  return (
+    <div>
+      <h3 className={sectionHeadingCls()}>Marital history</h3>
+      <p className="text-sm text-[#6B6560] mb-4">List every marriage in chronological order, including the current or most recent.</p>
+      {data.marriages.map((m, i) => (
+        <div key={i} className="mb-6 p-4 bg-[#F7F4EF] rounded-lg border border-[#D4CCC0]">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-sm font-medium text-[#2D5016]">Marriage {i + 1}</span>
+            {data.marriages.length > 1 && (
+              <button className={removeBtnCls()} onClick={() => removeMarriage(i)}>Remove</button>
+            )}
+          </div>
+          <div className="space-y-3">
+            <div>
+              <label className={labelCls()}>Spouse's full legal name</label>
+              <input className={inputCls()} value={m.spouseName} onChange={e => updateMarriage(i, 'spouseName', e.target.value)} placeholder="Robert James Johnson" />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className={labelCls()}>Date of marriage</label>
+                <input type="date" className={inputCls()} value={m.marriageDate} onChange={e => updateMarriage(i, 'marriageDate', e.target.value)} />
+              </div>
+              <div>
+                <label className={labelCls()}>Date ended (if applicable)</label>
+                <input type="date" className={inputCls()} value={m.endDate} onChange={e => updateMarriage(i, 'endDate', e.target.value)} />
+              </div>
+            </div>
+            <div>
+              <label className={labelCls()}>How did the marriage end?</label>
+              <select className={selectCls()} value={m.howEnded} onChange={e => updateMarriage(i, 'howEnded', e.target.value as Marriage['howEnded'])}>
+                <option value="">Select one...</option>
+                <option value="death">Death of spouse</option>
+                <option value="divorce">Divorce</option>
+                <option value="still-married">Still married at time of death</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      ))}
+      <button className={addBtnCls()} onClick={addMarriage}>+ Add another marriage</button>
+    </div>
+  );
+}
+
+// Sub-step C: Children
+function ChildrenStep({ data, onChange }: { data: HeirshipData; onChange: (d: HeirshipData) => void }) {
+  const updateChild = (i: number, key: keyof Child, val: string) => {
+    const updated = data.children.map((c, idx) => idx === i ? { ...c, [key]: val } : c);
+    onChange({ ...data, children: updated });
+  };
+  const addChild = () => onChange({ ...data, children: [...data.children, emptyChild()] });
+  const removeChild = (i: number) => onChange({ ...data, children: data.children.filter((_, idx) => idx !== i) });
+
+  return (
+    <div>
+      <h3 className={sectionHeadingCls()}>Children of the deceased</h3>
+      <p className="text-sm text-[#6B6560] mb-4">Include all biological and adopted children. If a child predeceased the decedent, list their children (grandchildren of the deceased) in the final field.</p>
+      {data.children.map((c, i) => (
+        <div key={i} className="mb-6 p-4 bg-[#F7F4EF] rounded-lg border border-[#D4CCC0]">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-sm font-medium text-[#2D5016]">Child {i + 1}</span>
+            {data.children.length > 1 && (
+              <button className={removeBtnCls()} onClick={() => removeChild(i)}>Remove</button>
+            )}
+          </div>
+          <div className="space-y-3">
+            <div>
+              <label className={labelCls()}>Full legal name</label>
+              <input className={inputCls()} value={c.fullName} onChange={e => updateChild(i, 'fullName', e.target.value)} placeholder="Emily Jane Smith" />
+            </div>
+            <div>
+              <label className={labelCls()}>Date of birth</label>
+              <input type="date" className={inputCls()} value={c.dob} onChange={e => updateChild(i, 'dob', e.target.value)} />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className={labelCls()}>Living or deceased?</label>
+                <select className={selectCls()} value={c.status} onChange={e => updateChild(i, 'status', e.target.value as Child['status'])}>
+                  <option value="">Select...</option>
+                  <option value="living">Living</option>
+                  <option value="deceased">Deceased</option>
+                </select>
+              </div>
+              <div>
+                <label className={labelCls()}>Biological or adopted?</label>
+                <select className={selectCls()} value={c.relation} onChange={e => updateChild(i, 'relation', e.target.value as Child['relation'])}>
+                  <option value="">Select...</option>
+                  <option value="biological">Biological</option>
+                  <option value="adopted">Adopted</option>
+                </select>
+              </div>
+            </div>
+            {c.status === 'deceased' && (
+              <div>
+                <label className={labelCls()}>If this child is deceased, list their children (grandchildren of decedent) — names separated by commas</label>
+                <input className={inputCls()} value={c.grandchildren} onChange={e => updateChild(i, 'grandchildren', e.target.value)} placeholder="Michael Smith, Sarah Smith" />
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+      <button className={addBtnCls()} onClick={addChild}>+ Add another child</button>
+    </div>
+  );
+}
+
+// Sub-step D: Parents & Siblings
+function FamilyStep({ data, onChange }: { data: HeirshipData; onChange: (d: HeirshipData) => void }) {
+  const set = (key: keyof HeirshipData, val: string | boolean) => onChange({ ...data, [key]: val });
+  const updateSibling = (i: number, key: keyof Sibling, val: string) => {
+    const updated = data.siblings.map((s, idx) => idx === i ? { ...s, [key]: val } : s);
+    onChange({ ...data, siblings: updated });
+  };
+  const addSibling = () => onChange({ ...data, siblings: [...data.siblings, emptySibling()] });
+  const removeSibling = (i: number) => onChange({ ...data, siblings: data.siblings.filter((_, idx) => idx !== i) });
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className={sectionHeadingCls()}>Parents</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="p-4 bg-[#F7F4EF] rounded-lg border border-[#D4CCC0]">
+            <p className="text-sm font-medium text-[#2D5016] mb-3">Father</p>
+            <div className="space-y-3">
+              <div>
+                <label className={labelCls()}>Full name</label>
+                <input className={inputCls()} value={data.fatherName} onChange={e => set('fatherName', e.target.value)} placeholder="William Henry Smith" />
+              </div>
+              <div>
+                <label className={labelCls()}>Status</label>
+                <select className={selectCls()} value={data.fatherStatus} onChange={e => set('fatherStatus', e.target.value as 'living' | 'deceased' | '')}>
+                  <option value="">Select...</option>
+                  <option value="living">Living</option>
+                  <option value="deceased">Deceased</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div className="p-4 bg-[#F7F4EF] rounded-lg border border-[#D4CCC0]">
+            <p className="text-sm font-medium text-[#2D5016] mb-3">Mother</p>
+            <div className="space-y-3">
+              <div>
+                <label className={labelCls()}>Full name</label>
+                <input className={inputCls()} value={data.motherName} onChange={e => set('motherName', e.target.value)} placeholder="Dorothy Mae Williams" />
+              </div>
+              <div>
+                <label className={labelCls()}>Status</label>
+                <select className={selectCls()} value={data.motherStatus} onChange={e => set('motherStatus', e.target.value as 'living' | 'deceased' | '')}>
+                  <option value="">Select...</option>
+                  <option value="living">Living</option>
+                  <option value="deceased">Deceased</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 className={sectionHeadingCls()}>Siblings</h3>
+        <label className="flex items-center gap-2 mb-4 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={data.noSiblings}
+            onChange={e => onChange({ ...data, noSiblings: e.target.checked, siblings: e.target.checked ? [] : [emptySibling()] })}
+            className="w-4 h-4 accent-[#2D5016]"
+          />
+          <span className="text-sm text-[#2C2C2A]">Decedent had no siblings</span>
+        </label>
+        {!data.noSiblings && (
+          <>
+            {data.siblings.map((s, i) => (
+              <div key={i} className="mb-4 p-4 bg-[#F7F4EF] rounded-lg border border-[#D4CCC0]">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-sm font-medium text-[#2D5016]">Sibling {i + 1}</span>
+                  {data.siblings.length > 1 && (
+                    <button className={removeBtnCls()} onClick={() => removeSibling(i)}>Remove</button>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className={labelCls()}>Full name</label>
+                    <input className={inputCls()} value={s.fullName} onChange={e => updateSibling(i, 'fullName', e.target.value)} placeholder="Thomas Alan Smith" />
+                  </div>
+                  <div>
+                    <label className={labelCls()}>Status</label>
+                    <select className={selectCls()} value={s.status} onChange={e => updateSibling(i, 'status', e.target.value as Sibling['status'])}>
+                      <option value="">Select...</option>
+                      <option value="living">Living</option>
+                      <option value="deceased">Deceased</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            ))}
+            <button className={addBtnCls()} onClick={addSibling}>+ Add another sibling</button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Sub-step E: Probate & Property
+function ProbatePropertyStep({ data, onChange }: { data: HeirshipData; onChange: (d: HeirshipData) => void }) {
+  const set = (key: keyof HeirshipData, val: string | boolean) => onChange({ ...data, [key]: val });
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className={sectionHeadingCls()}>Probate proceedings</h3>
+        <div className="space-y-3">
+          <label className="flex items-start gap-3 p-4 rounded-lg border cursor-pointer transition-colors"
+            style={{ borderColor: data.noProbate ? '#2D5016' : '#D4CCC0', background: data.noProbate ? '#EEF4E8' : '#F7F4EF' }}>
+            <input type="radio" name="probate" checked={data.noProbate} onChange={() => set('noProbate', true)} className="mt-0.5 accent-[#2D5016]" />
+            <span className="text-sm text-[#2C2C2A]">No probate proceeding has been filed or is pending for the estate of the decedent in Texas or any other state.</span>
+          </label>
+          <label className="flex items-start gap-3 p-4 rounded-lg border cursor-pointer transition-colors"
+            style={{ borderColor: !data.noProbate ? '#2D5016' : '#D4CCC0', background: !data.noProbate ? '#EEF4E8' : '#F7F4EF' }}>
+            <input type="radio" name="probate" checked={!data.noProbate} onChange={() => set('noProbate', false)} className="mt-0.5 accent-[#2D5016]" />
+            <span className="text-sm text-[#2C2C2A]">A probate proceeding was filed — describe below:</span>
+          </label>
+          {!data.noProbate && (
+            <textarea
+              className={inputCls() + ' min-h-[100px]'}
+              value={data.probateDescription}
+              onChange={e => set('probateDescription', e.target.value)}
+              placeholder="Describe the probate proceeding, court, case number, and current status..."
+            />
+          )}
+        </div>
+      </div>
+
+      <div>
+        <h3 className={sectionHeadingCls()}>Property / assets</h3>
+        <p className="text-sm text-[#6B6560] mb-3">Include the full legal description of any real property (from the deed) or a description of financial accounts.</p>
+        <textarea
+          className={inputCls() + ' min-h-[120px]'}
+          value={data.propertyDescription}
+          onChange={e => set('propertyDescription', e.target.value)}
+          placeholder="Lot 12, Block 3, Oak Ridge Subdivision, City of Houston, Harris County, Texas, according to the plat thereof recorded in Volume 45, Page 23 of the Map Records of Harris County, Texas.&#10;&#10;— OR —&#10;&#10;Checking account at Chase Bank, Houston, TX, account number ending in 4567."
+        />
+      </div>
+    </div>
+  );
+}
+
+// Sub-step F: Witnesses
+function WitnessesStep({ data, onChange }: { data: HeirshipData; onChange: (d: HeirshipData) => void }) {
+  const set = (key: keyof HeirshipData, val: string) => onChange({ ...data, [key]: val });
+  const witnessBlock = (n: 1 | 2) => {
+    const prefix = `witness${n}` as 'witness1' | 'witness2';
+    return (
+      <div className="p-5 bg-[#F7F4EF] rounded-lg border border-[#D4CCC0] mb-6">
+        <p className="text-sm font-medium text-[#2D5016] mb-4">Witness {n} — must be a disinterested person who is NOT an heir</p>
+        <div className="space-y-4">
+          <div>
+            <label className={labelCls()}>Full legal name</label>
+            <input className={inputCls()} value={data[`${prefix}Name`]} onChange={e => set(`${prefix}Name` as keyof HeirshipData, e.target.value)} placeholder="Mary Louise Johnson" />
+          </div>
+          <div>
+            <label className={labelCls()}>Address</label>
+            <input className={inputCls()} value={data[`${prefix}Address`]} onChange={e => set(`${prefix}Address` as keyof HeirshipData, e.target.value)} placeholder="456 Oak Lane, Houston, TX 77003" />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className={labelCls()}>How long known the deceased</label>
+              <input className={inputCls()} value={data[`${prefix}HowLong`]} onChange={e => set(`${prefix}HowLong` as keyof HeirshipData, e.target.value)} placeholder="25 years" />
+            </div>
+            <div>
+              <label className={labelCls()}>Relationship to deceased</label>
+              <input className={inputCls()} value={data[`${prefix}Relationship`]} onChange={e => set(`${prefix}Relationship` as keyof HeirshipData, e.target.value)} placeholder="Neighbor / Former coworker / Friend" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      <h3 className={sectionHeadingCls()}>Two disinterested witnesses</h3>
+      <div className="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 mb-6 text-sm text-[#2C2C2A]">
+        <strong className="text-[#C0392B]">Important:</strong> Texas law requires two witnesses who (1) personally knew the deceased, (2) are not heirs, devisees, or creditors of the estate, and (3) have no financial interest in this matter. Using an heir as a witness will invalidate the affidavit.
+      </div>
+      {witnessBlock(1)}
+      {witnessBlock(2)}
+    </div>
+  );
+}
+
+// ─── Heirship form sub-step navigator ────────────────────────────────────────
+
+const HEIRSHIP_SUBSTEPS = [
+  { id: 'deceased', label: 'Deceased & Residence' },
+  { id: 'marriages', label: 'Marital History' },
+  { id: 'children', label: 'Children' },
+  { id: 'family', label: 'Parents & Siblings' },
+  { id: 'probate', label: 'Probate & Property' },
+  { id: 'witnesses', label: 'Witnesses' },
+];
+
+function HeirshipForm({ data, onComplete }: { data: HeirshipData; onComplete: (d: HeirshipData) => void }) {
+  const [subStep, setSubStep] = useState(0);
+  const [local, setLocal] = useState<HeirshipData>(data);
+
+  const goNext = () => {
+    if (subStep < HEIRSHIP_SUBSTEPS.length - 1) {
+      setSubStep(s => s + 1);
+    } else {
+      onComplete(local);
+    }
+  };
+  const goBack = () => setSubStep(s => Math.max(0, s - 1));
+
+  return (
+    <div>
+      {/* Sub-step pills */}
+      <div className="flex flex-wrap gap-2 mb-6">
+        {HEIRSHIP_SUBSTEPS.map((s, i) => (
+          <button
+            key={s.id}
+            onClick={() => setSubStep(i)}
+            className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+              i === subStep
+                ? 'bg-[#2D5016] text-[#F7F4EF]'
+                : i < subStep
+                ? 'bg-[#EEF4E8] text-[#2D5016] border border-[#2D5016]'
+                : 'bg-[#EEE9E1] text-[#6B6560] border border-[#D4CCC0]'
+            }`}
+          >
+            {i + 1}. {s.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="min-h-[300px]">
+        {subStep === 0 && <DeceasedStep data={local} onChange={setLocal} />}
+        {subStep === 1 && <MarriagesStep data={local} onChange={setLocal} />}
+        {subStep === 2 && <ChildrenStep data={local} onChange={setLocal} />}
+        {subStep === 3 && <FamilyStep data={local} onChange={setLocal} />}
+        {subStep === 4 && <ProbatePropertyStep data={local} onChange={setLocal} />}
+        {subStep === 5 && <WitnessesStep data={local} onChange={setLocal} />}
+      </div>
+
+      <div className="flex gap-3 mt-8">
+        {subStep > 0 && (
+          <button
+            onClick={goBack}
+            className="px-5 py-2.5 border border-[#D4CCC0] text-[#2C2C2A] rounded-lg font-medium hover:bg-[#EEE9E1] transition-colors"
+          >
+            ← Back
+          </button>
+        )}
+        <button
+          onClick={goNext}
+          className="px-6 py-3 bg-[#2D5016] text-[#F7F4EF] rounded-lg font-medium hover:bg-[#2C2C2A] transition-colors"
+        >
+          {subStep < HEIRSHIP_SUBSTEPS.length - 1 ? 'Continue →' : 'Generate my affidavit →'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Main app ─────────────────────────────────────────────────────────────────
+
+export default function AffidavitFormApp({
+  documentType,
+  state,
+  county,
+  eligibilityThreshold,
+  waitingDays = 0,
+  statutoryReference,
+}: AffidavitFormAppProps) {
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
   const [formData, setFormData] = useState<Record<string, string>>({});
+  const [heirshipData, setHeirshipData] = useState<HeirshipData>(emptyHeirship());
   const [isEligible, setIsEligible] = useState<boolean | null>(null);
 
+  const isHeirship = documentType === 'affidavit-of-heirship';
   const fields = fieldConfigs[documentType] || fieldConfigs['small-estate-affidavit'];
 
   const handleEligibility = (eligible: boolean) => {
@@ -65,11 +640,45 @@ export default function AffidavitFormApp({ documentType, state, county, eligibil
     setFormData(prev => ({ ...prev, [key]: value }));
   };
 
+  // Serialize heirship data into formData for PDFData compatibility
+  const serializedHeirshipFormData: Record<string, string> = {
+    deceasedName: heirshipData.deceasedName,
+    deceasedDOB: heirshipData.deceasedDOB,
+    dateOfDeath: heirshipData.dateOfDeath,
+    countyOfDeath: heirshipData.countyOfDeath,
+    stateOfDeath: heirshipData.stateOfDeath,
+    lastAddress: heirshipData.lastAddress,
+    lastCity: heirshipData.lastCity,
+    lastCounty: heirshipData.lastCounty,
+    lastState: heirshipData.lastState,
+    lastZip: heirshipData.lastZip,
+    residenceFromDate: heirshipData.residenceFromDate,
+    marriages: JSON.stringify(heirshipData.marriages),
+    children: JSON.stringify(heirshipData.children),
+    fatherName: heirshipData.fatherName,
+    fatherStatus: heirshipData.fatherStatus,
+    motherName: heirshipData.motherName,
+    motherStatus: heirshipData.motherStatus,
+    siblings: JSON.stringify(heirshipData.siblings),
+    noSiblings: String(heirshipData.noSiblings),
+    noProbate: String(heirshipData.noProbate),
+    probateDescription: heirshipData.probateDescription,
+    propertyDescription: heirshipData.propertyDescription,
+    witness1Name: heirshipData.witness1Name,
+    witness1Address: heirshipData.witness1Address,
+    witness1HowLong: heirshipData.witness1HowLong,
+    witness1Relationship: heirshipData.witness1Relationship,
+    witness2Name: heirshipData.witness2Name,
+    witness2Address: heirshipData.witness2Address,
+    witness2HowLong: heirshipData.witness2HowLong,
+    witness2Relationship: heirshipData.witness2Relationship,
+  };
+
   const pdfData: PDFData = {
     documentType,
     state,
     county,
-    formData,
+    formData: isHeirship ? serializedHeirshipFormData : formData,
     statutoryReference,
     waitingDays,
   };
@@ -87,6 +696,11 @@ export default function AffidavitFormApp({ documentType, state, county, eligibil
              'Transfer on Death Deed'} — {state}{county ? `, ${county}` : ''}
           </h2>
           <p className="text-[#2C2C2A] mb-6 leading-relaxed">{documentDescriptions[documentType]}</p>
+          {isHeirship && (
+            <div className="bg-[#EEF4E8] border border-[#2D5016] rounded-lg p-4 mb-5 text-sm text-[#2C2C2A]">
+              <strong className="text-[#2D5016]">What you'll need:</strong> Deceased's full family history (marriages, all children, parents, siblings), two disinterested witnesses, and the legal description of any property.
+            </div>
+          )}
           <div className="bg-white rounded-lg p-4 border border-[#D4CCC0] mb-6 text-sm text-[#6B6560]">
             <strong className="text-[#2C2C2A]">Statutory authority:</strong> {statutoryReference}
           </div>
@@ -107,7 +721,7 @@ export default function AffidavitFormApp({ documentType, state, county, eligibil
             thresholdLabel={eligibilityThreshold ? `This document applies if the total estate value is $${eligibilityThreshold.toLocaleString()} or less.` : ''}
             waitingDays={waitingDays}
             documentType={documentType}
-            deathDate={formData.dateOfDeath}
+            deathDate={isHeirship ? heirshipData.dateOfDeath : formData.dateOfDeath}
             onEligible={handleEligibility}
           />
           {isEligible === false && (
@@ -121,28 +735,44 @@ export default function AffidavitFormApp({ documentType, state, county, eligibil
       {/* Step 3: Form fields */}
       {step === 3 && (
         <div className="max-w-2xl mx-auto">
-          <h3 className="font-serif text-xl text-[#2D5016] mb-6">Enter your details</h3>
-          <div className="space-y-5">
-            {fields.map(field => (
-              <div key={field.key}>
-                <label className="block text-sm font-medium text-[#2C2C2A] mb-1.5">{field.label}</label>
-                <input
-                  type={field.type || 'text'}
-                  value={formData[field.key] || ''}
-                  onChange={e => handleFieldChange(field.key, e.target.value)}
-                  placeholder={field.placeholder}
-                  className="w-full px-4 py-3 border border-[#D4CCC0] rounded-lg text-[#2C2C2A] focus:outline-none focus:ring-2 focus:ring-[#8B6914] focus:border-transparent bg-white"
-                />
+          {isHeirship ? (
+            <>
+              <h3 className="font-serif text-xl text-[#2D5016] mb-2">Complete the Affidavit of Heirship</h3>
+              <p className="text-sm text-[#6B6560] mb-6">Work through each section. You can navigate between sections using the pills above.</p>
+              <HeirshipForm
+                data={heirshipData}
+                onComplete={(d) => {
+                  setHeirshipData(d);
+                  setStep(4);
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <h3 className="font-serif text-xl text-[#2D5016] mb-6">Enter your details</h3>
+              <div className="space-y-5">
+                {fields.map(field => (
+                  <div key={field.key}>
+                    <label className="block text-sm font-medium text-[#2C2C2A] mb-1.5">{field.label}</label>
+                    <input
+                      type={field.type || 'text'}
+                      value={formData[field.key] || ''}
+                      onChange={e => handleFieldChange(field.key, e.target.value)}
+                      placeholder={field.placeholder}
+                      className="w-full px-4 py-3 border border-[#D4CCC0] rounded-lg text-[#2C2C2A] focus:outline-none focus:ring-2 focus:ring-[#8B6914] focus:border-transparent bg-white"
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <button
-            onClick={() => setStep(4)}
-            disabled={!formData[fields[0]?.key]}
-            className="mt-8 px-6 py-3 bg-[#2D5016] text-[#F7F4EF] rounded-lg font-medium hover:bg-[#2C2C2A] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Generate my documents →
-          </button>
+              <button
+                onClick={() => setStep(4)}
+                disabled={!formData[fields[0]?.key]}
+                className="mt-8 px-6 py-3 bg-[#2D5016] text-[#F7F4EF] rounded-lg font-medium hover:bg-[#2C2C2A] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Generate my documents →
+              </button>
+            </>
+          )}
         </div>
       )}
 
@@ -150,11 +780,23 @@ export default function AffidavitFormApp({ documentType, state, county, eligibil
       {step === 4 && (
         <div className="max-w-2xl mx-auto text-center">
           <h3 className="font-serif text-2xl text-[#2D5016] mb-2">Your documents are ready</h3>
-          <p className="text-[#6B6560] mb-8">Your PDF bundle includes the affidavit, filing date notice, and bank instruction letter.</p>
+          <p className="text-[#6B6560] mb-8">
+            {isHeirship
+              ? 'Your PDF includes the full Texas-compliant Affidavit of Heirship with all sections required by county clerks and title companies.'
+              : 'Your PDF bundle includes the affidavit, filing date notice, and bank instruction letter.'}
+          </p>
           <DownloadButton
             pdfData={pdfData}
             fileName={`${documentType}-${state.toLowerCase().replace(' ', '-')}`}
           />
+          {isHeirship && (
+            <button
+              onClick={() => setStep(3)}
+              className="mt-4 block mx-auto text-sm text-[#8B6914] hover:underline"
+            >
+              ← Edit my answers
+            </button>
+          )}
         </div>
       )}
     </div>
