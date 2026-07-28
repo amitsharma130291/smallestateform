@@ -1,11 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Forest green background -->
   <rect width="32" height="32" fill="#2D5016" rx="6"/>
-  <!-- Shield -->
-  <path d="M16 3L5 7V17C5 23 10 28 16 30C22 28 27 23 27 17V7L16 3Z"
-    fill="rgba(247,244,239,0.1)" stroke="#D4AF6E" stroke-width="1"/>
-  <!-- S -->
-  <text x="16" y="23"
-    font-family="Cormorant Garamond, Georgia, serif"
-    font-size="16" font-weight="700" font-style="italic"
-    fill="#F7F4EF" text-anchor="middle">S</text>
+
+  <!-- Ivory shield shape (solid fill — no text, pure geometry) -->
+  <path d="M16 4 L6 8 L6 18 C6 23.5 10.5 28 16 30 C21.5 28 26 23.5 26 18 L26 8 Z"
+    fill="#F7F4EF" opacity="0.95"/>
+
+  <!-- Brass inner shield border -->
+  <path d="M16 6.5 L8 10 L8 18 C8 22.5 11.5 26.5 16 28.2 C20.5 26.5 24 22.5 24 18 L24 10 Z"
+    fill="none" stroke="#D4AF6E" stroke-width="1" opacity="0.8"/>
+
+  <!-- Forest green S letterform — geometric strokes, no font needed -->
+  <!-- Top curve of S -->
+  <path d="M20 12.5 C20 10.8 18.5 9.5 16 9.5 C13 9.5 11.5 11 11.5 13 C11.5 15 13 16 16 16.5 C19 17 20.5 18.2 20.5 20.2 C20.5 22.2 18.8 23.5 16 23.5 C13.2 23.5 11.5 22 11.5 20.2"
+    fill="none" stroke="#2D5016" stroke-width="2.2" stroke-linecap="round"/>
 </svg>
