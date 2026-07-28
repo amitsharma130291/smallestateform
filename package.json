@@ -16,6 +16,8 @@
     "jspdf": "^2.5.1",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "@tailwindcss/typography": "^0.5.10"
+    "@tailwindcss/typography": "^0.5.10",
+    "nodemailer": "^6.9.9",
+    "@types/nodemailer": "^6.4.14"
   }
 }
