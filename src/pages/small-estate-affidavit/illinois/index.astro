@@ -1,0 +1,348 @@
+---
+import StatePage from '../../../layouts/StatePage.astro';
+import AffidavitFormApp from '../../../components/AffidavitFormApp';
+
+const articleSchema = `{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Illinois Small Estate Affidavit 2026: Current Law After August 2025 Amendment",
+  "description": "Illinois small estate affidavit threshold is now $150,000 after August 2025 amendment. Cook County has special rules. Updated guide to 755 ILCS 5/25-1.",
+  "datePublished": "2026-01-01",
+  "dateModified": "2026-07-28",
+  "author": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  }
+}`;
+
+const faqSchema = `{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Illinois small estate affidavit limit in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The statewide limit is $150,000 after the August 2025 amendment to 755 ILCS 5/25-1. Cook County has a different, lower formula: $20,000 base plus $10,000 for each surviving minor child of the deceased."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the Cook County small estate affidavit rules in Illinois?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cook County uses a separate threshold formula: $20,000 plus $10,000 per surviving minor child. For example, an estate with no minor children is limited to $20,000; an estate with two minor children can be up to $40,000."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What changed in the Illinois small estate law in August 2025?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The August 2025 amendment to 755 ILCS 5/25-1 raised the statewide small estate threshold to $150,000. Previously the limit was lower, requiring many families to go through formal probate. The amendment also updated certain procedural requirements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long do you have to wait to file an Illinois Small Estate Affidavit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You must wait at least 30 days after the date of death before presenting an Illinois Small Estate Affidavit. This waiting period is required by 755 ILCS 5/25-1 and cannot be waived."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does an Illinois Small Estate Affidavit work for real estate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Generally, no. Unlike some other states, Illinois's Small Estate Affidavit process does not typically cover real property transfers. Real estate in Illinois generally requires probate or another transfer instrument such as an Illinois Transfer on Death Instrument."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use an Illinois Small Estate Affidavit for a bank account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, if the total estate value is within the applicable threshold (statewide $150,000; Cook County formula) and the account does not already have a payable-on-death designation. Present the affidavit along with a death certificate and photo ID to the bank."
+      }
+    }
+  ]
+}`;
+
+const howToSchema = `{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to File an Illinois Small Estate Affidavit",
+  "description": "Step-by-step process for using an Illinois Small Estate Affidavit under 755 ILCS 5/25-1 as amended August 2025.",
+  "totalTime": "P30D",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Confirm eligibility",
+      "text": "Verify 30 days have elapsed since death, confirm you are an heir or legatee, and calculate the total probate estate value. If in Cook County, apply the $20,000 + $10,000/minor child formula."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Obtain the correct form",
+      "text": "Use an Illinois-specific form that meets 755 ILCS 5/25-1 requirements. Ensure it reflects the August 2025 threshold and includes all required fields including the penalty-of-perjury statement."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Complete and notarize",
+      "text": "Fill in all required information about the deceased, heirs, assets, and your relationship. Sign before a notary public."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Present to the asset holder",
+      "text": "Bring the notarized affidavit, death certificate, and your ID to the bank, brokerage, or other institution. Include a bank instruction letter citing 755 ILCS 5/25-1 to improve acceptance rates."
+    }
+  ]
+}`;
+
+const breadcrumbSchema = `{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://smallestateform.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Small Estate Affidavit",
+      "item": "https://smallestateform.com/small-estate-affidavit/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Illinois",
+      "item": "https://smallestateform.com/small-estate-affidavit/illinois/"
+    }
+  ]
+}`;
+---
+
+<StatePage
+  title="Illinois Small Estate Affidavit 2026: Current Law After August 2025 Amendment"
+  description="Illinois small estate affidavit threshold is now $150,000 after August 2025 amendment. Cook County has special rules. Updated guide to 755 ILCS 5/25-1."
+  canonicalUrl="https://smallestateform.com/small-estate-affidavit/illinois/"
+  jsonLd={[articleSchema, faqSchema, howToSchema, breadcrumbSchema]}
+>
+
+  <!-- Law update callout -->
+  <div class="bg-[#FFF8E8] border-l-4 border-[#B8860B] p-4 mb-4 max-w-4xl mx-auto mt-8">
+    <strong>⚡ Updated August 2025</strong> — Illinois Probate Act amended. The Secretary of State PDF still ranking on Google is from 2015. The current statewide threshold is <strong>$150,000</strong>. Cook County is different — see below.
+  </div>
+
+  <!-- Cook County special callout -->
+  <div class="bg-[#EFF7F2] border border-[#4A7C59] rounded-lg p-5 mb-4 max-w-4xl mx-auto">
+    <strong class="text-[#4A7C59]">Cook County residents:</strong> Different limits apply — $20,000 base + $10,000 per surviving minor child. The statewide $150,000 limit does NOT apply in Cook County.
+  </div>
+
+  <!-- Featured snippet callout -->
+  <div class="bg-[#F0EDE8] border-l-4 border-[#B8860B] p-6 mb-4 max-w-4xl mx-auto">
+    <p class="font-medium text-[#1C1C1E] leading-relaxed">
+      An Illinois Small Estate Affidavit allows heirs to collect assets from a deceased person's estate without probate under 755 ILCS 5/25-1. The statewide threshold is $150,000 after the August 2025 amendment. Cook County has a separate, lower formula: $20,000 base plus $10,000 per surviving minor child.
+    </p>
+  </div>
+
+  <!-- E-E-A-T disclaimer -->
+  <div class="bg-[#FAF8F5] border border-[#E5E0D8] rounded-lg p-4 mb-8 max-w-4xl mx-auto text-sm text-[#6B6B6B]">
+    <strong class="text-[#3D3D3D]">Last updated July 2026.</strong> This information reflects 755 ILCS 5/25-1 (Illinois Probate Act) as amended in August 2025. Laws may change. Consult a licensed Illinois attorney for advice specific to your situation.
+  </div>
+
+  <!-- H1 -->
+  <div class="max-w-4xl mx-auto px-6 mb-8">
+    <h1 class="font-serif text-4xl text-[#1C1C1E] leading-tight">
+      Illinois Small Estate Affidavit: 2025 Law Change, Cook County Rules, and How to File
+    </h1>
+  </div>
+
+  <!-- Form app -->
+  <div class="max-w-4xl mx-auto px-6">
+    <AffidavitFormApp
+      client:load
+      documentType="small-estate-affidavit"
+      state="Illinois"
+      county="standard"
+      eligibilityThreshold={150000}
+      waitingDays={30}
+      statutoryReference="755 ILCS 5/25-1 (Illinois Probate Act, as amended August 2025)"
+    />
+  </div>
+
+  <!-- Body content -->
+  <div class="max-w-4xl mx-auto px-6 py-12">
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">What Changed in August 2025 — and Why It Matters</h2>
+    <p class="text-[#3D3D3D] leading-relaxed mb-4">
+      The Illinois Probate Act's small estate provision (755 ILCS 5/25-1) was amended in August 2025, raising the statewide threshold and updating certain procedural requirements.
+    </p>
+    <p class="text-[#3D3D3D] leading-relaxed mb-8">
+      <strong>The practical effect:</strong> Many families who previously had no choice but to open a formal probate estate — a process that can cost $3,000–$15,000+ in attorney fees and take 9–18 months — can now use a small estate affidavit instead. If a guide, form, or tool you've found reflects the old law: stop and use current materials.
+    </p>
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">The Two Different Illinois Thresholds</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="border border-[#E5E0D8] rounded-xl p-5 bg-[#FAF8F5]">
+        <h3 class="font-serif text-lg text-[#1C1C1E] mb-2">Statewide: $150,000</h3>
+        <p class="text-[#3D3D3D] text-sm leading-relaxed">
+          Applies to all Illinois counties <strong>except Cook County</strong>. Total gross assets of $150,000 or less (as amended August 2025).
+        </p>
+      </div>
+      <div class="border border-[#4A7C59] rounded-xl p-5 bg-[#EFF7F2]">
+        <h3 class="font-serif text-lg text-[#4A7C59] mb-2">Cook County: Different Formula</h3>
+        <p class="text-[#3D3D3D] text-sm leading-relaxed mb-3">$20,000 base + $10,000 per surviving minor child</p>
+        <div class="text-sm text-[#3D3D3D] space-y-1">
+          <div>No minor children: <strong>$20,000</strong></div>
+          <div>One minor child: <strong>$30,000</strong></div>
+          <div>Three minor children: <strong>$50,000</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">Who Can Use an Illinois Small Estate Affidavit?</h2>
+    <p class="text-[#3D3D3D] leading-relaxed mb-4">Under 755 ILCS 5/25-1, the following people may present a Small Estate Affidavit:</p>
+    <ul class="list-disc list-inside text-[#3D3D3D] space-y-2 mb-4 pl-4">
+      <li>An heir of the deceased (as defined by Illinois intestate succession law)</li>
+      <li>A legatee (someone named in a will)</li>
+      <li>A creditor of the estate (to collect amounts owed)</li>
+    </ul>
+    <div class="space-y-2 mb-8">
+      <div class="flex items-start gap-3 p-3 bg-[#EFF7F2] rounded-lg">
+        <span class="text-[#4A7C59] font-bold mt-0.5">✓</span>
+        <span class="text-[#3D3D3D] text-sm">Total assets fall within the applicable threshold (statewide $150,000 or Cook County formula)</span>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#EFF7F2] rounded-lg">
+        <span class="text-[#4A7C59] font-bold mt-0.5">✓</span>
+        <span class="text-[#3D3D3D] text-sm">At least 30 days have passed since the date of death</span>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#EFF7F2] rounded-lg">
+        <span class="text-[#4A7C59] font-bold mt-0.5">✓</span>
+        <span class="text-[#3D3D3D] text-sm">No probate proceedings are pending or have been filed</span>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#EFF7F2] rounded-lg">
+        <span class="text-[#4A7C59] font-bold mt-0.5">✓</span>
+        <span class="text-[#3D3D3D] text-sm">The affidavit is signed under penalty of perjury</span>
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">What Assets Qualify?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div class="border border-[#4A7C59] rounded-xl p-4 bg-[#EFF7F2]">
+        <h3 class="font-medium text-[#4A7C59] mb-2">Included in the $150,000 cap</h3>
+        <ul class="text-sm text-[#3D3D3D] space-y-1">
+          <li>Bank and savings accounts (without POD designations)</li>
+          <li>Checking accounts</li>
+          <li>Certificates of deposit</li>
+          <li>Personal property, household goods, jewelry</li>
+          <li>Vehicles (Secretary of State has separate process)</li>
+        </ul>
+      </div>
+      <div class="border border-[#E5E0D8] rounded-xl p-4 bg-[#FAF8F5]">
+        <h3 class="font-medium text-[#1C1C1E] mb-2">Generally pass outside the affidavit</h3>
+        <ul class="text-sm text-[#3D3D3D] space-y-1">
+          <li>Life insurance with named beneficiaries</li>
+          <li>Retirement accounts (IRA, 401(k)) with beneficiaries</li>
+          <li>Payable-on-death (POD) bank accounts</li>
+          <li>Joint tenancy property</li>
+          <li>Real estate in Illinois</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bg-[#FAF8F5] border border-[#E5E0D8] rounded-lg p-4 mb-8 text-sm text-[#3D3D3D]">
+      <strong>Important on real property:</strong> Unlike Arizona, Illinois's Small Estate Affidavit does not typically cover real estate transfers. Real property in Illinois generally requires probate or another instrument (such as an Illinois Residential Real Property Transfer on Death Instrument). If the estate's main asset is a home, the Small Estate Affidavit alone will likely not be sufficient.
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">Common Mistakes</h2>
+    <ul class="list-disc list-inside text-[#3D3D3D] space-y-3 mb-8 pl-4">
+      <li><strong>Using the wrong threshold.</strong> Applying the $150,000 statewide limit to a Cook County estate when the actual limit may be far lower is a common and costly error.</li>
+      <li><strong>Counting non-probate assets.</strong> Life insurance proceeds with named beneficiaries, POD accounts, and 401(k)s do not count toward the $150,000 threshold. Families often assume the estate is over the limit when it is not.</li>
+      <li><strong>Not waiting 30 days.</strong> An affidavit presented before the 30-day period is legally defective.</li>
+      <li><strong>Assuming real estate is covered.</strong> Unlike Arizona, Illinois's Small Estate Affidavit generally does not cover real property transfers.</li>
+      <li><strong>Using pre-2025 forms.</strong> The August 2025 amendment changed both the threshold and certain procedural elements. A form from before that date may be outdated.</li>
+    </ul>
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">What Banks Actually Do with the Affidavit</h2>
+    <div class="space-y-4 mb-8">
+      <div class="border border-[#E5E0D8] rounded-lg p-4 bg-[#FAF8F5]">
+        <h3 class="font-medium text-[#1C1C1E] mb-2">Community banks and credit unions</h3>
+        <p class="text-[#3D3D3D] text-sm">Generally more cooperative. Often accept a properly prepared affidavit with a death certificate and will release funds promptly.</p>
+      </div>
+      <div class="border border-[#E5E0D8] rounded-lg p-4 bg-[#FAF8F5]">
+        <h3 class="font-medium text-[#1C1C1E] mb-2">Large national banks (Chase, BofA, Wells Fargo)</h3>
+        <p class="text-[#3D3D3D] text-sm">May have their own internal affidavit forms and may require a branch manager's approval for amounts above $5,000–$10,000. Legally authorized to honor the affidavit, but individual employees may be unfamiliar with the law.</p>
+      </div>
+      <div class="bg-[#F0EDE8] border-l-4 border-[#B8860B] p-4 rounded-r-lg">
+        <p class="text-[#3D3D3D] text-sm"><strong>Most effective approach:</strong> Present the affidavit with a bank instruction letter that cites 755 ILCS 5/25-1 and explains the bank's legal authority to release funds. This is included with every smallestateform.com document.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FAQ -->
+  <section class="max-w-4xl mx-auto px-6 pb-16">
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-8">Frequently asked questions</h2>
+    <div class="space-y-4">
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          What changed in the Illinois Small Estate Affidavit law in August 2025?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          The 2025 amendment raised the statewide threshold to $150,000 and updated certain procedural requirements. Previously, the threshold was lower, meaning many mid-sized estates had no choice but to go through formal probate.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          What are the Cook County small estate rules?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          Cook County uses a different formula: $20,000 base plus $10,000 for each surviving minor child of the deceased. This is substantially lower than the statewide $150,000 limit and applies to all estates where the deceased lived in Cook County or the assets are located there. "Minor" means under 18 in Illinois.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          What assets qualify for the Illinois Small Estate Affidavit?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          Bank accounts without POD designations, personal property, household goods, and similar probate assets. Life insurance with named beneficiaries, retirement accounts, and jointly-held property generally pass outside the estate and do not count toward the threshold.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          Can I use the Illinois Small Estate Affidavit for a bank account?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          Yes, if the total estate value is within the applicable threshold and the account does not already have a payable-on-death designation. Present the affidavit, death certificate, and your ID to the bank.
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- Internal links -->
+  <div class="max-w-4xl mx-auto px-6 pb-12 text-sm text-[#6B6B6B]">
+    Related: <a href="/small-estate-affidavit/" class="text-[#B8860B] hover:underline">Small Estate Affidavit Hub</a> | <a href="/small-estate-affidavit/arizona/" class="text-[#B8860B] hover:underline">Arizona Small Estate Affidavit</a> | <a href="/" class="text-[#B8860B] hover:underline">Homepage</a>
+  </div>
+
+</StatePage>

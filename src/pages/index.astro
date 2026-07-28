@@ -1,0 +1,333 @@
+---
+import StatePage from '../layouts/StatePage.astro';
+
+const faqSchema = `{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does smallestateform.com generate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "smallestateform.com generates state-specific estate affidavits and property transfer documents — including Small Estate Affidavits, Affidavits of Heirship, and Transfer on Death Deeds — using current 2026 law with county-level specificity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is smallestateform.com free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, during beta. All documents are free during the beta period. After beta, standard documents will be $19.99. Every download currently includes a bank instruction letter at no additional charge."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What states are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Currently: Texas (Affidavit of Heirship), Arizona (Small Estate Affidavit, updated for HB2116 March 2026), Illinois (Small Estate Affidavit, updated August 2025), and California (Transfer on Death Deed). Additional states are in development."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a bank instruction letter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A document included with every download that cites the specific statutory authority compelling banks to accept small estate affidavits. No competitor includes this. It significantly improves bank cooperation compared to presenting the affidavit alone."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an attorney to use these documents?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For most straightforward estates within state thresholds, no attorney is needed — these processes are designed to be completed without legal representation. For complicated estates, significant debts, or disputed heirs, consulting an attorney is advisable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is smallestateform.com different from generic templates I can find online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Generic templates are usually years out of date and are written for a generic state, not your specific county. smallestateform.com uses current law (including 2025 and 2026 amendments) and applies county-specific rules automatically — such as Cook County's separate Illinois threshold and Maricopa County's specific Arizona recording procedures."
+      }
+    }
+  ]
+}`;
+
+const websiteSchema = `{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "smallestateform.com",
+  "url": "https://smallestateform.com",
+  "description": "Estate document generator for grieving families. Generates state-specific small estate affidavits, heirship affidavits, and transfer on death deeds using current 2026 law.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://smallestateform.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}`;
+---
+
+<StatePage
+  title="Small Estate Affidavit Generator — Free Estate Documents with Current 2026 Law"
+  description="Generate a legally correct small estate affidavit or heirship affidavit in minutes. Updated for 2026 law changes in AZ, IL, and CA. Free during beta."
+  canonicalUrl="https://smallestateform.com/"
+  jsonLd={[faqSchema, websiteSchema]}
+>
+
+  <!-- Hero -->
+  <section class="bg-[#FAF8F5] py-20 px-6 text-center border-b border-[#E5E0D8]">
+    <h1 class="font-serif text-4xl md:text-5xl text-[#1C1C1E] mb-4 leading-tight">
+      Generate Your Free Estate Document
+    </h1>
+    <p class="text-[#3D3D3D] text-lg md:text-xl max-w-2xl mx-auto mb-4">
+      Most families dealing with a loss discover too late that the document they downloaded was based on law that changed years ago. Banks reject it. Title companies won't accept it.
+    </p>
+    <p class="text-[#3D3D3D] text-lg md:text-xl max-w-2xl mx-auto mb-8">
+      smallestateform.com is the only estate document generator built on current 2026 law — with real county-level specificity, not generic state templates.
+    </p>
+    <a href="#documents" class="inline-block px-8 py-4 bg-[#1C1C1E] text-[#FAF8F5] rounded-lg font-medium hover:bg-[#3D3D3D] transition-colors">
+      Select Your State →
+    </a>
+    <p class="mt-4 text-sm text-[#6B6B6B]">Free during beta. No account required. No attorney needed for most families.</p>
+  </section>
+
+  <!-- State document cards -->
+  <section id="documents" class="py-16 px-6 max-w-6xl mx-auto">
+    <h2 class="font-serif text-3xl text-[#1C1C1E] text-center mb-4">State Estate Documents</h2>
+    <p class="text-[#6B6B6B] text-center max-w-2xl mx-auto mb-12">
+      Select your state to generate a document using current law — including 2025 and 2026 amendments your competitors haven't updated yet.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Texas card -->
+      <a href="/affidavit-of-heirship/texas/" class="block bg-[#F0EDE8] border border-[#E5E0D8] rounded-xl p-6 shadow-[0_2px_8px_rgba(28,28,30,0.08)] hover:shadow-md transition-shadow">
+        <div class="text-[#B8860B] font-medium text-sm mb-2 tracking-wide">TEXAS</div>
+        <h3 class="font-serif text-lg text-[#1C1C1E] mb-3">Affidavit of Heirship</h3>
+        <p class="text-[#6B6B6B] text-sm leading-relaxed">
+          No asset value threshold — works for any estate with real property. Requires two disinterested witnesses and county clerk recording. Built on Texas Estates Code Chapter 203.
+        </p>
+        <div class="mt-4 text-[#B8860B] font-medium text-sm">Start →</div>
+      </a>
+
+      <!-- Arizona card -->
+      <a href="/small-estate-affidavit/arizona/" class="block bg-[#F0EDE8] border border-[#E5E0D8] rounded-xl p-6 shadow-[0_2px_8px_rgba(28,28,30,0.08)] hover:shadow-md transition-shadow">
+        <div class="text-[#B8860B] font-medium text-sm mb-2 tracking-wide">ARIZONA</div>
+        <h3 class="font-serif text-lg text-[#1C1C1E] mb-3">Small Estate Affidavit</h3>
+        <p class="text-[#6B6B6B] text-sm leading-relaxed">
+          Updated March 2026 under HB2116: $200,000 personal property, $300,000 real property. County-specific forms for Maricopa, Pima, and Yavapai automatically selected.
+        </p>
+        <div class="mt-4 text-[#B8860B] font-medium text-sm">Start →</div>
+      </a>
+
+      <!-- Illinois card -->
+      <a href="/small-estate-affidavit/illinois/" class="block bg-[#F0EDE8] border border-[#E5E0D8] rounded-xl p-6 shadow-[0_2px_8px_rgba(28,28,30,0.08)] hover:shadow-md transition-shadow">
+        <div class="text-[#B8860B] font-medium text-sm mb-2 tracking-wide">ILLINOIS</div>
+        <h3 class="font-serif text-lg text-[#1C1C1E] mb-3">Small Estate Affidavit</h3>
+        <p class="text-[#6B6B6B] text-sm leading-relaxed">
+          Updated August 2025: statewide threshold now $150,000. Cook County has a separate formula. The Secretary of State PDF still on Google is from 2015 — don't use it.
+        </p>
+        <div class="mt-4 text-[#B8860B] font-medium text-sm">Start →</div>
+      </a>
+
+      <!-- California card -->
+      <a href="/transfer-on-death-deed/california/" class="block bg-[#F0EDE8] border border-[#E5E0D8] rounded-xl p-6 shadow-[0_2px_8px_rgba(28,28,30,0.08)] hover:shadow-md transition-shadow">
+        <div class="text-[#B8860B] font-medium text-sm mb-2 tracking-wide">CALIFORNIA</div>
+        <h3 class="font-serif text-lg text-[#1C1C1E] mb-3">Transfer on Death Deed</h3>
+        <p class="text-[#6B6B6B] text-sm leading-relaxed">
+          A planning document — set it up now, takes effect at your death. Transfers real property to a named beneficiary without probate. No attorney required. Civil Code §5600–5696.
+        </p>
+        <div class="mt-4 text-[#B8860B] font-medium text-sm">Start →</div>
+      </a>
+
+    </div>
+
+    <p class="text-center text-sm text-[#6B6B6B] mt-8">Additional states in development. <a href="/small-estate-affidavit/" class="text-[#B8860B] hover:underline">See the full state threshold guide →</a></p>
+  </section>
+
+  <!-- How it works -->
+  <section class="bg-[#F0EDE8] py-16 px-6 border-y border-[#E5E0D8]">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-serif text-3xl text-[#1C1C1E] text-center mb-12">How it works</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-xl mx-auto mb-4">1</div>
+          <h3 class="font-serif text-lg text-[#1C1C1E] mb-2">Select document + state</h3>
+          <p class="text-[#6B6B6B] text-sm leading-relaxed">Choose your state and document type. The generator applies the correct current law — including 2025 and 2026 amendments — and asks county-specific questions automatically.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-xl mx-auto mb-4">2</div>
+          <h3 class="font-serif text-lg text-[#1C1C1E] mb-2">Answer a few questions</h3>
+          <p class="text-[#6B6B6B] text-sm leading-relaxed">The form asks about the deceased, the property, and your relationship to the estate. No legal jargon. Takes about 5 minutes. No account needed.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-xl mx-auto mb-4">3</div>
+          <h3 class="font-serif text-lg text-[#1C1C1E] mb-2">Download and file</h3>
+          <p class="text-[#6B6B6B] text-sm leading-relaxed">Receive a professionally formatted document ready to sign, notarize, and file. Includes a plain-English completion guide and a bank instruction letter that legally compels the bank to cooperate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust signals -->
+  <section class="py-12 px-6 border-b border-[#E5E0D8]">
+    <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div>
+        <div class="text-[#B8860B] text-2xl mb-2">✓</div>
+        <div class="text-sm font-medium text-[#1C1C1E]">Current 2026 law</div>
+        <div class="text-xs text-[#6B6B6B] mt-1">AZ, IL, CA 2025–2026 amendments included</div>
+      </div>
+      <div>
+        <div class="text-[#B8860B] text-2xl mb-2">✓</div>
+        <div class="text-sm font-medium text-[#1C1C1E]">No account required</div>
+        <div class="text-xs text-[#6B6B6B] mt-1">Download immediately, no registration</div>
+      </div>
+      <div>
+        <div class="text-[#B8860B] text-2xl mb-2">✓</div>
+        <div class="text-sm font-medium text-[#1C1C1E]">Free during beta</div>
+        <div class="text-xs text-[#6B6B6B] mt-1">$19.99 after beta period</div>
+      </div>
+      <div>
+        <div class="text-[#B8860B] text-2xl mb-2">✓</div>
+        <div class="text-sm font-medium text-[#1C1C1E]">Bank letter included</div>
+        <div class="text-xs text-[#6B6B6B] mt-1">No competitor includes this</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison table -->
+  <section class="py-16 px-6 max-w-4xl mx-auto">
+    <h2 class="font-serif text-3xl text-[#1C1C1E] text-center mb-10">Why families choose smallestateform.com</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#1C1C1E] text-[#FAF8F5]">
+            <th class="p-4 text-left font-medium"></th>
+            <th class="p-4 text-left font-medium">smallestateform.com</th>
+            <th class="p-4 text-left font-medium">Generic templates</th>
+            <th class="p-4 text-left font-medium">Other generators</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-4 font-medium text-[#1C1C1E]">Current 2026 law</td>
+            <td class="p-4 text-[#B8860B] font-medium">✓ Yes</td>
+            <td class="p-4 text-[#6B6B6B]">Often years out of date</td>
+            <td class="p-4 text-[#6B6B6B]">Rarely updated</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8] bg-[#FAF8F5]">
+            <td class="p-4 font-medium text-[#1C1C1E]">County-level specificity</td>
+            <td class="p-4 text-[#B8860B] font-medium">✓ Yes</td>
+            <td class="p-4 text-[#6B6B6B]">State-level only</td>
+            <td class="p-4 text-[#6B6B6B]">State-level only</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-4 font-medium text-[#1C1C1E]">Bank instruction letter</td>
+            <td class="p-4 text-[#B8860B] font-medium">✓ Included free</td>
+            <td class="p-4 text-[#6B6B6B]">Not included</td>
+            <td class="p-4 text-[#6B6B6B]">Not included</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8] bg-[#FAF8F5]">
+            <td class="p-4 font-medium text-[#1C1C1E]">No account required</td>
+            <td class="p-4 text-[#B8860B] font-medium">✓ Yes</td>
+            <td class="p-4 text-[#6B6B6B]">Usually yes</td>
+            <td class="p-4 text-[#6B6B6B]">Often requires signup</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-4 font-medium text-[#1C1C1E]">Price</td>
+            <td class="p-4 text-[#B8860B] font-medium">Free during beta</td>
+            <td class="p-4 text-[#6B6B6B]">Sometimes free</td>
+            <td class="p-4 text-[#6B6B6B]">Usually paid</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 px-6 max-w-4xl mx-auto border-t border-[#E5E0D8]">
+    <h2 class="font-serif text-3xl text-[#1C1C1E] mb-10 text-center">Frequently asked questions</h2>
+    <div class="space-y-4">
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          What does smallestateform.com actually do?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          It generates legally accurate estate affidavits and property transfer documents for specific U.S. states and counties. You answer questions about the estate; it produces a correctly formatted, properly worded document based on current law for your state.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          Who is this for?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          Primarily: adult children and spouses dealing with a loved one's death who need to access bank accounts, transfer property, or establish ownership — without the time and cost of formal probate. Most useful when the estate is relatively straightforward and within state-specific thresholds.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          Is it free?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          Yes, during beta. After the beta period, standard documents will be $19.99. The bank instruction letter add-on will be $4.99 separately after beta — currently included free with every download.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          Does this replace a lawyer?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          For many families, no attorney is needed. These processes are designed to be used without legal representation. However, if the estate is complicated — significant debts, disputed heirs, property over the threshold — consulting an attorney is the right call. smallestateform.com does not provide legal advice.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          What is a bank instruction letter?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          A document included with every smallestateform.com download that cites the specific statutory authority compelling the bank to honor your affidavit. Banks often delay or refuse affidavits from unfamiliar customers — this letter, citing the exact law section, dramatically improves cooperation.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          Is the document legally valid?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          The document reflects current state law and is formatted for acceptance by county clerks, banks, and title companies. Legal validity depends on correct completion and proper execution (signing, notarization, recording where required). smallestateform.com generates the document; you are responsible for completing it accurately.
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bg-[#F0EDE8] py-16 px-6 text-center border-t border-[#E5E0D8]">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="font-serif text-3xl text-[#1C1C1E] mb-4">Ready to get started?</h2>
+      <p class="text-[#3D3D3D] mb-8">Select your state above, or read our complete guide to small estate affidavits to understand your options.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#documents" class="inline-block px-8 py-4 bg-[#1C1C1E] text-[#FAF8F5] rounded-lg font-medium hover:bg-[#3D3D3D] transition-colors">
+          Generate Your Document →
+        </a>
+        <a href="/small-estate-affidavit/" class="inline-block px-8 py-4 border border-[#1C1C1E] text-[#1C1C1E] rounded-lg font-medium hover:bg-[#E5E0D8] transition-colors">
+          Read the State Guide
+        </a>
+      </div>
+    </div>
+  </section>
+
+</StatePage>

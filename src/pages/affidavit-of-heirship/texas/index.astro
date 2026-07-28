@@ -1,0 +1,491 @@
+---
+import StatePage from '../../../layouts/StatePage.astro';
+import AffidavitFormApp from '../../../components/AffidavitFormApp';
+
+const articleSchema = `{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Affidavit of Heirship Texas: Complete Guide + Free Generator (2026)",
+  "description": "How to complete a Texas Affidavit of Heirship under Texas Estates Code Ch. 203. Two-witness rules, county clerk filing fees, step-by-step process.",
+  "datePublished": "2026-01-01",
+  "dateModified": "2026-07-28",
+  "author": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  }
+}`;
+
+const faqSchema = `{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Who qualifies as a disinterested witness for a Texas Affidavit of Heirship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A disinterested witness is someone who personally knew the deceased and has no financial interest in the estate. They cannot be heirs, beneficiaries, or anyone who owes money to the estate. Neighbors, former coworkers, family friends, and church members typically qualify."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there an asset value limit for a Texas Affidavit of Heirship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Unlike a Small Estate Affidavit, there is no asset threshold for an Affidavit of Heirship in Texas. It can be used regardless of the estate's value."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a Texas Affidavit of Heirship need to be recorded?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Recording with the county clerk's deed records is required to make the affidavit effective against third parties such as banks, title companies, and future buyers. An unrecorded affidavit provides no chain-of-title protection."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to file an Affidavit of Heirship in Texas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gathering information and completing the form typically takes 1–2 weeks. Filing at the county clerk's office can be done same-day. If mailing, allow an additional 1–2 weeks for processing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use an Affidavit of Heirship for bank accounts in Texas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Many banks accept a properly notarized and recorded Affidavit of Heirship for account access, especially for modest balances. Larger banks may require their own internal forms or a court order. A bank instruction letter citing legal authority improves acceptance rates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the filing fee for an Affidavit of Heirship at the county clerk?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Major Texas counties charge $25 for the first page plus $4 for each additional page. Confirm the current fee with your specific county clerk before filing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an attorney to file a Texas Affidavit of Heirship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Texas law does not require an attorney to prepare or file an Affidavit of Heirship. However, consulting an attorney is advisable for complicated family situations, significant debts, or properties being sold soon."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between a Texas Affidavit of Heirship and probate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An Affidavit of Heirship requires no court involvement and costs $25–$100 in filing fees. Formal probate requires a court proceeding, typically costs $3,000–$15,000+ in attorney fees, and takes 6–18 months. Probate offers stronger creditor protection and is better for contested estates."
+      }
+    }
+  ]
+}`;
+
+const howToSchema = `{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to File an Affidavit of Heirship in Texas",
+  "description": "Step-by-step process for completing, notarizing, and recording a Texas Affidavit of Heirship under Texas Estates Code Chapter 203.",
+  "totalTime": "P14D",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "25"
+  },
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Gather required information",
+      "text": "Collect the deceased's full legal name, dates of birth and death, marriage history, names of all heirs, and the legal property description from the deed."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Identify two disinterested witnesses",
+      "text": "Find two people who personally knew the deceased and have no financial interest in the estate — not heirs, beneficiaries, or relatives who may inherit."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Complete the Affidavit of Heirship form",
+      "text": "Fill in the deceased's family history, list all heirs and their relationships, describe the property using its exact legal description, and state that the affiant has personal knowledge of the facts."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Sign before a notary public",
+      "text": "Both witnesses must sign the completed form in the presence of a notary public. Do not sign before appearing before the notary."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Record with the county clerk",
+      "text": "File the original notarized affidavit at the county clerk's deed records office in the county where the property is located. Pay the filing fee (approximately $25 for the first page)."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Obtain certified copies",
+      "text": "Request certified copies from the county clerk after recording. Banks and title companies require certified copies — not photocopies — to accept the affidavit."
+    }
+  ]
+}`;
+
+const breadcrumbSchema = `{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://smallestateform.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Affidavit of Heirship",
+      "item": "https://smallestateform.com/affidavit-of-heirship/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Texas",
+      "item": "https://smallestateform.com/affidavit-of-heirship/texas/"
+    }
+  ]
+}`;
+---
+
+<StatePage
+  title="Affidavit of Heirship Texas: Complete Guide + Free Generator (2026)"
+  description="Learn how to complete a Texas Affidavit of Heirship under Texas Estates Code Ch. 203. Two-witness rules, county clerk filing fees, step-by-step process."
+  canonicalUrl="https://smallestateform.com/affidavit-of-heirship/texas/"
+  jsonLd={[articleSchema, faqSchema, howToSchema, breadcrumbSchema]}
+>
+
+  <!-- Featured snippet callout -->
+  <div class="bg-[#F0EDE8] border-l-4 border-[#B8860B] p-6 mb-4 max-w-4xl mx-auto mt-8">
+    <p class="font-medium text-[#1C1C1E] leading-relaxed">
+      A Texas Affidavit of Heirship is a legal document signed by two disinterested witnesses that establishes who inherited a deceased person's property when no will was probated. It must be notarized and recorded with the county clerk to be effective against third parties such as banks and title companies.
+    </p>
+  </div>
+
+  <!-- E-E-A-T disclaimer -->
+  <div class="bg-[#FAF8F5] border border-[#E5E0D8] rounded-lg p-4 mb-8 max-w-4xl mx-auto text-sm text-[#6B6B6B]">
+    <strong class="text-[#3D3D3D]">Last updated July 2026.</strong> This information reflects Texas Estates Code Chapter 203 as of July 2026. Laws may change. Consult a licensed attorney for advice specific to your situation.
+  </div>
+
+  <!-- H1 -->
+  <div class="max-w-4xl mx-auto px-6 mb-8">
+    <h1 class="font-serif text-4xl text-[#1C1C1E] leading-tight">
+      Affidavit of Heirship in Texas: What It Is, When You Need One, and How to File It
+    </h1>
+  </div>
+
+  <!-- Form app -->
+  <div class="max-w-4xl mx-auto px-6">
+    <AffidavitFormApp
+      client:load
+      documentType="affidavit-of-heirship"
+      state="Texas"
+      waitingDays={0}
+      statutoryReference="Texas Estates Code Chapter 203"
+    />
+  </div>
+
+  <!-- Body content -->
+  <div class="max-w-4xl mx-auto px-6 py-12 prose prose-lg max-w-none">
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">What Is a Texas Affidavit of Heirship?</h2>
+    <p class="text-[#3D3D3D] leading-relaxed mb-4">
+      A Texas Affidavit of Heirship is a sworn statement — signed by two people who knew the deceased — that identifies the deceased person's heirs and establishes the chain of property ownership. It does not transfer title in the way a deed does. Instead, it creates a record in the county's deed records showing who the rightful heirs are, which allows banks, title companies, and other institutions to recognize those heirs as the legal owners.
+    </p>
+    <p class="text-[#3D3D3D] leading-relaxed mb-4">
+      Unlike probate, which requires a court proceeding, an Affidavit of Heirship is recorded directly with the county clerk. Unlike a small estate affidavit, <strong>there is no asset value threshold</strong> — it can be used regardless of how much the estate is worth.
+    </p>
+
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#1C1C1E] text-[#FAF8F5]">
+            <th class="p-3 text-left">Situation</th>
+            <th class="p-3 text-left">Right tool?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-3 text-[#3D3D3D]">Deceased died without a will, real property in Texas</td>
+            <td class="p-3 text-[#4A7C59] font-medium">✅ Yes — primary use case</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8] bg-[#FAF8F5]">
+            <td class="p-3 text-[#3D3D3D]">Bank asking for documentation of inheritance</td>
+            <td class="p-3 text-[#4A7C59] font-medium">✅ Yes — widely accepted</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-3 text-[#3D3D3D]">Clear title for real property sale or refinance</td>
+            <td class="p-3 text-[#4A7C59] font-medium">✅ Yes — title companies accept it</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8] bg-[#FAF8F5]">
+            <td class="p-3 text-[#3D3D3D]">Deceased had a will that was filed with the court</td>
+            <td class="p-3 text-[#C0392B] font-medium">❌ No — probate governs</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-3 text-[#3D3D3D]">You need to access retirement accounts or life insurance</td>
+            <td class="p-3 text-[#C0392B] font-medium">❌ No — beneficiary designations control</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8] bg-[#FAF8F5]">
+            <td class="p-3 text-[#3D3D3D]">Estate has significant debts or creditors</td>
+            <td class="p-3 text-[#B8860B] font-medium">⚠️ Caution — consult an attorney</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">The Two-Witness Requirement: The Most Misunderstood Rule</h2>
+    <p class="text-[#3D3D3D] leading-relaxed mb-4">
+      Texas law requires two <strong>disinterested witnesses</strong> to sign the Affidavit of Heirship. Most families get this wrong, and a defective affidavit can create title problems for decades.
+    </p>
+
+    <h3 class="font-serif text-xl text-[#1C1C1E] mb-3">What "Disinterested" Actually Means</h3>
+    <p class="text-[#3D3D3D] leading-relaxed mb-3">A disinterested witness is someone who:</p>
+    <ul class="list-disc list-inside text-[#3D3D3D] space-y-2 mb-4 pl-4">
+      <li>Personally knew the deceased for a meaningful period (usually years, not just acquaintances)</li>
+      <li>Has <strong>no financial interest</strong> in the estate — they will not receive anything from it</li>
+      <li>Is <strong>not an heir</strong> of the deceased</li>
+      <li>Is <strong>not a beneficiary</strong> under any will</li>
+    </ul>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div class="bg-[#EFF7F2] border border-[#4A7C59] rounded-lg p-4">
+        <h4 class="font-medium text-[#4A7C59] mb-2">Acceptable witnesses</h4>
+        <ul class="text-sm text-[#3D3D3D] space-y-1">
+          <li>A long-time neighbor (20+ years)</li>
+          <li>A former colleague</li>
+          <li>A family friend with no expectation of inheritance</li>
+          <li>A church community member</li>
+          <li>A business associate</li>
+        </ul>
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4">
+        <h4 class="font-medium text-[#C0392B] mb-2">Who does NOT qualify</h4>
+        <ul class="text-sm text-[#3D3D3D] space-y-1">
+          <li>The deceased's spouse</li>
+          <li>The deceased's children or grandchildren</li>
+          <li>Siblings, even if not inheriting</li>
+          <li>Anyone named as an heir in the affidavit</li>
+          <li>Someone who owes money to the estate</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">Step-by-Step: How to Complete and File</h2>
+
+    <div class="space-y-4 mb-8">
+      <div class="flex gap-4 p-4 bg-[#F0EDE8] rounded-lg border border-[#E5E0D8]">
+        <div class="w-8 h-8 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">1</div>
+        <div>
+          <strong class="text-[#1C1C1E]">Gather the information you need</strong>
+          <p class="text-[#3D3D3D] text-sm mt-1">Deceased's full legal name, date of birth, date of death, last known address, Social Security number, marriage history, names and relationships of all children, property description (legal description from the deed), names of two disinterested witnesses.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#F0EDE8] rounded-lg border border-[#E5E0D8]">
+        <div class="w-8 h-8 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">2</div>
+        <div>
+          <strong class="text-[#1C1C1E]">Complete the form</strong>
+          <p class="text-[#3D3D3D] text-sm mt-1">The affidavit must describe the deceased's family history, whether a will was left and probated, all known heirs and relationships, the specific property, and that the affiant has personal knowledge of these facts. Use exact legal property descriptions.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#F0EDE8] rounded-lg border border-[#E5E0D8]">
+        <div class="w-8 h-8 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">3</div>
+        <div>
+          <strong class="text-[#1C1C1E]">Sign before a notary</strong>
+          <p class="text-[#3D3D3D] text-sm mt-1">Both witnesses must sign in front of a notary public. Do not sign before appearing before the notary. A pre-signed affidavit is defective and will not be accepted.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#F0EDE8] rounded-lg border border-[#E5E0D8]">
+        <div class="w-8 h-8 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">4</div>
+        <div>
+          <strong class="text-[#1C1C1E]">Record with the county clerk</strong>
+          <p class="text-[#3D3D3D] text-sm mt-1">Take the original notarized affidavit to the county clerk's office in the county where the property is located. Recording makes the affidavit effective against third parties — banks, title companies, and future buyers.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#F0EDE8] rounded-lg border border-[#E5E0D8]">
+        <div class="w-8 h-8 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">5</div>
+        <div>
+          <strong class="text-[#1C1C1E]">Get certified copies</strong>
+          <p class="text-[#3D3D3D] text-sm mt-1">After recording, request certified copies. Banks and title companies require certified copies — not photocopies — to accept the affidavit.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">Common Mistakes That Invalidate Texas Affidavits of Heirship</h2>
+    <ul class="list-disc list-inside text-[#3D3D3D] space-y-3 mb-8 pl-4">
+      <li><strong>Using heirs as witnesses.</strong> The most common error. Even well-meaning family members who know the facts cannot serve as witnesses if they stand to inherit.</li>
+      <li><strong>Vague property descriptions.</strong> "The family home" or a street address alone will be rejected by title companies. Use the exact legal description from the deed or county appraisal records.</li>
+      <li><strong>Forgetting to record.</strong> An unrecorded affidavit may work for a bank, but it provides no chain-of-title protection for real property sales or refinancing.</li>
+      <li><strong>One-witness affidavits.</strong> Texas requires exactly two disinterested witnesses. A single-witness affidavit does not meet the statutory requirement.</li>
+      <li><strong>Signing before the notary.</strong> Both witnesses must sign in the notary's presence.</li>
+    </ul>
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">Affidavit of Heirship vs. Formal Probate</h2>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#1C1C1E] text-[#FAF8F5]">
+            <th class="p-3 text-left">Factor</th>
+            <th class="p-3 text-left">Affidavit of Heirship</th>
+            <th class="p-3 text-left">Formal Probate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Court involvement</td>
+            <td class="p-3 text-[#3D3D3D]">None</td>
+            <td class="p-3 text-[#3D3D3D]">Required</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8] bg-[#FAF8F5]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Cost</td>
+            <td class="p-3 text-[#3D3D3D]">$25–$100+ (filing fees)</td>
+            <td class="p-3 text-[#3D3D3D]">$3,000–$15,000+ (attorney fees)</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Time</td>
+            <td class="p-3 text-[#3D3D3D]">Days to weeks</td>
+            <td class="p-3 text-[#3D3D3D]">6–18 months</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8] bg-[#FAF8F5]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Asset threshold</td>
+            <td class="p-3 text-[#3D3D3D]">None</td>
+            <td class="p-3 text-[#3D3D3D]">None</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Best for</td>
+            <td class="p-3 text-[#3D3D3D]">Clear, uncontested heirship</td>
+            <td class="p-3 text-[#3D3D3D]">Contested estates, large debts</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8] bg-[#FAF8F5]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Creditor protection</td>
+            <td class="p-3 text-[#3D3D3D]">Limited</td>
+            <td class="p-3 text-[#3D3D3D]">Formal bar on creditor claims</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- County clerk table -->
+  <div class="max-w-4xl mx-auto px-6 mb-12">
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-6">Texas County Clerk Offices</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#1C1C1E] text-[#FAF8F5]">
+            <th class="p-3 text-left">County</th>
+            <th class="p-3 text-left">Clerk Address</th>
+            <th class="p-3 text-left">Fee (first page)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Harris</td>
+            <td class="p-3 text-[#3D3D3D]">201 Caroline St, Houston, TX 77002</td>
+            <td class="p-3 text-[#3D3D3D]">$25 + $4/additional page</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8] bg-[#FAF8F5]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Dallas</td>
+            <td class="p-3 text-[#3D3D3D]">509 Main St, Dallas, TX 75202</td>
+            <td class="p-3 text-[#3D3D3D]">$25 + $4/additional page</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Tarrant</td>
+            <td class="p-3 text-[#3D3D3D]">200 Taylor St, Fort Worth, TX 76196</td>
+            <td class="p-3 text-[#3D3D3D]">$25 + $4/additional page</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8] bg-[#FAF8F5]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Bexar</td>
+            <td class="p-3 text-[#3D3D3D]">100 Dolorosa, Suite 104, San Antonio, TX 78205</td>
+            <td class="p-3 text-[#3D3D3D]">$25 + $4/additional page</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Travis</td>
+            <td class="p-3 text-[#3D3D3D]">5501 Airport Blvd, Austin, TX 78751</td>
+            <td class="p-3 text-[#3D3D3D]">$25 + $4/additional page</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-sm text-[#6B6B6B] mt-3">Most Texas county clerks also accept filings by mail. Confirm current fees before visiting or mailing.</p>
+  </div>
+
+  <!-- FAQ -->
+  <section class="max-w-4xl mx-auto px-6 pb-16">
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-8">Frequently asked questions</h2>
+    <div class="space-y-4">
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          Who qualifies as a disinterested witness?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          Anyone who knew the deceased personally for a significant time and has no financial stake in the estate. They cannot be heirs, beneficiaries, or people who owe money to the estate. A neighbor, former coworker, family friend, or church member typically qualifies.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          How long does the process take?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          From gathering information to filing: typically 1–3 weeks. The recording itself happens the same day at the clerk's office. If mailing, add 1–2 weeks for processing and return.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          Do I need a lawyer to file in Texas?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          No — Texas law does not require an attorney to prepare or file the form. However, an attorney review is advisable if the heirship is complicated (multiple marriages, estranged children, disputed facts) or if the property will be sold soon and title insurance is needed.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          Does it work for mineral rights?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          Yes. Affidavits of Heirship are commonly used to establish heirship for mineral interests, which are often severed from surface rights in Texas and may have their own separate chain of title.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          What if there are debts against the estate?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          An Affidavit of Heirship does not extinguish creditor claims. Creditors who had claims against the deceased can still pursue the heirs for those debts. If the estate has significant debts, probate — which provides a formal process for creditors to file and be barred — may offer more protection.
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- Internal links -->
+  <div class="max-w-4xl mx-auto px-6 pb-12 text-sm text-[#6B6B6B]">
+    Related: <a href="/small-estate-affidavit/" class="text-[#B8860B] hover:underline">Small Estate Affidavit Hub</a> | <a href="/small-estate-affidavit/arizona/" class="text-[#B8860B] hover:underline">Arizona Small Estate Affidavit</a> | <a href="/" class="text-[#B8860B] hover:underline">Homepage</a>
+  </div>
+
+</StatePage>

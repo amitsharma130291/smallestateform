@@ -1,0 +1,414 @@
+---
+import StatePage from '../../../../layouts/StatePage.astro';
+import AffidavitFormApp from '../../../../components/AffidavitFormApp';
+
+const articleSchema = `{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Small Estate Affidavit Maricopa County Arizona: 2026 Guide",
+  "description": "How to file a small estate affidavit in Maricopa County, AZ. HB2116 March 2026 thresholds, Maricopa County Recorder address, fees, and required forms.",
+  "datePublished": "2026-01-01",
+  "dateModified": "2026-07-28",
+  "author": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  }
+}`;
+
+const faqSchema = `{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Where do I file a small estate affidavit for real property in Maricopa County, Arizona?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Record the Small Estate Affidavit with the Maricopa County Recorder at 111 S 3rd Ave, Phoenix, AZ 85003. Recording fees are $30 for the first page plus $3 for each additional page."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the Maricopa County small estate thresholds in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As of March 2026 under HB2116, the thresholds are $200,000 for personal property and $300,000 for real property. A 30-day waiting period applies."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does it cost to record a small estate affidavit with the Maricopa County Recorder?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Maricopa County Recorder charges $30 for the first page and $3 for each additional page. A typical 2–4 page affidavit costs $30–$42 to record."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I mail my small estate affidavit to the Maricopa County Recorder?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Mail the original notarized affidavit with payment (check payable to Maricopa County Recorder) and a self-addressed stamped envelope to 111 S 3rd Ave, Phoenix, AZ 85003."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I file at the Superior Court or the County Recorder in Maricopa County?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For real property, you record with the Maricopa County Recorder (111 S 3rd Ave, Phoenix). You do not file a petition with the Superior Court — the affidavit process is designed to bypass the court entirely."
+      }
+    }
+  ]
+}`;
+
+const howToSchema = `{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to File a Small Estate Affidavit in Maricopa County, Arizona",
+  "description": "County-specific process for recording an Arizona Small Estate Affidavit for real property at the Maricopa County Recorder under ARS §14-3971 (HB2116, March 2026).",
+  "totalTime": "P30D",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "42"
+  },
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Confirm 30-day waiting period",
+      "text": "Verify that at least 30 days have passed since the date of death as shown on the death certificate."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Verify property value under $300,000",
+      "text": "Confirm the fair market value of the real property is under the $300,000 threshold (HB2116, March 2026)."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Complete the Maricopa County affidavit form",
+      "text": "Use Maricopa Superior Court probate division-compatible forms. Include the deceased's information, legal property description, heir information, and penalty-of-perjury statement."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Notarize the affidavit",
+      "text": "Sign the completed affidavit in front of a notary public."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Record with the Maricopa County Recorder",
+      "text": "Bring or mail the original notarized affidavit to Maricopa County Recorder, 111 S 3rd Ave, Phoenix, AZ 85003. Pay $30 for the first page plus $3 per additional page."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Obtain certified copies",
+      "text": "Request certified copies from the Recorder after filing. Banks and title companies require certified copies."
+    }
+  ]
+}`;
+
+const breadcrumbSchema = `{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://smallestateform.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Small Estate Affidavit",
+      "item": "https://smallestateform.com/small-estate-affidavit/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Arizona",
+      "item": "https://smallestateform.com/small-estate-affidavit/arizona/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Maricopa County",
+      "item": "https://smallestateform.com/small-estate-affidavit/arizona/maricopa/"
+    }
+  ]
+}`;
+---
+
+<StatePage
+  title="Small Estate Affidavit Maricopa County Arizona: 2026 Guide"
+  description="How to file a small estate affidavit in Maricopa County, AZ. HB2116 March 2026 thresholds, Maricopa County Recorder address, fees, and required forms."
+  canonicalUrl="https://smallestateform.com/small-estate-affidavit/arizona/maricopa/"
+  jsonLd={[articleSchema, faqSchema, howToSchema, breadcrumbSchema]}
+>
+
+  <!-- Parent breadcrumb link -->
+  <div class="max-w-4xl mx-auto px-6 mt-8 mb-4">
+    <a href="/small-estate-affidavit/arizona/" class="text-[#B8860B] hover:underline text-sm font-medium">← View all Arizona small estate rules</a>
+  </div>
+
+  <!-- HB2116 update callout -->
+  <div class="bg-[#FFF8E8] border-l-4 border-[#B8860B] p-4 mb-4 max-w-4xl mx-auto">
+    <strong>⚡ Updated March 2026 — HB2116</strong> raised Arizona's small estate thresholds. Personal property: $200,000. Real property: $300,000. Most guides still show old limits.
+  </div>
+
+  <!-- Featured snippet callout -->
+  <div class="bg-[#F0EDE8] border-l-4 border-[#B8860B] p-6 mb-4 max-w-4xl mx-auto">
+    <p class="font-medium text-[#1C1C1E] leading-relaxed">
+      In Maricopa County, Arizona, a Small Estate Affidavit for real property must be recorded with the Maricopa County Recorder at 111 S 3rd Ave, Phoenix, AZ 85003. As of March 2026 under HB2116, the thresholds are $200,000 for personal property and $300,000 for real property. A 30-day waiting period applies.
+    </p>
+  </div>
+
+  <!-- E-E-A-T disclaimer -->
+  <div class="bg-[#FAF8F5] border border-[#E5E0D8] rounded-lg p-4 mb-8 max-w-4xl mx-auto text-sm text-[#6B6B6B]">
+    <strong class="text-[#3D3D3D]">Last updated July 2026.</strong> This information reflects ARS §14-3971 as amended by HB2116, effective March 2026. Laws may change. Consult a licensed Arizona attorney for advice specific to your situation.
+  </div>
+
+  <!-- H1 -->
+  <div class="max-w-4xl mx-auto px-6 mb-8">
+    <h1 class="font-serif text-4xl text-[#1C1C1E] leading-tight">
+      Small Estate Affidavit in Maricopa County, Arizona: Where to File and What to Expect
+    </h1>
+  </div>
+
+  <!-- Form app -->
+  <div class="max-w-4xl mx-auto px-6">
+    <AffidavitFormApp
+      client:load
+      documentType="small-estate-affidavit"
+      state="Arizona"
+      county="Maricopa"
+      eligibilityThreshold={200000}
+      waitingDays={30}
+      statutoryReference="ARS §14-3971 (HB2116, March 2026)"
+    />
+  </div>
+
+  <!-- Body content -->
+  <div class="max-w-4xl mx-auto px-6 py-12">
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">Maricopa County vs. the Rest of Arizona: What's Different</h2>
+    <p class="text-[#3D3D3D] leading-relaxed mb-4">
+      Arizona's statewide Small Estate Affidavit law (ARS §14-3971) applies in Maricopa County — but the <strong>forms and recording procedures are county-specific</strong>. What works in Pima or Yavapai County may not be the right form for Maricopa.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div class="border border-[#E5E0D8] rounded-xl p-4 bg-[#FAF8F5]">
+        <h3 class="font-medium text-[#1C1C1E] mb-2">Personal property (bank accounts, vehicles)</h3>
+        <p class="text-[#3D3D3D] text-sm">The statewide process applies — present the notarized affidavit to the asset holder. No county-specific forms required.</p>
+      </div>
+      <div class="border border-[#B8860B] rounded-xl p-4 bg-[#FFF8E8]">
+        <h3 class="font-medium text-[#1C1C1E] mb-2">Real property in Maricopa County</h3>
+        <p class="text-[#3D3D3D] text-sm">Must record with the <strong>Maricopa County Recorder</strong>, using forms consistent with Maricopa Superior Court probate division requirements.</p>
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">HB2116: Current Maricopa County Thresholds (March 2026)</h2>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#1C1C1E] text-[#FAF8F5]">
+            <th class="p-3 text-left">Asset Type</th>
+            <th class="p-3 text-left">Current Limit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Personal property</td>
+            <td class="p-3 text-[#B8860B] font-medium">$200,000</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8] bg-[#FAF8F5]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Real property</td>
+            <td class="p-3 text-[#B8860B] font-medium">$300,000</td>
+          </tr>
+          <tr class="border-b border-[#E5E0D8]">
+            <td class="p-3 font-medium text-[#1C1C1E]">Waiting period</td>
+            <td class="p-3 text-[#3D3D3D]">30 days from date of death</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Maricopa County Recorder info box -->
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">Where to Record in Maricopa County</h2>
+    <div class="bg-[#F0EDE8] border border-[#E5E0D8] rounded-xl p-6 mb-8">
+      <h3 class="font-serif text-xl text-[#1C1C1E] mb-4">Maricopa County Recorder</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2 text-sm text-[#3D3D3D]">
+          <div><strong class="text-[#1C1C1E]">Address:</strong> 111 S 3rd Ave, Phoenix, AZ 85003</div>
+          <div><strong class="text-[#1C1C1E]">Phone:</strong> (602) 506-3535</div>
+          <div><strong class="text-[#1C1C1E]">Website:</strong> recorder.maricopa.gov</div>
+          <div><strong class="text-[#1C1C1E]">Hours:</strong> Monday–Friday, 8:00 AM – 5:00 PM (confirm before visiting)</div>
+        </div>
+        <div class="space-y-2 text-sm text-[#3D3D3D]">
+          <div class="font-medium text-[#1C1C1E]">Recording fees (2026):</div>
+          <div>• $30 for the first page</div>
+          <div>• $3 for each additional page</div>
+          <div class="mt-2 text-[#6B6B6B]">A typical affidavit runs 2–4 pages: budget $30–$42.</div>
+          <div class="mt-2 text-[#6B6B6B]">Mail accepted — include a self-addressed stamped envelope for return of stamped document.</div>
+        </div>
+      </div>
+      <div class="mt-4 p-3 bg-[#FAF8F5] rounded-lg border border-[#E5E0D8] text-sm text-[#6B6B6B]">
+        <strong>Note:</strong> This is a Recording, not a court filing — bring your completed, notarized affidavit. You do not file a petition with the Superior Court.
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">Step-by-Step: Maricopa County Real Property Process</h2>
+    <div class="space-y-4 mb-8">
+      <div class="flex gap-4 p-4 bg-[#F0EDE8] rounded-lg border border-[#E5E0D8]">
+        <div class="w-8 h-8 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">1</div>
+        <div>
+          <strong class="text-[#1C1C1E]">Confirm the 30-day waiting period</strong>
+          <p class="text-[#3D3D3D] text-sm mt-1">Check the date of death on the death certificate. You cannot record the affidavit until at least 30 days after that date.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#F0EDE8] rounded-lg border border-[#E5E0D8]">
+        <div class="w-8 h-8 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">2</div>
+        <div>
+          <strong class="text-[#1C1C1E]">Verify the property value</strong>
+          <p class="text-[#3D3D3D] text-sm mt-1">Determine the current fair market value of the real property. If it exceeds $300,000, formal probate or another transfer mechanism is needed.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#F0EDE8] rounded-lg border border-[#E5E0D8]">
+        <div class="w-8 h-8 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">3</div>
+        <div>
+          <strong class="text-[#1C1C1E]">Use the correct form</strong>
+          <p class="text-[#3D3D3D] text-sm mt-1">Maricopa County recommends forms consistent with the Maricopa Superior Court's probate division. Available through the Maricopa County Superior Court Self-Service Center, or generated by smallestateform.com (which auto-selects Maricopa County forms).</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#F0EDE8] rounded-lg border border-[#E5E0D8]">
+        <div class="w-8 h-8 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">4</div>
+        <div>
+          <strong class="text-[#1C1C1E]">Include required elements</strong>
+          <div class="text-[#3D3D3D] text-sm mt-1 space-y-1">
+            <div>✓ Deceased's full name and date of death</div>
+            <div>✓ Statement that 30 days have elapsed</div>
+            <div>✓ Statement that no probate proceeding is pending</div>
+            <div>✓ Legal property description (not just the address)</div>
+            <div>✓ Fair market value statement</div>
+            <div>✓ Affiant's relationship to the deceased</div>
+            <div>✓ Names of all known heirs</div>
+            <div>✓ Notarized signature</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#F0EDE8] rounded-lg border border-[#E5E0D8]">
+        <div class="w-8 h-8 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">5</div>
+        <div>
+          <strong class="text-[#1C1C1E]">Notarize</strong>
+          <p class="text-[#3D3D3D] text-sm mt-1">Sign the affidavit in front of a notary public. The Maricopa County Recorder will not accept an unnotarized affidavit.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#F0EDE8] rounded-lg border border-[#E5E0D8]">
+        <div class="w-8 h-8 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">6</div>
+        <div>
+          <strong class="text-[#1C1C1E]">Record at the Maricopa County Recorder</strong>
+          <p class="text-[#3D3D3D] text-sm mt-1">Bring or mail the original notarized affidavit to 111 S 3rd Ave, Phoenix, AZ 85003. Pay the $30 first-page fee plus $3 per additional page.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#F0EDE8] rounded-lg border border-[#E5E0D8]">
+        <div class="w-8 h-8 bg-[#1C1C1E] text-[#FAF8F5] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">7</div>
+        <div>
+          <strong class="text-[#1C1C1E]">Obtain certified copies</strong>
+          <p class="text-[#3D3D3D] text-sm mt-1">Request certified copies after recording. Banks and title companies require certified copies — not photocopies — when accepting the recorded affidavit as proof of transfer.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-4">What to Bring to the Maricopa County Recorder</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="border border-[#E5E0D8] rounded-xl p-5 bg-[#FAF8F5]">
+        <h3 class="font-medium text-[#1C1C1E] mb-3">Filing in person</h3>
+        <ul class="text-sm text-[#3D3D3D] space-y-2">
+          <li>• Original notarized Small Estate Affidavit</li>
+          <li>• Copy of the death certificate (useful to have)</li>
+          <li>• Payment for recording fees (check, money order, or exact cash; confirm card acceptance)</li>
+          <li>• Self-addressed stamped envelope if you want a stamped copy returned</li>
+        </ul>
+      </div>
+      <div class="border border-[#E5E0D8] rounded-xl p-5 bg-[#FAF8F5]">
+        <h3 class="font-medium text-[#1C1C1E] mb-3">Filing by mail</h3>
+        <ul class="text-sm text-[#3D3D3D] space-y-2">
+          <li>• Original notarized affidavit</li>
+          <li>• Check payable to "Maricopa County Recorder" for the correct fee</li>
+          <li>• Self-addressed stamped envelope</li>
+          <li>• Note requesting a conformed copy be mailed back</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FAQ -->
+  <section class="max-w-4xl mx-auto px-6 pb-16">
+    <h2 class="font-serif text-2xl text-[#1C1C1E] mb-8">Frequently asked questions: Maricopa County</h2>
+    <div class="space-y-4">
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          Do I file the Maricopa County Small Estate Affidavit at the Superior Court or the Recorder?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          For real property, you record with the <strong>Maricopa County Recorder</strong> (111 S 3rd Ave, Phoenix). You do not file a petition with the Superior Court — the affidavit process is designed to bypass the court entirely. The Recorder records the transfer; the Court is not involved unless there is a dispute.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          What if the estate has both personal property and real property in Maricopa County?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          Each is handled separately. Personal property (bank accounts, vehicles) — present the affidavit to the institution. Real property — record with the Maricopa County Recorder. Each must independently fall within its respective threshold ($200,000 personal, $300,000 real).
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          Can I file by mail with the Maricopa County Recorder?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          Yes. Mail the original notarized affidavit with payment and a self-addressed stamped envelope to 111 S 3rd Ave, Phoenix, AZ 85003. Turnaround is typically 1–3 business days after receipt.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          What are the current Maricopa County small estate thresholds?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          As of March 2026 under HB2116: $200,000 for personal property and $300,000 for real property. A 30-day waiting period applies. If you've seen lower numbers elsewhere, the source is outdated.
+        </div>
+      </details>
+
+      <details class="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8]">
+        <summary class="p-6 font-medium text-[#1C1C1E] cursor-pointer list-none flex items-center justify-between">
+          What if someone disputes my claim to the property?
+          <span class="text-[#B8860B] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#3D3D3D] leading-relaxed text-sm">
+          A Small Estate Affidavit does not extinguish other heirs' legal claims. If there is a legitimate dispute among heirs, the affidavit process should be approached cautiously — a disputed estate is generally better handled through formal probate where a court can adjudicate the competing claims.
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- Internal links -->
+  <div class="max-w-4xl mx-auto px-6 pb-12 text-sm text-[#6B6B6B]">
+    Related: <a href="/small-estate-affidavit/arizona/" class="text-[#B8860B] hover:underline">Arizona Small Estate Affidavit (statewide)</a> | <a href="/small-estate-affidavit/" class="text-[#B8860B] hover:underline">Small Estate Affidavit Hub</a> | <a href="/" class="text-[#B8860B] hover:underline">Homepage</a>
+  </div>
+
+</StatePage>
