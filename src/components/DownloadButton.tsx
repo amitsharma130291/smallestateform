@@ -5,9 +5,10 @@ import { generateAffidavitPDF } from './PDFGenerator';
 interface DownloadButtonProps {
   pdfData: PDFData;
   fileName: string;
+  onDownloaded?: () => void;
 }
 
-export default function DownloadButton({ pdfData, fileName }: DownloadButtonProps) {
+export default function DownloadButton({ pdfData, fileName, onDownloaded }: DownloadButtonProps) {
   const [status, setStatus] = useState<'idle' | 'generating' | 'done'>('idle');
 
   const handleDownload = async () => {
@@ -17,6 +18,7 @@ export default function DownloadButton({ pdfData, fileName }: DownloadButtonProp
       const doc = generateAffidavitPDF(pdfData);
       doc.save(`${fileName}.pdf`);
       setStatus('done');
+      if (onDownloaded) onDownloaded();
     } catch (err) {
       setStatus('idle');
       console.error('PDF generation error:', err);

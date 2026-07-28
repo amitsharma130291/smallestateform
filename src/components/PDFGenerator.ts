@@ -17,7 +17,7 @@ const documentTitles: Record<string, string> = {
 };
 
 const bankLetterText: Record<string, string> = {
-  'small-estate-affidavit': 'Under [STATUTORY_REFERENCE], financial institutions are legally required to accept a properly executed Small Estate Affidavit and release the assets described herein to the claimant. Failure to comply within a reasonable time may subject the institution to liability for damages, including attorney\'s fees and costs.',
+  'small-estate-affidavit': 'Under [STATUTORY_REFERENCE], financial institutions are generally required to accept a properly executed Small Estate Affidavit and release the assets described herein to the claimant under applicable state law; individual institutions may request additional documentation depending on the account type and value.',
   'affidavit-of-heirship': 'Under Texas Estates Code Chapter 203, a recorded Affidavit of Heirship constitutes prima facie evidence of the facts stated therein. Financial institutions and title companies are advised to accept this document as proof of heirship and succession.',
   'tod-deed': 'Under California Civil Code §5600–5696, a properly recorded Revocable Transfer on Death Deed transfers the described real property to the designated beneficiary upon the grantor\'s death, without probate.',
 };
@@ -589,10 +589,19 @@ export function generateHeirshipAffidavit(data: PDFData): jsPDF {
     'documentation, please contact the affiant directly.'
   );
   addSpace(0.25);
+  // Affiant declaration using affiant fields or heir fallback
+  const heirshipAffinatName = fd.affinatName?.trim() || fd.witness1Name || '[AFFIANT NAME]';
+  const heirshipAffiantAddr = fd.affiantAddress?.trim() || '';
+  const heirshipAffiantRel = fd.affiantRelationship?.trim() || 'heir';
+  writeLine(
+    `I, ${heirshipAffinatName}, residing at ${heirshipAffiantAddr || '________________'}, being the ${heirshipAffiantRel} of the above-named Decedent, hereby declare under penalty of perjury that the foregoing is true and correct.`,
+    { size: 10, style: 'italic' }
+  );
+  addSpace(0.15);
   writeLine('Respectfully,', { style: 'italic' });
   addSpace(0.35);
   sigLine('Affiant / Heir Signature');
-  sigLine(fd.witness1Name || 'Printed Name');
+  sigLine(heirshipAffinatName || 'Printed Name');
   addSpace(0.1);
 
   writeLine(
@@ -691,11 +700,30 @@ export function generateAffidavitPDF(data: PDFData): jsPDF {
   addLine();
   addSpace(0.2);
 
+  // Affiant identity: use affiant fields if provided, otherwise fall back to heir name
+  const affinatName = data.formData.affinatName?.trim() || data.formData.heirName || '[AFFIANT NAME]';
+  const affiantAddress = data.formData.affiantAddress?.trim() || '';
+  const affiantRelationship = data.formData.affiantRelationship?.trim() || 'heir';
+
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(61, 61, 61);
+
+  // Declaration line
+  const declarationText = `I, ${affinatName}, residing at ${affiantAddress || '________________'}, being the ${affiantRelationship} of the above-named Decedent, hereby declare under penalty of perjury that the foregoing is true and correct.`;
+  const declarationLines = doc.splitTextToSize(declarationText, contentWidth) as string[];
+  doc.setFontSize(10);
+  doc.text(declarationLines, margin, y);
+  y += declarationLines.length * 0.2 + 0.2;
+
   doc.text('Signature of Affiant: ___________________________________  Date: _______________', margin, y);
-  y += 0.6;
+  y += 0.25;
+  doc.setFontSize(9);
+  doc.setTextColor(100, 100, 100);
+  doc.text(affinatName, margin, y);
+  y += 0.35;
+  doc.setFontSize(10);
+  doc.setTextColor(61, 61, 61);
   doc.text('Notary Public Signature: _______________________________  Date: _______________', margin, y);
   y += 0.3;
   doc.text('Commission Expires: ____________________________________', margin, y);
@@ -763,8 +791,11 @@ export function generateAffidavitPDF(data: PDFData): jsPDF {
     .replace('[STATUTORY_REFERENCE]', data.statutoryReference);
 
   doc.setFontSize(11);
+  const signerName = data.formData.affinatName?.trim() || data.formData.heirName || '[AFFIANT NAME]';
+  const signerAddress = data.formData.affiantAddress?.trim() || '';
+  const signerRelationship = data.formData.affiantRelationship?.trim() || 'heir';
   const wrappedLetter = doc.splitTextToSize(
-    `To Whom It May Concern,\n\nThis letter accompanies a legally executed ${documentTitles[data.documentType]} for the estate of ${data.formData.deceasedName || '[Deceased]'}, who passed away on ${data.formData.dateOfDeath || '[date]'}.\n\n${letterText}\n\nPlease process the transfer of the following assets to the designated heir or beneficiary as described in the accompanying affidavit:\n\n${data.formData.propertyDescription || data.formData.heirName || '[See affidavit]'}\n\nShould you require any additional documentation, please contact the affiant directly.\n\nRespectfully,\n\n___________________________________\nAffiant Signature\n\n${data.formData.heirName || ''}`,
+    `To Whom It May Concern,\n\nThis letter accompanies a legally executed ${documentTitles[data.documentType]} for the estate of ${data.formData.deceasedName || '[Deceased]'}, who passed away on ${data.formData.dateOfDeath || '[date]'}.\n\n${letterText}\n\nPlease process the transfer of the following assets to the designated heir or beneficiary as described in the accompanying affidavit:\n\n${data.formData.propertyDescription || data.formData.heirName || '[See affidavit]'}\n\nShould you require any additional documentation, please contact the affiant directly.\n\nRespectfully,\n\n___________________________________\n${signerName}${signerAddress ? '\n' + signerAddress : ''}\n${signerRelationship}`,
     contentWidth
   );
   doc.text(wrappedLetter, margin, y);

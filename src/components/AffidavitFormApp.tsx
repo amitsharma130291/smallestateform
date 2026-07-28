@@ -132,12 +132,12 @@ const emptyHeirship = (): HeirshipData => ({
 
 // ─── Non-heirship simple fields ─────────────────────────────────────────────
 
-const fieldConfigs: Record<string, Array<{ key: string; label: string; placeholder?: string; type?: string }>> = {
+const fieldConfigs: Record<string, Array<{ key: string; label: string; placeholder?: string; type?: string; helperText?: string }>> = {
   'small-estate-affidavit': [
     { key: 'deceasedName', label: 'Full name of the deceased', placeholder: 'Jane Smith' },
     { key: 'dateOfDeath', label: 'Date of death', type: 'date' },
     { key: 'county', label: 'County where assets are located', placeholder: 'e.g. Maricopa' },
-    { key: 'propertyDescription', label: 'Description of assets to transfer', placeholder: 'Bank account at Chase Bank, account ending 1234' },
+    { key: 'propertyDescription', label: 'Asset Description', placeholder: 'e.g. Checking account at Chase Bank, account ending in 1234', helperText: 'Be specific — include the financial institution, account type, vehicle VIN, or property address.' },
     { key: 'heirName', label: 'Your full name (heir / claimant)', placeholder: 'John Smith' },
     { key: 'heirRelationship', label: 'Your relationship to the deceased', placeholder: 'Son / Daughter / Spouse' },
   ],
@@ -613,6 +613,116 @@ function HeirshipForm({ data, onComplete }: { data: HeirshipData; onComplete: (d
 
 // ─── Main app ─────────────────────────────────────────────────────────────────
 
+// ─── Validation ──────────────────────────────────────────────────────────────
+
+function validateForm(data: Record<string, string>, docType: string): Record<string, string> {
+  const errors: Record<string, string> = {};
+  if (!data.deceasedName?.trim()) errors.deceasedName = 'Required';
+  if (!data.dateOfDeath?.trim()) errors.dateOfDeath = 'Required';
+  if (!data.county?.trim()) errors.county = 'Required';
+  if (!data.heirName?.trim()) errors.heirName = 'Required';
+  if (!data.propertyDescription?.trim()) errors.propertyDescription = 'Required';
+  return errors;
+}
+
+function isFormValid(data: Record<string, string>, docType: string): boolean {
+  return Object.keys(validateForm(data, docType)).length === 0;
+}
+
+// ─── Next Steps Checklist ────────────────────────────────────────────────────
+
+function NextStepsCard({ onDownloadAgain, onStartOver }: { onDownloadAgain: () => void; onStartOver: () => void }) {
+  const items = [
+    'Sign the affidavit before a notary public (do NOT sign in advance)',
+    'Obtain a certified copy of the death certificate',
+    'Bring a valid government-issued photo ID',
+    'Verify the waiting period has passed since date of death',
+    "Confirm the estate value is under your state's threshold",
+  ];
+  return (
+    <div className="bg-[#EEF4E8] border border-[#2D5016] rounded-xl p-6 text-left">
+      <p className="font-serif text-xl text-[#2D5016] mb-4">✅ Your document has been generated!</p>
+      <p className="text-sm font-semibold text-[#2C2C2A] mb-3">Before Filing — Next Steps:</p>
+      <ul className="space-y-2 mb-6">
+        {items.map((item, i) => (
+          <li key={i} className="flex items-start gap-2 text-sm text-[#2C2C2A]">
+            <span className="mt-0.5 text-[#2D5016] flex-shrink-0">☐</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="flex flex-wrap gap-3">
+        <button
+          onClick={onDownloadAgain}
+          className="px-5 py-2.5 border border-[#2D5016] text-[#2D5016] rounded-lg font-medium text-sm hover:bg-[#2D5016] hover:text-[#F7F4EF] transition-colors"
+        >
+          Download Again
+        </button>
+        <button
+          onClick={onStartOver}
+          className="px-5 py-2.5 bg-[#2C2C2A] text-[#F7F4EF] rounded-lg font-medium text-sm hover:bg-[#2D5016] transition-colors"
+        >
+          Start Over
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Affiant Section ─────────────────────────────────────────────────────────
+
+interface AffiántData {
+  affinatName: string;
+  affiantAddress: string;
+  affiantRelationship: '' | 'Spouse' | 'Child' | 'Parent' | 'Sibling' | 'Other';
+}
+
+function AffiантSection({ data, onChange }: { data: AffiántData; onChange: (d: AffiántData) => void }) {
+  return (
+    <div className="mt-8 p-5 bg-[#F7F4EF] rounded-lg border border-[#D4CCC0]">
+      <p className="text-sm font-semibold text-[#2D5016] mb-1">Affiant Information (optional)</p>
+      <p className="text-xs text-[#6B6560] mb-4">If the person filing this affidavit is different from the heir, enter their details below. Leave blank to use the heir's name on the signature block.</p>
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-[#2C2C2A] mb-1.5">Affiant Full Name</label>
+          <input
+            type="text"
+            value={data.affinatName}
+            onChange={e => onChange({ ...data, affinatName: e.target.value })}
+            placeholder="If different from heir name — leave blank to use heir name"
+            className="w-full px-4 py-3 border border-[#D4CCC0] rounded-lg text-[#2C2C2A] focus:outline-none focus:ring-2 focus:ring-[#8B6914] focus:border-transparent bg-white"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-[#2C2C2A] mb-1.5">Affiant Mailing Address</label>
+          <input
+            type="text"
+            value={data.affiantAddress}
+            onChange={e => onChange({ ...data, affiantAddress: e.target.value })}
+            placeholder="123 Main St, City, State 12345"
+            className="w-full px-4 py-3 border border-[#D4CCC0] rounded-lg text-[#2C2C2A] focus:outline-none focus:ring-2 focus:ring-[#8B6914] focus:border-transparent bg-white"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-[#2C2C2A] mb-1.5">Affiant Relationship to Deceased</label>
+          <select
+            value={data.affiantRelationship}
+            onChange={e => onChange({ ...data, affiantRelationship: e.target.value as AffiántData['affiantRelationship'] })}
+            className="w-full px-4 py-3 border border-[#D4CCC0] rounded-lg text-[#2C2C2A] focus:outline-none focus:ring-2 focus:ring-[#8B6914] bg-white"
+          >
+            <option value="">Select relationship...</option>
+            <option value="Spouse">Spouse</option>
+            <option value="Child">Child</option>
+            <option value="Parent">Parent</option>
+            <option value="Sibling">Sibling</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AffidavitFormApp({
   documentType,
   state,
@@ -625,9 +735,31 @@ export default function AffidavitFormApp({
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [heirshipData, setHeirshipData] = useState<HeirshipData>(emptyHeirship());
   const [isEligible, setIsEligible] = useState<boolean | null>(null);
+  const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
+  const [submitAttempted, setSubmitAttempted] = useState(false);
+  const [downloadComplete, setDownloadComplete] = useState(false);
+  const [affiántData, setAffiántData] = useState<AffiántData>({
+    affinatName: '',
+    affiantAddress: '',
+    affiantRelationship: '',
+  });
 
   const isHeirship = documentType === 'affidavit-of-heirship';
   const fields = fieldConfigs[documentType] || fieldConfigs['small-estate-affidavit'];
+
+  const validationErrors = validateForm(formData, documentType);
+  const formIsValid = isFormValid(formData, documentType);
+
+  const getFieldError = (key: string): string | undefined => {
+    if ((touchedFields[key] || submitAttempted) && validationErrors[key]) {
+      return validationErrors[key];
+    }
+    return undefined;
+  };
+
+  const handleBlur = (key: string) => {
+    setTouchedFields(prev => ({ ...prev, [key]: true }));
+  };
 
   const handleEligibility = (eligible: boolean) => {
     setIsEligible(eligible);
@@ -638,6 +770,14 @@ export default function AffidavitFormApp({
 
   const handleFieldChange = (key: string, value: string) => {
     setFormData(prev => ({ ...prev, [key]: value }));
+  };
+
+  const handleGenerateClick = () => {
+    if (!formIsValid) {
+      setSubmitAttempted(true);
+      return;
+    }
+    setStep(4);
   };
 
   // Serialize heirship data into formData for PDFData compatibility
@@ -672,13 +812,22 @@ export default function AffidavitFormApp({
     witness2Address: heirshipData.witness2Address,
     witness2HowLong: heirshipData.witness2HowLong,
     witness2Relationship: heirshipData.witness2Relationship,
+    // Affiant fields
+    affinatName: affiántData.affinatName,
+    affiantAddress: affiántData.affiantAddress,
+    affiantRelationship: affiántData.affiantRelationship,
   };
 
   const pdfData: PDFData = {
     documentType,
     state,
     county,
-    formData: isHeirship ? serializedHeirshipFormData : formData,
+    formData: isHeirship ? serializedHeirshipFormData : {
+      ...formData,
+      affinatName: affiántData.affinatName,
+      affiantAddress: affiántData.affiantAddress,
+      affiantRelationship: affiántData.affiantRelationship,
+    },
     statutoryReference,
     waitingDays,
   };
@@ -746,30 +895,50 @@ export default function AffidavitFormApp({
                   setStep(4);
                 }}
               />
+              <AffiантSection data={affiántData} onChange={setAffiántData} />
             </>
           ) : (
             <>
               <h3 className="font-serif text-xl text-[#2D5016] mb-6">Enter your details</h3>
               <div className="space-y-5">
-                {fields.map(field => (
-                  <div key={field.key}>
-                    <label className="block text-sm font-medium text-[#2C2C2A] mb-1.5">{field.label}</label>
-                    <input
-                      type={field.type || 'text'}
-                      value={formData[field.key] || ''}
-                      onChange={e => handleFieldChange(field.key, e.target.value)}
-                      placeholder={field.placeholder}
-                      className="w-full px-4 py-3 border border-[#D4CCC0] rounded-lg text-[#2C2C2A] focus:outline-none focus:ring-2 focus:ring-[#8B6914] focus:border-transparent bg-white"
-                    />
-                  </div>
-                ))}
+                {fields.map(field => {
+                  const error = getFieldError(field.key);
+                  return (
+                    <div key={field.key}>
+                      <label className="block text-sm font-medium text-[#2C2C2A] mb-1.5">{field.label}</label>
+                      <input
+                        type={field.type || 'text'}
+                        value={formData[field.key] || ''}
+                        onChange={e => handleFieldChange(field.key, e.target.value)}
+                        onBlur={() => handleBlur(field.key)}
+                        placeholder={field.placeholder}
+                        className={`w-full px-4 py-3 border rounded-lg text-[#2C2C2A] focus:outline-none focus:ring-2 focus:border-transparent bg-white ${
+                          error
+                            ? 'border-[#C0392B] focus:ring-[#C0392B]'
+                            : 'border-[#D4CCC0] focus:ring-[#8B6914]'
+                        }`}
+                      />
+                      {field.helperText && !error && (
+                        <p className="mt-1 text-xs text-[#6B6560]">{field.helperText}</p>
+                      )}
+                      {error && (
+                        <p className="mt-1 text-xs text-[#C0392B] font-medium">{error}</p>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
+              <AffiантSection data={affiántData} onChange={setAffiántData} />
               <button
-                onClick={() => setStep(4)}
-                disabled={!formData[fields[0]?.key]}
-                className="mt-8 px-6 py-3 bg-[#2D5016] text-[#F7F4EF] rounded-lg font-medium hover:bg-[#2C2C2A] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={handleGenerateClick}
+                disabled={false}
+                className={`mt-8 px-6 py-3 rounded-lg font-medium transition-colors ${
+                  formIsValid
+                    ? 'bg-[#2D5016] text-[#F7F4EF] hover:bg-[#2C2C2A]'
+                    : 'bg-[#D4CCC0] text-[#6B6560] cursor-not-allowed'
+                }`}
               >
-                Generate my documents →
+                {formIsValid ? 'Download Free PDF' : 'Complete all fields to generate'}
               </button>
             </>
           )}
@@ -779,23 +948,42 @@ export default function AffidavitFormApp({
       {/* Step 4: Download */}
       {step === 4 && (
         <div className="max-w-2xl mx-auto text-center">
-          <h3 className="font-serif text-2xl text-[#2D5016] mb-2">Your documents are ready</h3>
-          <p className="text-[#6B6560] mb-8">
-            {isHeirship
-              ? 'Your PDF includes the full Texas-compliant Affidavit of Heirship with all sections required by county clerks and title companies.'
-              : 'Your PDF bundle includes the affidavit, filing date notice, and bank instruction letter.'}
-          </p>
-          <DownloadButton
-            pdfData={pdfData}
-            fileName={`${documentType}-${state.toLowerCase().replace(' ', '-')}`}
-          />
-          {isHeirship && (
-            <button
-              onClick={() => setStep(3)}
-              className="mt-4 block mx-auto text-sm text-[#8B6914] hover:underline"
-            >
-              ← Edit my answers
-            </button>
+          {!downloadComplete ? (
+            <>
+              <h3 className="font-serif text-2xl text-[#2D5016] mb-2">Your documents are ready</h3>
+              <p className="text-[#6B6560] mb-8">
+                {isHeirship
+                  ? 'Your PDF includes the full Texas-compliant Affidavit of Heirship with all sections required by county clerks and title companies.'
+                  : 'Your PDF bundle includes the affidavit, filing date notice, and bank instruction letter.'}
+              </p>
+              <DownloadButton
+                pdfData={pdfData}
+                fileName={`${documentType}-${state.toLowerCase().replace(' ', '-')}`}
+                onDownloaded={() => setDownloadComplete(true)}
+              />
+              {isHeirship && (
+                <button
+                  onClick={() => setStep(3)}
+                  className="mt-4 block mx-auto text-sm text-[#8B6914] hover:underline"
+                >
+                  ← Edit my answers
+                </button>
+              )}
+            </>
+          ) : (
+            <NextStepsCard
+              onDownloadAgain={() => setDownloadComplete(false)}
+              onStartOver={() => {
+                setStep(1);
+                setFormData({});
+                setHeirshipData(emptyHeirship());
+                setIsEligible(null);
+                setTouchedFields({});
+                setSubmitAttempted(false);
+                setDownloadComplete(false);
+                setAffiántData({ affinatName: '', affiantAddress: '', affiantRelationship: '' });
+              }}
+            />
           )}
         </div>
       )}
