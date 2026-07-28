@@ -1,4 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#FAF8F5" rx="6"/>
-  <text x="16" y="23" font-family="Georgia,serif" font-size="20" font-weight="bold" fill="#1C1C1E" text-anchor="middle">S</text>
+  <rect width="32" height="32" fill="#2D5016" rx="6"/>
+  <!-- Shield -->
+  <path d="M16 3L5 7V17C5 23 10 28 16 30C22 28 27 23 27 17V7L16 3Z"
+    fill="rgba(247,244,239,0.1)" stroke="#D4AF6E" stroke-width="1"/>
+  <!-- S -->
+  <text x="16" y="23"
+    font-family="Cormorant Garamond, Georgia, serif"
+    font-size="16" font-weight="700" font-style="italic"
+    fill="#F7F4EF" text-anchor="middle">S</text>
 </svg>

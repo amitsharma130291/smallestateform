@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" fill="none">
+  <!-- Shield mark -->
+  <path d="M32 4L8 13V34C8 47 18 57 32 62C46 57 56 47 56 34V13L32 4Z"
+    fill="rgba(247,244,239,0.08)" stroke="#D4AF6E" stroke-width="1.5"/>
+  <!-- S monogram inside shield -->
+  <text x="32" y="44"
+    font-family="Cormorant Garamond, Georgia, serif"
+    font-size="28" font-weight="600" font-style="italic"
+    fill="#F7F4EF" text-anchor="middle">S</text>
+  <!-- Wordmark: Small -->
+  <text x="72" y="40"
+    font-family="Cormorant Garamond, Georgia, serif"
+    font-size="28" font-weight="600" font-style="italic"
+    fill="#F7F4EF">Small</text>
+  <!-- Wordmark: Estate (brass accent) -->
+  <text x="138" y="40"
+    font-family="Cormorant Garamond, Georgia, serif"
+    font-size="28" font-weight="600" font-style="italic"
+    fill="#D4AF6E">Estate</text>
+  <!-- Wordmark: Form -->
+  <text x="226" y="40"
+    font-family="Cormorant Garamond, Georgia, serif"
+    font-size="28" font-weight="600" font-style="italic"
+    fill="#F7F4EF">Form</text>
+  <!-- Tagline -->
+  <text x="72" y="56"
+    font-family="DM Sans, system-ui, sans-serif"
+    font-size="8" letter-spacing="2.5"
+    fill="rgba(247,244,239,0.38)">ESTATE DOCUMENT GENERATOR</text>
+</svg>

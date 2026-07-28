@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" fill="none">
+  <path d="M32 4L8 13V34C8 47 18 57 32 62C46 57 56 47 56 34V13L32 4Z"
+    fill="rgba(45,80,22,0.06)" stroke="#2D5016" stroke-width="1.5"/>
+  <text x="32" y="44"
+    font-family="Cormorant Garamond, Georgia, serif"
+    font-size="28" font-weight="600" font-style="italic"
+    fill="#2D5016" text-anchor="middle">S</text>
+  <text x="72" y="40"
+    font-family="Cormorant Garamond, Georgia, serif"
+    font-size="28" font-weight="600" font-style="italic"
+    fill="#2C2C2A">Small</text>
+  <text x="138" y="40"
+    font-family="Cormorant Garamond, Georgia, serif"
+    font-size="28" font-weight="600" font-style="italic"
+    fill="#2D5016">Estate</text>
+  <text x="226" y="40"
+    font-family="Cormorant Garamond, Georgia, serif"
+    font-size="28" font-weight="600" font-style="italic"
+    fill="#2C2C2A">Form</text>
+  <text x="72" y="56"
+    font-family="DM Sans, system-ui, sans-serif"
+    font-size="8" letter-spacing="2.5"
+    fill="rgba(44,44,42,0.35)">ESTATE DOCUMENT GENERATOR</text>
+</svg>
