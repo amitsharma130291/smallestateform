@@ -613,12 +613,485 @@ export function generateHeirshipAffidavit(data: PDFData): jsPDF {
   return doc;
 }
 
+// ─── California TOD Deed Generator ───────────────────────────────────────────
+
+export function generateTODDeed(data: PDFData): jsPDF {
+  const doc = new jsPDF({ unit: 'in', format: 'letter' });
+  const margin = 1;
+  const pageWidth = 8.5;
+  const pageHeight = 11;
+  const contentWidth = pageWidth - margin * 2;
+  let y = margin;
+
+  const fd = data.formData;
+  const grantorName = fd.grantorName || '[GRANTOR NAME]';
+  const grantorAddress = fd.grantorAddress || '________________';
+  const beneficiaryName = fd.granteeName || '[BENEFICIARY NAME]';
+  const beneficiaryRelationship = fd.beneficiaryRelationship || '';
+  const propertyDescription = fd.propertyDescription || '[LEGAL DESCRIPTION OF PROPERTY]';
+  const apn = fd.propertyAPN || '[APN]';
+  const county = fd.county || data.county || '[COUNTY]';
+  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  // ── Drawing helpers ──
+
+  const checkPage = (needed: number = 0.4) => {
+    if (y + needed > pageHeight - margin) {
+      doc.addPage();
+      y = margin;
+    }
+  };
+
+  const addSpace = (amt: number = 0.18) => { y += amt; };
+
+  const writeLine = (text: string, opts?: {
+    size?: number;
+    style?: string;
+    indent?: number;
+    color?: [number, number, number];
+    align?: 'left' | 'center';
+  }) => {
+    const {
+      size = 11,
+      style = 'normal',
+      indent = 0,
+      color = [50, 50, 50],
+      align = 'left',
+    } = opts || {};
+
+    doc.setFontSize(size);
+    doc.setFont('helvetica', style);
+    doc.setTextColor(...color);
+
+    if (align === 'center') {
+      checkPage(size * 0.0175 + 0.08);
+      doc.text(text, pageWidth / 2, y, { align: 'center' });
+      y += size * 0.0175 + 0.08;
+    } else {
+      const x = margin + indent;
+      const maxW = contentWidth - indent;
+      const lines = doc.splitTextToSize(text, maxW) as string[];
+      checkPage(lines.length * (size * 0.0175 + 0.06));
+      doc.text(lines, x, y);
+      y += lines.length * (size * 0.0175 + 0.06);
+    }
+  };
+
+  const drawSigLine = (label: string, lineLen = 3.5) => {
+    checkPage(0.55);
+    addSpace(0.25);
+    doc.setDrawColor(80, 80, 80);
+    doc.line(margin, y, margin + lineLen, y);
+    y += 0.08;
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(100, 100, 100);
+    doc.text(label, margin, y);
+    y += 0.2;
+  };
+
+  // ══════════════════════════════════════════════════
+  // PAGE 1: THE DEED
+  // ══════════════════════════════════════════════════
+
+  // Header bar
+  doc.setFillColor(28, 28, 30);
+  doc.rect(0, 0, pageWidth, 1.5, 'F');
+
+  doc.setTextColor(250, 248, 245);
+  doc.setFontSize(17);
+  doc.setFont('helvetica', 'bold');
+  doc.text('REVOCABLE TRANSFER ON DEATH DEED', pageWidth / 2, 0.58, { align: 'center' });
+
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  doc.text('California Probate Code § 5614–5696', pageWidth / 2, 0.85, { align: 'center' });
+
+  doc.setFontSize(9);
+  doc.text(`County of ${county}, California  |  APN: ${apn}`, pageWidth / 2, 1.08, { align: 'center' });
+  doc.text(`Generated: ${today}`, pageWidth / 2, 1.27, { align: 'center' });
+
+  y = 1.8;
+  doc.setTextColor(50, 50, 50);
+
+  // Statutory notice (bold box)
+  doc.setFillColor(255, 248, 230);
+  doc.setDrawColor(180, 130, 20);
+  doc.roundedRect(margin, y, contentWidth, 0.7, 0.08, 0.08, 'FD');
+  y += 0.15;
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(100, 60, 0);
+  const noticeLines = doc.splitTextToSize(
+    'IMPORTANT NOTICE: THIS DEED IS REVOCABLE. IT DOES NOT AFFECT OWNERSHIP DURING YOUR LIFETIME. THIS DEED TRANSFERS YOUR PROPERTY ONLY UPON YOUR DEATH.',
+    contentWidth - 0.3
+  ) as string[];
+  doc.text(noticeLines, margin + 0.15, y);
+  y += noticeLines.length * 0.18 + 0.12;
+
+  doc.setTextColor(50, 50, 50);
+  addSpace(0.1);
+
+  // Grantor block
+  writeLine('GRANTOR (Property Owner):', { size: 10, style: 'bold', color: [30, 60, 20] });
+  writeLine(`Name: ${grantorName}`, { size: 11, indent: 0.1 });
+  writeLine(`Address: ${grantorAddress}`, { size: 11, indent: 0.1 });
+  addSpace(0.1);
+
+  // Transfer language
+  writeLine(
+    `${grantorName}, Grantor, hereby declares that on the death of the Grantor, the following described real property shall transfer to:`,
+    { size: 11 }
+  );
+  addSpace(0.1);
+
+  // Beneficiary block
+  writeLine('BENEFICIARY:', { size: 10, style: 'bold', color: [30, 60, 20] });
+  writeLine(`Name: ${beneficiaryName}`, { size: 11, indent: 0.1 });
+  if (beneficiaryRelationship) {
+    writeLine(`Relationship to Grantor: ${beneficiaryRelationship}`, { size: 11, indent: 0.1 });
+  }
+  addSpace(0.1);
+
+  writeLine(
+    'If the above-named beneficiary does not survive the Grantor, this transfer on death deed shall lapse and have no effect.',
+    { size: 10, style: 'italic' }
+  );
+  addSpace(0.12);
+
+  // Property description
+  writeLine('PROPERTY DESCRIPTION:', { size: 10, style: 'bold', color: [30, 60, 20] });
+  writeLine(`Assessor's Parcel Number (APN): ${apn}`, { size: 11, indent: 0.1 });
+  addSpace(0.06);
+  writeLine('Legal Description:', { size: 10, indent: 0.1 });
+  writeLine(propertyDescription, { size: 11, indent: 0.2 });
+  addSpace(0.12);
+
+  // Revocation statement
+  writeLine(
+    "REVOCATION: This deed may be revoked at any time before my death by recording a Revocation of Transfer on Death Deed in the county where the property is located. This deed is revocable and does not affect the Grantor's rights to sell, encumber, or otherwise deal with the property during the Grantor's lifetime.",
+    { size: 10 }
+  );
+  addSpace(0.12);
+
+  // Statutory citation
+  writeLine(
+    'This instrument is executed pursuant to California Probate Code § 5614 et seq.',
+    { size: 10, style: 'italic', color: [80, 80, 80] }
+  );
+  addSpace(0.2);
+
+  // Signature block
+  writeLine('GRANTOR SIGNATURE', { size: 11, style: 'bold', color: [30, 30, 30] });
+  addSpace(0.05);
+
+  doc.setDrawColor(80, 80, 80);
+  doc.line(margin, y, margin + 3.5, y);
+  y += 0.08;
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(100, 100, 100);
+  doc.text('Grantor Signature', margin, y);
+  y += 0.25;
+
+  doc.setDrawColor(80, 80, 80);
+  doc.line(margin, y, margin + 3.5, y);
+  y += 0.08;
+  doc.setFontSize(9);
+  doc.text(grantorName, margin, y);
+  y += 0.25;
+
+  doc.setDrawColor(80, 80, 80);
+  doc.line(margin, y, margin + 2, y);
+  y += 0.08;
+  doc.setFontSize(9);
+  doc.text('Date', margin, y);
+  y += 0.25;
+
+  addSpace(0.2);
+
+  // Full California Notary Acknowledgment
+  checkPage(2.8);
+  doc.setFillColor(245, 245, 248);
+  const notaryBoxY = y;
+  // We'll draw the box after writing content to know the height
+  const notaryStartY = y;
+
+  writeLine('NOTARY ACKNOWLEDGMENT', { size: 12, style: 'bold', color: [30, 30, 80] });
+  writeLine('State of California', { size: 11 });
+  writeLine(`County of ${county}`, { size: 11 });
+  addSpace(0.12);
+  writeLine(
+    `On _______________, before me, ________________________________, Notary Public, personally appeared ${grantorName}, who proved to me on the basis of satisfactory evidence to be the person whose name is subscribed to this instrument and acknowledged to me that they executed the same in their authorized capacity, and that by their signature on the instrument, the person, or the entity upon whose behalf the person acted, executed the instrument.`,
+    { size: 10 }
+  );
+  addSpace(0.1);
+  writeLine(
+    'I certify under PENALTY OF PERJURY under the laws of the State of California that the foregoing paragraph is true and correct.',
+    { size: 10 }
+  );
+  addSpace(0.1);
+  writeLine('WITNESS my hand and official seal.', { size: 10 });
+  addSpace(0.25);
+
+  // Notary signature lines (two columns)
+  const leftX = margin;
+  const rightX = margin + contentWidth / 2 + 0.2;
+
+  doc.setDrawColor(80, 80, 80);
+  doc.line(leftX, y, leftX + 2.8, y);
+  doc.line(rightX, y, rightX + 2.5, y);
+  y += 0.1;
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(100, 100, 100);
+  doc.text('Notary Public', leftX, y);
+  doc.text('Commission #: ___________________', rightX, y);
+  y += 0.22;
+  doc.text('(Seal)', leftX, y);
+  doc.text('My Commission Expires: ___________', rightX, y);
+  y += 0.25;
+
+  // Draw the notary box now
+  doc.setDrawColor(150, 150, 200);
+  doc.rect(margin - 0.1, notaryStartY - 0.1, contentWidth + 0.2, y - notaryStartY + 0.1);
+
+  addSpace(0.12);
+  writeLine(
+    'Generated by smallestateform.com — for informational purposes only. Consult a licensed California attorney before recording.',
+    { size: 8, style: 'italic', color: [120, 110, 100] }
+  );
+
+  // ══════════════════════════════════════════════════
+  // PAGE 2: FILING DATE NOTICE (kept for consistency)
+  // ══════════════════════════════════════════════════
+
+  doc.addPage();
+  y = margin;
+  doc.setFillColor(28, 28, 30);
+  doc.rect(0, 0, pageWidth, 0.8, 'F');
+  doc.setTextColor(250, 248, 245);
+  doc.setFontSize(14);
+  doc.setFont('helvetica', 'bold');
+  doc.text('FILING DATE NOTICE', pageWidth / 2, 0.5, { align: 'center' });
+
+  y = 1.2;
+  doc.setTextColor(61, 61, 61);
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'bold');
+  doc.text('No waiting period applies to a Transfer on Death Deed.', pageWidth / 2, y, { align: 'center' });
+  y += 0.4;
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  doc.text('This deed may be recorded immediately after notarization during your lifetime.', pageWidth / 2, y, { align: 'center' });
+  y += 0.3;
+  doc.text('The deed MUST be recorded before your death to be effective.', pageWidth / 2, y, { align: 'center' });
+
+  // ══════════════════════════════════════════════════
+  // PAGE 3: COUNTY RECORDER INSTRUCTION SHEET
+  // ══════════════════════════════════════════════════
+
+  doc.addPage();
+  y = margin;
+
+  doc.setFillColor(28, 28, 30);
+  doc.rect(0, 0, pageWidth, 0.9, 'F');
+  doc.setTextColor(250, 248, 245);
+  doc.setFontSize(14);
+  doc.setFont('helvetica', 'bold');
+  doc.text('COUNTY RECORDER INSTRUCTION SHEET', pageWidth / 2, 0.45, { align: 'center' });
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Transfer on Death Deed — California Probate Code § 5614–5696', pageWidth / 2, 0.7, { align: 'center' });
+
+  y = 1.2;
+  doc.setTextColor(50, 50, 50);
+
+  writeLine('DOCUMENT TO RECORD: Transfer on Death Deed', { size: 11, style: 'bold' });
+  addSpace(0.2);
+
+  writeLine('RECORDING REQUIREMENTS:', { size: 11, style: 'bold', color: [30, 60, 20] });
+  addSpace(0.08);
+  const reqItems = [
+    'Document must be signed by the grantor',
+    'Grantor signature must be acknowledged before a notary public',
+    "Include the grantor's name and address",
+    "Include the property's Assessor's Parcel Number (APN)",
+    'Include the legal description of the property',
+    "Document must be recorded during grantor's lifetime — it is revocable until death",
+  ];
+  reqItems.forEach(item => {
+    writeLine(`☐  ${item}`, { size: 10, indent: 0.1 });
+    addSpace(0.05);
+  });
+
+  addSpace(0.15);
+  writeLine('RECORDING FEE:', { size: 11, style: 'bold', color: [30, 60, 20] });
+  writeLine('Fees vary by county. Contact your county recorder for current fees.', { size: 10, indent: 0.1 });
+
+  addSpace(0.15);
+  writeLine('WHERE TO RECORD:', { size: 11, style: 'bold', color: [30, 60, 20] });
+  writeLine(
+    `Record with the County Recorder in the county where the property is located.`,
+    { size: 10, indent: 0.1 }
+  );
+  writeLine(`County: ${county}, California`, { size: 10, indent: 0.1 });
+  writeLine(
+    `Search: "${county} County Recorder California" to find website and address.`,
+    { size: 10, indent: 0.1, style: 'italic' }
+  );
+
+  addSpace(0.15);
+  writeLine('AFTER RECORDING:', { size: 11, style: 'bold', color: [30, 60, 20] });
+  addSpace(0.05);
+  const afterItems = [
+    'Keep the original recorded deed in a safe place',
+    'Notify your beneficiary that a TOD deed has been recorded',
+    'This deed may be revoked at any time by recording a Revocation of Transfer on Death Deed',
+  ];
+  afterItems.forEach(item => {
+    writeLine(`☐  ${item}`, { size: 10, indent: 0.1 });
+    addSpace(0.05);
+  });
+
+  addSpace(0.15);
+  writeLine('BENEFICIARY NOTES:', { size: 11, style: 'bold', color: [30, 60, 20] });
+  addSpace(0.05);
+  const benefNotes = [
+    "The beneficiary receives no interest during the grantor's lifetime",
+    "The beneficiary cannot sell or encumber the property during the grantor's lifetime",
+    "After the grantor's death, the beneficiary must record an Affidavit of Death of Transferor and provide a certified death certificate to claim the property",
+  ];
+  benefNotes.forEach(item => {
+    writeLine(`•  ${item}`, { size: 10, indent: 0.1 });
+    addSpace(0.06);
+  });
+
+  addSpace(0.2);
+  writeLine(`Prepared by: ${grantorName}   Date: ${today}`, { size: 10, style: 'italic' });
+
+  // ══════════════════════════════════════════════════
+  // PAGE 4: BENEFICIARY INFORMATION SHEET
+  // ══════════════════════════════════════════════════
+
+  doc.addPage();
+  y = margin;
+
+  doc.setFillColor(28, 28, 30);
+  doc.rect(0, 0, pageWidth, 0.9, 'F');
+  doc.setTextColor(250, 248, 245);
+  doc.setFontSize(14);
+  doc.setFont('helvetica', 'bold');
+  doc.text('BENEFICIARY INFORMATION SHEET', pageWidth / 2, 0.45, { align: 'center' });
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Transfer on Death Deed', pageWidth / 2, 0.7, { align: 'center' });
+
+  y = 1.2;
+  doc.setTextColor(50, 50, 50);
+
+  // Summary box
+  doc.setFillColor(238, 244, 232);
+  doc.setDrawColor(45, 80, 22);
+  doc.roundedRect(margin, y, contentWidth, 1.0, 0.08, 0.08, 'FD');
+  y += 0.15;
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(30, 60, 20);
+  const summaryLines = [
+    `Grantor: ${grantorName}`,
+    `Beneficiary: ${beneficiaryName}${beneficiaryRelationship ? ' (' + beneficiaryRelationship + ')' : ''}`,
+    `Property: ${propertyDescription.length > 80 ? propertyDescription.slice(0, 80) + '...' : propertyDescription}`,
+    `APN: ${apn}`,
+    `County: ${county}, California`,
+  ];
+  summaryLines.forEach(line => {
+    writeLine(line, { size: 10, indent: 0.15, color: [30, 60, 20] });
+  });
+  y += 0.1;
+  doc.setTextColor(50, 50, 50);
+
+  addSpace(0.2);
+  writeLine('WHAT TO DO AFTER THE GRANTOR PASSES AWAY:', { size: 12, style: 'bold', color: [28, 28, 30] });
+  addSpace(0.1);
+
+  const steps = [
+    {
+      num: '1.',
+      title: 'OBTAIN CERTIFIED DEATH CERTIFICATES',
+      body: 'Get at least 2–3 certified copies from the county where the death occurred.',
+    },
+    {
+      num: '2.',
+      title: 'PREPARE AN AFFIDAVIT OF DEATH OF TRANSFEROR',
+      body: 'Record this affidavit with the County Recorder along with a certified copy of the death certificate.',
+    },
+    {
+      num: '3.',
+      title: 'CONTACT A TITLE COMPANY',
+      body: 'To sell or refinance the property, work with a title company to clear the title.',
+    },
+    {
+      num: '4.',
+      title: 'UPDATE TAXES AND INSURANCE',
+      body: 'Notify the county assessor and your homeowners insurance company of the ownership change.',
+    },
+    {
+      num: '5.',
+      title: 'OBSERVE THE 120-DAY WAITING PERIOD',
+      body: "California Probate Code § 5696 requires 120 days after the grantor's death before you can transfer or encumber the property.",
+    },
+  ];
+
+  steps.forEach(step => {
+    checkPage(0.6);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(28, 28, 30);
+    const titleText = `${step.num}  ${step.title}`;
+    doc.text(titleText, margin, y);
+    y += 0.2;
+    writeLine(step.body, { size: 10, indent: 0.25 });
+    addSpace(0.12);
+  });
+
+  addSpace(0.1);
+  writeLine('IMPORTANT LIMITATIONS:', { size: 11, style: 'bold', color: [150, 30, 30] });
+  addSpace(0.06);
+  const limitations = [
+    'This deed does not override a will — it only affects this property.',
+    'If you (the beneficiary) predecease the grantor, the transfer lapses.',
+    "Creditors of the grantor's estate may have claims against the property.",
+    'Mortgages, liens, and encumbrances remain on the property.',
+  ];
+  limitations.forEach(lim => {
+    writeLine(`•  ${lim}`, { size: 10, indent: 0.1 });
+    addSpace(0.06);
+  });
+
+  addSpace(0.2);
+  writeLine('Keep this sheet with your copy of the recorded deed.', { size: 10, style: 'italic', color: [80, 80, 80] });
+
+  addSpace(0.15);
+  writeLine(
+    'Generated by smallestateform.com — for informational purposes only. Consult a licensed California attorney.',
+    { size: 8, style: 'italic', color: [130, 120, 110] }
+  );
+
+  return doc;
+}
+
 // ─── Original generic generator (unchanged) ──────────────────────────────────
 
 export function generateAffidavitPDF(data: PDFData): jsPDF {
   // Route heirship to the full Texas-compliant generator
   if (data.documentType === 'affidavit-of-heirship') {
     return generateHeirshipAffidavit(data);
+  }
+
+  // Route TOD deed to the California-specific generator
+  if (data.documentType === 'tod-deed') {
+    return generateTODDeed(data);
   }
 
   const doc = new jsPDF({ unit: 'in', format: 'letter' });

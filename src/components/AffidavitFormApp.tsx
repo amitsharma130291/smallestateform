@@ -143,9 +143,10 @@ const fieldConfigs: Record<string, Array<{ key: string; label: string; placehold
   ],
   'tod-deed': [
     { key: 'grantorName', label: 'Your full legal name (grantor / property owner)', placeholder: 'Jane Smith' },
+    { key: 'grantorAddress', label: 'Your address', placeholder: '123 Main St, Los Angeles, CA 90001' },
     { key: 'granteeName', label: 'Beneficiary\'s full legal name', placeholder: 'John Smith' },
     { key: 'propertyDescription', label: 'Property legal description (from your deed)', placeholder: 'Lot 5, Tract 1234, Map Book 45, Page 12...' },
-    { key: 'propertyAPN', label: 'Assessor Parcel Number (APN)', placeholder: '1234-567-890' },
+    { key: 'propertyAPN', label: 'Assessor Parcel Number (APN)', placeholder: '123-456-789', helperText: 'Format: 123-456-789' },
     { key: 'county', label: 'California county where property is located', placeholder: 'e.g. Los Angeles' },
   ],
 };
@@ -613,10 +614,43 @@ function HeirshipForm({ data, onComplete }: { data: HeirshipData; onComplete: (d
 
 // ─── Main app ─────────────────────────────────────────────────────────────────
 
+// ─── California county list ───────────────────────────────────────────────────
+
+const CA_COUNTIES = ['Los Angeles', 'San Diego', 'Orange', 'Riverside', 'San Bernardino', 'Santa Clara', 'Alameda', 'Sacramento', 'Contra Costa', 'Fresno', 'Kern', 'San Francisco', 'Ventura', 'San Mateo', 'San Joaquin', 'Stanislaus', 'Sonoma', 'Tulare', 'Santa Barbara', 'Solano', 'Monterey', 'Placer', 'San Luis Obispo', 'Santa Cruz', 'Marin', 'Merced', 'Butte', 'Yolo', 'El Dorado', 'Imperial', 'Shasta', 'Kings', 'Madera', 'Napa', 'Humboldt', 'Nevada', 'Mendocino', 'Sutter', 'Yuba', 'Lake', 'San Benito', 'Tehama', 'Tuolumne', 'Calaveras', 'Siskiyou', 'Amador', 'Lassen', 'Del Norte', 'Glenn', 'Plumas', 'Colusa', 'Modoc', 'Sierra', 'Trinity', 'Mono', 'Inyo', 'Alpine'];
+
+function findClosestCounty(input: string): string | null {
+  const lower = input.toLowerCase();
+  const exact = CA_COUNTIES.find(c => c.toLowerCase() === lower);
+  if (exact) return null; // matches, no suggestion needed
+  const partial = CA_COUNTIES.find(c => c.toLowerCase().startsWith(lower) || lower.startsWith(c.toLowerCase().slice(0, 3)));
+  return partial || null;
+}
+
 // ─── Validation ──────────────────────────────────────────────────────────────
 
 function validateForm(data: Record<string, string>, docType: string): Record<string, string> {
   const errors: Record<string, string> = {};
+
+  if (docType === 'tod-deed') {
+    if (!data.grantorName?.trim()) errors.grantorName = 'Required';
+    if (!data.granteeName?.trim()) errors.granteeName = 'Required';
+    if (!data.propertyDescription?.trim()) errors.propertyDescription = 'Required';
+    if (!data.propertyAPN?.trim()) errors.propertyAPN = 'Required';
+    if (!data.county?.trim()) {
+      errors.county = 'Required';
+    } else {
+      const lower = data.county.trim().toLowerCase();
+      const matched = CA_COUNTIES.some(c => c.toLowerCase() === lower);
+      if (!matched) {
+        const closest = findClosestCounty(data.county.trim());
+        errors.county = closest
+          ? `Did you mean "${closest}"? Check county spelling.`
+          : 'Not a recognized California county — check spelling.';
+      }
+    }
+    return errors;
+  }
+
   if (!data.deceasedName?.trim()) errors.deceasedName = 'Required';
   if (!data.dateOfDeath?.trim()) errors.dateOfDeath = 'Required';
   if (!data.county?.trim()) errors.county = 'Required';
@@ -626,6 +660,21 @@ function validateForm(data: Record<string, string>, docType: string): Record<str
 }
 
 function isFormValid(data: Record<string, string>, docType: string): boolean {
+  // For TOD deed, county warning doesn't block download — only hard-required fields do
+  if (docType === 'tod-deed') {
+    const errors = validateForm(data, docType);
+    const hardErrors = Object.entries(errors).filter(([key, _]) => key !== 'county' || !data.county?.trim());
+    // county warning (unrecognized but non-empty) should NOT block
+    const countyVal = data.county?.trim() || '';
+    const countyIsRecognized = CA_COUNTIES.some(c => c.toLowerCase() === countyVal.toLowerCase());
+    const countyIsEmpty = !countyVal;
+    const countyError = errors.county;
+    const blockingErrors = Object.entries(errors).filter(([key, msg]) => {
+      if (key === 'county' && !countyIsEmpty && !countyIsRecognized) return false; // warn only
+      return true;
+    });
+    return blockingErrors.length === 0;
+  }
   return Object.keys(validateForm(data, docType)).length === 0;
 }
 
@@ -903,6 +952,8 @@ export default function AffidavitFormApp({
               <div className="space-y-5">
                 {fields.map(field => {
                   const error = getFieldError(field.key);
+                  // County field for TOD deed: show warning (yellow) not hard error (red)
+                  const isTODCountyWarning = documentType === 'tod-deed' && field.key === 'county' && error && formData[field.key]?.trim();
                   return (
                     <div key={field.key}>
                       <label className="block text-sm font-medium text-[#2C2C2A] mb-1.5">{field.label}</label>
@@ -913,20 +964,42 @@ export default function AffidavitFormApp({
                         onBlur={() => handleBlur(field.key)}
                         placeholder={field.placeholder}
                         className={`w-full px-4 py-3 border rounded-lg text-[#2C2C2A] focus:outline-none focus:ring-2 focus:border-transparent bg-white ${
-                          error
+                          error && !isTODCountyWarning
                             ? 'border-[#C0392B] focus:ring-[#C0392B]'
+                            : isTODCountyWarning
+                            ? 'border-[#F59E0B] focus:ring-[#F59E0B]'
                             : 'border-[#D4CCC0] focus:ring-[#8B6914]'
                         }`}
                       />
                       {field.helperText && !error && (
                         <p className="mt-1 text-xs text-[#6B6560]">{field.helperText}</p>
                       )}
-                      {error && (
+                      {error && !isTODCountyWarning && (
                         <p className="mt-1 text-xs text-[#C0392B] font-medium">{error}</p>
+                      )}
+                      {isTODCountyWarning && (
+                        <p className="mt-1 text-xs text-[#92400E] font-medium">⚠ {error}</p>
                       )}
                     </div>
                   );
                 })}
+                {documentType === 'tod-deed' && (
+                  <div>
+                    <label className="block text-sm font-medium text-[#2C2C2A] mb-1.5">Beneficiary's relationship to you (optional)</label>
+                    <select
+                      value={formData['beneficiaryRelationship'] || ''}
+                      onChange={e => handleFieldChange('beneficiaryRelationship', e.target.value)}
+                      className="w-full px-4 py-3 border border-[#D4CCC0] rounded-lg text-[#2C2C2A] focus:outline-none focus:ring-2 focus:ring-[#8B6914] bg-white"
+                    >
+                      <option value="">Not specified</option>
+                      <option value="Spouse">Spouse</option>
+                      <option value="Child">Child</option>
+                      <option value="Parent">Parent</option>
+                      <option value="Sibling">Sibling</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                )}
               </div>
               <AffiантSection data={affiántData} onChange={setAffiántData} />
               <button
