@@ -42,15 +42,15 @@ export default function EligibilityCheck({ threshold, thresholdLabel, waitingDay
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="font-serif text-xl text-[#1C1C1E] mb-2">Does this document apply to your situation?</h3>
+        <h3 className="font-serif text-xl text-[#2D5016] mb-2">Does this document apply to your situation?</h3>
         {hasThreshold && (
-          <p className="text-[#6B6B6B] text-sm mb-4">{thresholdLabel}</p>
+          <p className="text-[#6B6560] text-sm mb-4">{thresholdLabel}</p>
         )}
       </div>
 
       {hasThreshold && (
         <div>
-          <label className="block text-sm font-medium text-[#3D3D3D] mb-2">
+          <label className="block text-sm font-medium text-[#2C2C2A] mb-2">
             Approximate value of assets to transfer ($)
           </label>
           <input
@@ -58,7 +58,7 @@ export default function EligibilityCheck({ threshold, thresholdLabel, waitingDay
             value={assetValue}
             onChange={e => setAssetValue(e.target.value)}
             placeholder="e.g. 85,000"
-            className="w-full max-w-xs px-4 py-3 border border-[#E5E0D8] rounded-lg text-[#3D3D3D] focus:outline-none focus:ring-2 focus:ring-[#B8860B] focus:border-transparent bg-white"
+            className="w-full max-w-xs px-4 py-3 border border-[#D4CCC0] rounded-lg text-[#2C2C2A] focus:outline-none focus:ring-2 focus:ring-[#8B6914] focus:border-transparent bg-white"
           />
         </div>
       )}
@@ -67,28 +67,28 @@ export default function EligibilityCheck({ threshold, thresholdLabel, waitingDay
         <button
           onClick={handleCheck}
           disabled={hasThreshold && !assetValue}
-          className="px-6 py-3 bg-[#1C1C1E] text-[#FAF8F5] rounded-lg font-medium hover:bg-[#3D3D3D] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-3 bg-[#2D5016] text-[#F7F4EF] rounded-lg font-medium hover:bg-[#2C2C2A] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Check eligibility
         </button>
       )}
 
       {checked && eligible && (
-        <div className="bg-[#EFF7F2] border border-[#4A7C59] rounded-lg p-5">
+        <div className="bg-[#EEF4E8] border border-[#2D5016] rounded-lg p-5">
           <div className="flex items-start gap-3">
-            <span className="text-[#4A7C59] text-lg">✓</span>
+            <span className="text-[#2D5016] text-lg">✓</span>
             <div>
-              <p className="font-medium text-[#4A7C59] mb-1">
+              <p className="font-medium text-[#2D5016] mb-1">
                 {hasThreshold
                   ? `Your estate of ${formatCurrency(parseFloat(assetValue.replace(/[,$]/g, '')))} qualifies under the ${formatCurrency(threshold!)} limit`
                   : `This document applies to your situation`
                 }
               </p>
               {waitingDays > 0 && getFilingDate() && (
-                <p className="text-[#3D3D3D] text-sm">You may file on or after <strong>{getFilingDate()}</strong></p>
+                <p className="text-[#2C2C2A] text-sm">You may file on or after <strong>{getFilingDate()}</strong></p>
               )}
               {waitingDays === 0 && (
-                <p className="text-[#3D3D3D] text-sm">You may proceed immediately.</p>
+                <p className="text-[#2C2C2A] text-sm">You may proceed immediately.</p>
               )}
             </div>
           </div>
@@ -98,7 +98,7 @@ export default function EligibilityCheck({ threshold, thresholdLabel, waitingDay
       {checked && !eligible && (
         <div className="bg-red-50 border border-[#9B2335] rounded-lg p-5">
           <p className="font-medium text-[#9B2335]">The estate value may be above the threshold</p>
-          <p className="text-[#3D3D3D] text-sm mt-1">The threshold for this document is {formatCurrency(threshold!)}. For larger estates, full probate may be required. Consult a licensed attorney.</p>
+          <p className="text-[#2C2C2A] text-sm mt-1">The threshold for this document is {formatCurrency(threshold!)}. For larger estates, full probate may be required. Consult a licensed attorney.</p>
         </div>
       )}
     </div>

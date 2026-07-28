@@ -1,5 +1,7 @@
 # Deployment Guide — SmallEstateForm.com
 
+**Theme: Forest Sovereign (forest green + warm ivory + aged brass | Cormorant Garamond + DM Sans)**
+
 ## Phase 1 (Current) — Free During Beta
 
 ### Vercel Deployment

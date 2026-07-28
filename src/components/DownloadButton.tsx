@@ -29,20 +29,20 @@ export default function DownloadButton({ pdfData, fileName }: DownloadButtonProp
         <button
           onClick={handleDownload}
           disabled={status === 'generating'}
-          className="px-8 py-4 bg-[#1C1C1E] text-[#FAF8F5] rounded-lg font-medium text-base hover:bg-[#3D3D3D] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          className="px-8 py-4 bg-[#2D5016] text-[#F7F4EF] rounded-lg font-medium text-base hover:bg-[#2C2C2A] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {status === 'generating' ? 'Generating your documents...' :
            status === 'done' ? '✓ Download complete — click again for another copy' :
            'Download Free PDF Bundle'}
         </button>
-        <span className="px-3 py-1.5 bg-[#EFF7F2] text-[#4A7C59] text-xs font-medium rounded border border-[#4A7C59]">
+        <span className="px-3 py-1.5 bg-[#EEF4E8] text-[#2D5016] text-xs font-medium rounded border border-[#2D5016]">
           Free During Beta
         </span>
       </div>
       {status === 'done' && (
-        <p className="text-[#6B6B6B] text-sm">Your PDF bundle has been saved. It includes the affidavit, filing date notice, and bank instruction letter.</p>
+        <p className="text-[#6B6560] text-sm">Your PDF bundle has been saved. It includes the affidavit, filing date notice, and bank instruction letter.</p>
       )}
-      <p className="text-[#6B6B6B] text-xs text-center max-w-sm">
+      <p className="text-[#6B6560] text-xs text-center max-w-sm">
         No account required. Documents generated locally in your browser — nothing is uploaded to our servers.
       </p>
     </div>

@@ -75,24 +75,24 @@ export default function AffidavitFormApp({ documentType, state, county, eligibil
   };
 
   return (
-    <div className="bg-[#F0EDE8] rounded-xl border border-[#E5E0D8] p-8 my-10 shadow-[0_2px_8px_rgba(28,28,30,0.08)]">
+    <div className="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0] p-8 my-10 shadow-[0_2px_8px_rgba(28,28,30,0.08)]">
       <FormStepper step={step} totalSteps={4} />
 
       {/* Step 1: About */}
       {step === 1 && (
         <div className="max-w-2xl mx-auto">
-          <h2 className="font-serif text-2xl text-[#1C1C1E] mb-4">
+          <h2 className="font-serif text-2xl text-[#2D5016] mb-4">
             {documentType === 'small-estate-affidavit' ? 'Small Estate Affidavit' :
              documentType === 'affidavit-of-heirship' ? 'Affidavit of Heirship' :
              'Transfer on Death Deed'} — {state}{county ? `, ${county}` : ''}
           </h2>
-          <p className="text-[#3D3D3D] mb-6 leading-relaxed">{documentDescriptions[documentType]}</p>
-          <div className="bg-white rounded-lg p-4 border border-[#E5E0D8] mb-6 text-sm text-[#6B6B6B]">
-            <strong className="text-[#3D3D3D]">Statutory authority:</strong> {statutoryReference}
+          <p className="text-[#2C2C2A] mb-6 leading-relaxed">{documentDescriptions[documentType]}</p>
+          <div className="bg-white rounded-lg p-4 border border-[#D4CCC0] mb-6 text-sm text-[#6B6560]">
+            <strong className="text-[#2C2C2A]">Statutory authority:</strong> {statutoryReference}
           </div>
           <button
             onClick={() => setStep(2)}
-            className="px-6 py-3 bg-[#1C1C1E] text-[#FAF8F5] rounded-lg font-medium hover:bg-[#3D3D3D] transition-colors"
+            className="px-6 py-3 bg-[#2D5016] text-[#F7F4EF] rounded-lg font-medium hover:bg-[#2C2C2A] transition-colors"
           >
             Check if I qualify →
           </button>
@@ -111,7 +111,7 @@ export default function AffidavitFormApp({ documentType, state, county, eligibil
             onEligible={handleEligibility}
           />
           {isEligible === false && (
-            <p className="mt-4 text-sm text-[#6B6B6B]">
+            <p className="mt-4 text-sm text-[#6B6560]">
               Consider consulting a probate attorney for estates above the threshold.
             </p>
           )}
@@ -121,17 +121,17 @@ export default function AffidavitFormApp({ documentType, state, county, eligibil
       {/* Step 3: Form fields */}
       {step === 3 && (
         <div className="max-w-2xl mx-auto">
-          <h3 className="font-serif text-xl text-[#1C1C1E] mb-6">Enter your details</h3>
+          <h3 className="font-serif text-xl text-[#2D5016] mb-6">Enter your details</h3>
           <div className="space-y-5">
             {fields.map(field => (
               <div key={field.key}>
-                <label className="block text-sm font-medium text-[#3D3D3D] mb-1.5">{field.label}</label>
+                <label className="block text-sm font-medium text-[#2C2C2A] mb-1.5">{field.label}</label>
                 <input
                   type={field.type || 'text'}
                   value={formData[field.key] || ''}
                   onChange={e => handleFieldChange(field.key, e.target.value)}
                   placeholder={field.placeholder}
-                  className="w-full px-4 py-3 border border-[#E5E0D8] rounded-lg text-[#3D3D3D] focus:outline-none focus:ring-2 focus:ring-[#B8860B] focus:border-transparent bg-white"
+                  className="w-full px-4 py-3 border border-[#D4CCC0] rounded-lg text-[#2C2C2A] focus:outline-none focus:ring-2 focus:ring-[#8B6914] focus:border-transparent bg-white"
                 />
               </div>
             ))}
@@ -139,7 +139,7 @@ export default function AffidavitFormApp({ documentType, state, county, eligibil
           <button
             onClick={() => setStep(4)}
             disabled={!formData[fields[0]?.key]}
-            className="mt-8 px-6 py-3 bg-[#1C1C1E] text-[#FAF8F5] rounded-lg font-medium hover:bg-[#3D3D3D] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="mt-8 px-6 py-3 bg-[#2D5016] text-[#F7F4EF] rounded-lg font-medium hover:bg-[#2C2C2A] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Generate my documents →
           </button>
@@ -149,8 +149,8 @@ export default function AffidavitFormApp({ documentType, state, county, eligibil
       {/* Step 4: Download */}
       {step === 4 && (
         <div className="max-w-2xl mx-auto text-center">
-          <h3 className="font-serif text-2xl text-[#1C1C1E] mb-2">Your documents are ready</h3>
-          <p className="text-[#6B6B6B] mb-8">Your PDF bundle includes the affidavit, filing date notice, and bank instruction letter.</p>
+          <h3 className="font-serif text-2xl text-[#2D5016] mb-2">Your documents are ready</h3>
+          <p className="text-[#6B6560] mb-8">Your PDF bundle includes the affidavit, filing date notice, and bank instruction letter.</p>
           <DownloadButton
             pdfData={pdfData}
             fileName={`${documentType}-${state.toLowerCase().replace(' ', '-')}`}

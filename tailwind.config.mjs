@@ -5,22 +5,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        charcoal: '#1C1C1E',
-        gold: '#B8860B',
-        'gold-light': '#D4A017',
-        cream: '#FAF8F5',
-        'cream-dark': '#F0EDE8',
-        slate: '#3D3D3D',
-        'slate-light': '#6B6B6B',
-        'muted-green': '#4A7C59',
-        'muted-green-bg': '#EFF7F2',
+        charcoal: '#2D5016',
+        gold: '#8B6914',
+        'gold-light': '#A87A20',
+        cream: '#F7F4EF',
+        'cream-dark': '#EEE9E1',
+        slate: '#2C2C2A',
+        'slate-light': '#6B6560',
+        'muted-green': '#2D5016',
+        'muted-green-bg': '#EEF4E8',
         error: '#9B2335',
-        border: '#E5E0D8',
+        border: '#D4CCC0',
       },
 
       fontFamily: {
-        serif: ['Playfair Display', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+        sans: ['DM Sans', 'system-ui', 'sans-serif'],
       },
 
       fontSize: {
