@@ -12,158 +12,180 @@ import StatePage from '../../layouts/StatePage.astro';
         <a href="/" style="color:#8B6914;text-decoration:none;">Home</a> › Contact
       </p>
       <h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(2rem,4vw,2.8rem);color:#2C2C2A;margin-bottom:0.75rem;">Get in touch</h1>
-      <p style="font-family:'DM Sans',sans-serif;color:#6B6560;margin-bottom:2rem;font-size:1rem;line-height:1.6;">Have a question about a document, a state law, or how to use the generator? We typically respond within one business day.</p>
+      <p style="font-family:'DM Sans',sans-serif;color:#6B6560;margin-bottom:2rem;font-size:1rem;line-height:1.6;">Have a question about a document, a state law, or how to use the generator? We'll respond as soon as possible.</p>
     </div>
   </section>
 
   <section style="padding:3rem 1.5rem 5rem;background:#F7F4EF;">
-    <div style="max-width:720px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;">
+    <div style="max-width:720px;margin:0 auto;">
 
-      <!-- Contact form -->
-      <div style="grid-column:1/3;">
-
-        <!-- Success message (hidden by default, shown by JS after submit) -->
-        <div id="form-success" style="display:none;background:#EEF4E8;border:1px solid #2D5016;border-radius:4px;padding:1.5rem;margin-bottom:2rem;">
-          <h3 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:#2D5016;margin-bottom:0.5rem;">Thank you for reaching out.</h3>
-          <p style="font-family:'DM Sans',sans-serif;font-size:0.9rem;color:#2C2C2A;line-height:1.6;">We've received your message and will respond as soon as possible — usually within one business day. In the meantime, you can <a href="/" style="color:#8B6914;">return to the home page</a> or <a href="/small-estate-affidavit/" style="color:#8B6914;">read our state guide</a>.</p>
-        </div>
-
-        <!--
-          SETUP REQUIRED:
-          1. Go to https://formspree.io/register
-          2. Create a new form pointing to amitsharma00261@gmail.com
-          3. Get your form ID (looks like xabc1234)
-          4. Replace YOUR_FORMSPREE_ID below with your actual form ID
-        -->
-        <form
-          id="contact-form"
-          action="https://formspree.io/f/YOUR_FORMSPREE_ID"
-          method="POST"
-          style="display:grid;gap:1.25rem;"
-        >
-          <!-- Hidden fields — not visible to user -->
-          <input type="hidden" name="_subject" value="New contact from SmallEstateForm.com" />
-          <input type="hidden" name="_replyto" value="" id="reply-to-mirror" />
-          <!-- Page URL hidden field — captures where the user came from -->
-          <input type="hidden" name="page_url" id="page-url-field" value="" />
-          <!-- Honeypot spam protection -->
-          <input type="text" name="_gotcha" style="display:none;" />
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;">
-            <div>
-              <label style="display:block;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;color:#2C2C2A;margin-bottom:0.4rem;">Your name <span style="color:#9B2335;">*</span></label>
-              <input
-                type="text"
-                name="name"
-                required
-                placeholder="Jane Smith"
-                style="width:100%;padding:0.75rem 1rem;border:1px solid #D4CCC0;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:#2C2C2A;background:white;outline:none;box-sizing:border-box;"
-              />
-            </div>
-            <div>
-              <label style="display:block;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;color:#2C2C2A;margin-bottom:0.4rem;">Email address <span style="color:#9B2335;">*</span></label>
-              <input
-                type="email"
-                name="email"
-                id="email-field"
-                required
-                placeholder="you@example.com"
-                style="width:100%;padding:0.75rem 1rem;border:1px solid #D4CCC0;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:#2C2C2A;background:white;outline:none;box-sizing:border-box;"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label style="display:block;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;color:#2C2C2A;margin-bottom:0.4rem;">Subject</label>
-            <select
-              name="subject"
-              style="width:100%;padding:0.75rem 1rem;border:1px solid #D4CCC0;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:#2C2C2A;background:white;outline:none;box-sizing:border-box;"
-            >
-              <option value="">Select a topic…</option>
-              <option value="Question about a document">Question about a document</option>
-              <option value="State law question">State law question</option>
-              <option value="Problem with the generator">Problem with the generator</option>
-              <option value="Bank rejected my affidavit">Bank rejected my affidavit</option>
-              <option value="County clerk question">County clerk question</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <div>
-            <label style="display:block;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;color:#2C2C2A;margin-bottom:0.4rem;">Your message <span style="color:#9B2335;">*</span></label>
-            <textarea
-              name="message"
-              required
-              rows="6"
-              placeholder="Describe your question or issue in as much detail as helpful. Include your state and document type if relevant."
-              style="width:100%;padding:0.75rem 1rem;border:1px solid #D4CCC0;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:#2C2C2A;background:white;outline:none;resize:vertical;box-sizing:border-box;"
-            ></textarea>
-          </div>
-
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
-            <p style="font-family:'DM Sans',sans-serif;font-size:0.8rem;color:#6B6560;margin:0;">We respond within one business day. We do not provide legal advice.</p>
-            <button
-              type="submit"
-              id="submit-btn"
-              style="background:#2D5016;color:#F7F4EF;padding:0.875rem 2rem;border:none;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;cursor:pointer;transition:background 0.15s;white-space:nowrap;"
-            >
-              Send message →
-            </button>
-          </div>
-        </form>
-
-        <script>
-          // Capture current page URL as hidden field (not shown to user)
-          document.getElementById('page-url-field').value = window.location.href;
-
-          // Mirror email to _replyto for Formspree reply-to
-          document.getElementById('email-field').addEventListener('input', function() {
-            document.getElementById('reply-to-mirror').value = this.value;
-          });
-
-          // Handle form submission with AJAX to show success message inline
-          document.getElementById('contact-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submit-btn');
-            btn.textContent = 'Sending…';
-            btn.disabled = true;
-
-            const data = new FormData(this);
-            try {
-              const res = await fetch(this.action, {
-                method: 'POST',
-                body: data,
-                headers: { 'Accept': 'application/json' }
-              });
-              if (res.ok) {
-                this.style.display = 'none';
-                document.getElementById('form-success').style.display = 'block';
-              } else {
-                btn.textContent = 'Something went wrong — try again';
-                btn.disabled = false;
-              }
-            } catch {
-              btn.textContent = 'Something went wrong — try again';
-              btn.disabled = false;
-            }
-          });
-        </script>
+      <!-- Success message — shown after submission, hidden by default -->
+      <div id="form-success" style="display:none;background:#EEF4E8;border:1px solid #2D5016;border-radius:4px;padding:2rem;margin-bottom:2rem;text-align:center;">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="margin:0 auto 1rem;display:block;">
+          <circle cx="24" cy="24" r="22" stroke="#2D5016" stroke-width="2"/>
+          <path d="M14 24 L21 31 L34 18" stroke="#2D5016" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:#2D5016;margin-bottom:0.5rem;">Message received.</h3>
+        <p style="font-family:'DM Sans',sans-serif;font-size:0.9rem;color:#2C2C2A;line-height:1.6;">Thank you for reaching out. We'll respond to your message as soon as possible — usually within one business day.</p>
+        <p style="font-family:'DM Sans',sans-serif;font-size:0.875rem;color:#6B6560;margin-top:0.75rem;">In the meantime: <a href="/" style="color:#8B6914;">return home</a> or <a href="/small-estate-affidavit/" style="color:#8B6914;">read our state guide</a>.</p>
       </div>
 
-      <!-- Side info -->
-      <div style="grid-column:1/2;">
-        <h3 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.25rem;color:#2C2C2A;margin-bottom:0.75rem;">Common questions</h3>
-        <p style="font-family:'DM Sans',sans-serif;font-size:0.875rem;color:#6B6560;line-height:1.6;margin-bottom:0.75rem;">Before writing to us, these resources may help faster:</p>
-        <ul style="list-style:none;padding:0;font-family:'DM Sans',sans-serif;font-size:0.875rem;color:#6B6560;">
-          <li style="margin-bottom:0.5rem;">→ <a href="/small-estate-affidavit/" style="color:#8B6914;text-decoration:none;">State threshold guide (all states)</a></li>
-          <li style="margin-bottom:0.5rem;">→ <a href="/affidavit-of-heirship/texas/" style="color:#8B6914;text-decoration:none;">Texas Affidavit of Heirship guide</a></li>
-          <li style="margin-bottom:0.5rem;">→ <a href="/small-estate-affidavit/arizona/" style="color:#8B6914;text-decoration:none;">Arizona HB2116 guide</a></li>
-          <li style="margin-bottom:0.5rem;">→ <a href="/small-estate-affidavit/illinois/" style="color:#8B6914;text-decoration:none;">Illinois 2025 law guide</a></li>
-        </ul>
-        <div style="margin-top:1.5rem;padding:1rem;background:#EEE9E1;border-radius:3px;border:1px solid #D4CCC0;">
-          <p style="font-family:'DM Sans',sans-serif;font-size:0.8rem;color:#6B6560;line-height:1.5;margin:0;"><strong style="color:#2C2C2A;">Please note:</strong> We provide document generation tools, not legal advice. For questions about whether a document applies to your specific situation, please consult a licensed estate attorney in your state.</p>
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:3rem;align-items:start;">
+
+        <!-- Contact form -->
+        <div>
+          <!--
+            SETUP REQUIRED (takes 2 minutes):
+            1. Go to https://formspree.io/register
+            2. Sign in with amitsharma00261@gmail.com
+            3. Create a new form — set the email to amitsharma00261@gmail.com
+            4. Copy your form ID (looks like: xabc1234)
+            5. Replace YOUR_FORMSPREE_ID below with that ID
+            All submissions will be emailed to amitsharma00261@gmail.com
+            and will include the page URL the user was on.
+          -->
+          <form
+            id="contact-form"
+            action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+            method="POST"
+            style="display:grid;gap:1.25rem;"
+          >
+            <!-- Hidden fields — not visible to the user -->
+            <input type="hidden" name="_subject" value="New enquiry — SmallEstateForm.com" />
+            <!-- page_url is populated by JS below — captures where the user came from -->
+            <input type="hidden" name="page_url" id="page-url-field" value="" />
+            <!-- Honeypot spam trap -->
+            <input type="text" name="_gotcha" style="display:none;visibility:hidden;" tabindex="-1" autocomplete="off" />
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div>
+                <label style="display:block;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;color:#2C2C2A;margin-bottom:0.4rem;">Name <span style="color:#9B2335;">*</span></label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  placeholder="Jane Smith"
+                  style="width:100%;padding:0.75rem 1rem;border:1px solid #D4CCC0;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:#2C2C2A;background:white;outline:none;box-sizing:border-box;transition:border-color 0.15s;"
+                  onfocus="this.style.borderColor='#2D5016'"
+                  onblur="this.style.borderColor='#D4CCC0'"
+                />
+              </div>
+              <div>
+                <label style="display:block;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;color:#2C2C2A;margin-bottom:0.4rem;">Email <span style="color:#9B2335;">*</span></label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="you@example.com"
+                  style="width:100%;padding:0.75rem 1rem;border:1px solid #D4CCC0;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:#2C2C2A;background:white;outline:none;box-sizing:border-box;transition:border-color 0.15s;"
+                  onfocus="this.style.borderColor='#2D5016'"
+                  onblur="this.style.borderColor='#D4CCC0'"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label style="display:block;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;color:#2C2C2A;margin-bottom:0.4rem;">Topic</label>
+              <select
+                name="subject"
+                style="width:100%;padding:0.75rem 1rem;border:1px solid #D4CCC0;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:#2C2C2A;background:white;outline:none;box-sizing:border-box;"
+              >
+                <option value="">Select a topic…</option>
+                <option value="Question about a document">Question about a document</option>
+                <option value="State law question">State law question</option>
+                <option value="Problem with the generator">Problem with the generator</option>
+                <option value="Bank rejected my affidavit">Bank rejected my affidavit</option>
+                <option value="County clerk question">County clerk question</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="display:block;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;color:#2C2C2A;margin-bottom:0.4rem;">Message <span style="color:#9B2335;">*</span></label>
+              <textarea
+                name="message"
+                required
+                rows="6"
+                placeholder="Describe your question. Include your state and document type if relevant."
+                style="width:100%;padding:0.75rem 1rem;border:1px solid #D4CCC0;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:#2C2C2A;background:white;outline:none;resize:vertical;box-sizing:border-box;transition:border-color 0.15s;"
+                onfocus="this.style.borderColor='#2D5016'"
+                onblur="this.style.borderColor='#D4CCC0'"
+              ></textarea>
+            </div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+              <p style="font-family:'DM Sans',sans-serif;font-size:0.8rem;color:#6B6560;margin:0;">We do not provide legal advice.</p>
+              <button
+                type="submit"
+                id="submit-btn"
+                style="background:#2D5016;color:#F7F4EF;padding:0.875rem 2rem;border:none;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;cursor:pointer;white-space:nowrap;"
+                onmouseover="this.style.background='#1E3A0F'"
+                onmouseout="this.style.background='#2D5016'"
+              >
+                Send message →
+              </button>
+            </div>
+          </form>
         </div>
+
+        <!-- Side info -->
+        <div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:#2C2C2A;margin-bottom:0.75rem;">Quick links</h3>
+          <ul style="list-style:none;padding:0;font-family:'DM Sans',sans-serif;font-size:0.875rem;color:#6B6560;margin-bottom:1.5rem;">
+            <li style="margin-bottom:0.5rem;">→ <a href="/small-estate-affidavit/" style="color:#8B6914;text-decoration:none;">State threshold guide</a></li>
+            <li style="margin-bottom:0.5rem;">→ <a href="/affidavit-of-heirship/texas/" style="color:#8B6914;text-decoration:none;">Texas guide</a></li>
+            <li style="margin-bottom:0.5rem;">→ <a href="/small-estate-affidavit/arizona/" style="color:#8B6914;text-decoration:none;">Arizona HB2116</a></li>
+            <li style="margin-bottom:0.5rem;">→ <a href="/small-estate-affidavit/illinois/" style="color:#8B6914;text-decoration:none;">Illinois 2025 law</a></li>
+            <li style="margin-bottom:0.5rem;">→ <a href="/transfer-on-death-deed/california/" style="color:#8B6914;text-decoration:none;">California TOD Deed</a></li>
+          </ul>
+          <div style="padding:1rem;background:#EEE9E1;border-radius:3px;border:1px solid #D4CCC0;">
+            <p style="font-family:'DM Sans',sans-serif;font-size:0.8rem;color:#6B6560;line-height:1.5;margin:0;"><strong style="color:#2C2C2A;">Please note:</strong> We provide document tools, not legal advice. For estate-specific legal questions, please consult a licensed attorney in your state.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
+
+  <script>
+    // Capture the current page URL into the hidden field — sent with every form submission
+    // This tells you which page the user was on when they contacted you
+    const urlField = document.getElementById('page-url-field');
+    if (urlField) urlField.value = window.location.href;
+
+    // AJAX submission — shows success message inline without page reload
+    const form = document.getElementById('contact-form');
+    if (form) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submit-btn');
+        const originalText = btn.textContent;
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+
+        try {
+          const res = await fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            // Hide form, show success message
+            form.style.display = 'none';
+            document.getElementById('form-success').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            btn.textContent = 'Something went wrong — please try again';
+            btn.disabled = false;
+            btn.style.opacity = '1';
+          }
+        } catch {
+          btn.textContent = 'Something went wrong — please try again';
+          btn.disabled = false;
+          btn.style.opacity = '1';
+        }
+      });
+    }
+  </script>
 </StatePage>
