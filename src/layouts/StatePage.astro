@@ -51,6 +51,14 @@ const { title, description, canonicalUrl, jsonLd } = Astro.props;
     {jsonLd && jsonLd.map((item) => (
       <script type="application/ld+json" set:html={item} />
     ))}
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PZE0D43B7Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PZE0D43B7Q');
+    </script>
   </head>
   <body class="bg-cream text-slate font-sans">
     <Header />
