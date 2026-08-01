@@ -1,0 +1,361 @@
+---
+export const prerender = true;
+import StatePage from '../../../../layouts/StatePage.astro';
+import AffidavitFormApp from '../../../../components/AffidavitFormApp';
+
+const articleSchema = `{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Affidavit of Heirship Harris County, Texas: How to Record and What It Costs",
+  "description": "Record an affidavit of heirship in Harris County, TX. Fees, address, e-recording options, what to bring, and how to avoid the county mismatch mistake.",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-31",
+  "author": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  }
+}`;
+
+const faqSchema = `{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Where do I record an affidavit of heirship in Harris County, Texas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "File at the Harris County Clerk's Real Property Division, Civil Courthouse Annex, 201 Caroline Street, Houston, TX 77002. Hours are Monday through Friday, 8:00 a.m. to 4:30 p.m. E-recording is available through Simplifile, CSC, and ePN and is often faster."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the recording fee for an affidavit of heirship in Harris County?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As of 2024–2025, Harris County charges $25 for the first page and $4 for each additional page. A typical 3–5 page affidavit costs $33–$41 to record. Certified copies cost $5 per page. Fees are subject to change — confirm before filing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I e-record an affidavit of heirship in Harris County?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Harris County accepts e-recording through Simplifile, CSC, and ePN. Upload the signed, notarized affidavit as a PDF along with the certified death certificate. Processing typically takes 1–2 business days. The affidavit must still be physically notarized before e-recording."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a Texas affidavit of heirship need to be filed in Harris County even if the deceased lived there?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The affidavit must be filed in the county where the real property is located — not necessarily where the deceased lived. If the property is in Harris County, file with the Harris County Clerk regardless of where the deceased resided. If the estate includes property in multiple counties, file in each county separately."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a waiting period after recording a Texas affidavit of heirship before it is effective?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Texas law does not impose a mandatory waiting period for an affidavit of heirship to be effective after recording. It becomes part of the deed records immediately. The five-year figure sometimes cited online is a practitioner risk-management guideline for title insurance purposes, not a legal requirement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What documents do I need to bring to the Harris County Clerk to record an affidavit of heirship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bring: (1) the original notarized affidavit of heirship — not a copy; (2) a certified copy of the death certificate; and (3) photo ID. Have payment ready for the recording fee ($25 for the first page, $4 per additional page). Request certified copies of the recorded affidavit before you leave."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to record an affidavit of heirship at the Harris County Clerk?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In-person submissions are typically processed the same day, though counter wait times can run 1–3 hours during busy periods. E-recording through Simplifile, CSC, or ePN is typically processed within 1–2 business days and avoids the counter wait entirely."
+      }
+    }
+  ]
+}`;
+
+const breadcrumbSchema = `{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://smallestateform.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Affidavit of Heirship",
+      "item": "https://smallestateform.com/affidavit-of-heirship/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Texas",
+      "item": "https://smallestateform.com/affidavit-of-heirship/texas/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Harris County",
+      "item": "https://smallestateform.com/affidavit-of-heirship/texas/harris-county/"
+    }
+  ]
+}`;
+---
+
+<StatePage
+  title="Affidavit of Heirship Harris County Texas: Recording Guide 2026"
+  description="Record an affidavit of heirship in Harris County, TX. Fees, address, e-recording options, what to bring, and how to avoid the county mismatch mistake."
+  canonicalUrl="https://smallestateform.com/affidavit-of-heirship/texas/harris-county/"
+  jsonLd={[articleSchema, faqSchema, breadcrumbSchema]}
+>
+
+  <div class="max-w-4xl mx-auto px-6 mt-8 mb-4">
+    <a href="/affidavit-of-heirship/texas/" class="text-[#8B6914] hover:underline text-sm font-medium">← Texas Affidavit of Heirship hub</a>
+  </div>
+
+  <!-- Featured snippet -->
+  <div class="bg-[#EEE9E1] border-l-4 border-[#8B6914] p-6 mb-4 max-w-4xl mx-auto">
+    <p class="font-medium text-[#2D5016] leading-relaxed">
+      Record an affidavit of heirship in Harris County at the Harris County Clerk's Real Property Division, Civil Courthouse Annex, 201 Caroline Street, Houston, TX 77002. The 2024–2025 recording fee is $25 for the first page plus $4 for each additional page. Bring the original notarized affidavit, a certified copy of the death certificate, and photo ID. E-recording through Simplifile, CSC, or ePN is available and is often faster than in-person filing.
+    </p>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="bg-[#F7F4EF] border border-[#D4CCC0] rounded-lg p-4 mb-8 max-w-4xl mx-auto text-sm text-[#6B6560]">
+    <strong class="text-[#2C2C2A]">Legal information, not legal advice.</strong> This page reflects Texas Estates Code § 203.001 and Harris County Clerk procedures as of July 2026. Fees and procedures change. Confirm current information with the Harris County Clerk before filing.
+  </div>
+
+  <!-- H1 -->
+  <div class="max-w-4xl mx-auto px-6 mb-8">
+    <h1 class="italic font-serif text-4xl text-[#2D5016] leading-tight">
+      Affidavit of Heirship Harris County, Texas: How to Record and What It Costs
+    </h1>
+  </div>
+
+  <!-- Form app -->
+  <div class="max-w-4xl mx-auto px-6">
+    <AffidavitFormApp
+      client:load
+      documentType="affidavit-of-heirship"
+      state="Texas"
+      county="Harris"
+      waitingDays={0}
+      statutoryReference="Texas Estates Code § 203.001"
+    />
+  </div>
+
+  <!-- Body content -->
+  <div class="max-w-4xl mx-auto px-6 py-12">
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Real-World Example: Filing in the Right County</h2>
+    <p class="text-[#2C2C2A] leading-relaxed mb-4">
+      James's mother died owning a house in Houston (Harris County). James lives in Dallas and drove to the Dallas County Clerk's office with a completed, notarized affidavit of heirship. The clerk explained: the affidavit must be recorded in the county where the property is located — Harris County — not the county where the heir lives. A recording in Dallas County has no effect on a title search in Harris County.
+    </p>
+    <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5 mb-6">
+      <h3 class="font-medium text-[#2D5016] mb-3">What James did instead:</h3>
+      <ol class="text-sm text-[#2C2C2A] space-y-2 list-decimal list-inside">
+        <li>Created an account with Simplifile (simplifile.com), the e-recording service most commonly used by Houston-area filers.</li>
+        <li>Uploaded his signed, notarized affidavit as a PDF and the certified death certificate as supporting documentation.</li>
+        <li>Submitted and paid the recording fee electronically: $33 (first page $25 + two additional pages at $4 each).</li>
+        <li>Received a recording confirmation number from Harris County within 48 hours — without making the drive to Houston.</li>
+        <li>Ordered a certified copy through the Harris County Clerk's online portal to present to his mother's bank.</li>
+      </ol>
+      <p class="text-sm text-[#6B6560] mt-3"><strong>Total time from submission to certified copy:</strong> 5 business days. Total cost: $33 recording fee plus $15 for a certified copy. No trip to Houston required.</p>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Should You Record in Harris County? Decision Framework</h2>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#2D5016] text-[#F7F4EF]">
+            <th class="p-3 text-left">Your Situation</th>
+            <th class="p-3 text-left">Where to File</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Property is located in Houston or unincorporated Harris County</td>
+            <td class="p-3 text-[#2D5016] font-medium">Harris County Clerk — 201 Caroline St, Houston</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">You live in Harris County but the property is in another county</td>
+            <td class="p-3 text-[#2C2C2A]">File with the county where the property is located — not Harris County</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Property spans Harris and Montgomery counties</td>
+            <td class="p-3 text-[#2C2C2A]">File with both county clerks separately</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">You prefer not to drive to Houston</td>
+            <td class="p-3 text-[#2D5016] font-medium">E-record via Simplifile, CSC, or ePN — no in-person visit required</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">You need same-day recording</td>
+            <td class="p-3 text-[#2C2C2A]">In-person at the Real Property Division counter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Where to File in Harris County</h2>
+    <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-6 mb-6">
+      <h3 class="font-serif text-xl text-[#2D5016] mb-4">Harris County Clerk, Real Property Division</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2 text-sm text-[#2C2C2A]">
+          <div><strong class="text-[#2D5016]">Address:</strong> 201 Caroline Street, Houston, TX 77002</div>
+          <div><strong class="text-[#2D5016]">Building:</strong> Civil Courthouse Annex (not the main courthouse)</div>
+          <div><strong class="text-[#2D5016]">Phone:</strong> (713) 274-8600</div>
+          <div><strong class="text-[#2D5016]">Hours:</strong> Monday–Friday, 8:00 a.m. – 4:30 p.m.</div>
+          <div><strong class="text-[#2D5016]">Transit:</strong> METRORail Red Line — Central Station stop (one block away)</div>
+        </div>
+        <div class="space-y-2 text-sm text-[#2C2C2A]">
+          <div class="font-medium text-[#2D5016]">Recording fees (2024–2025):</div>
+          <div>• First page: $25.00</div>
+          <div>• Each additional page: $4.00</div>
+          <div>• Certified copy (after recording): $5.00 per page</div>
+          <div class="mt-2 text-[#6B6560]">A typical 3–5 page affidavit costs $33–$41 to record.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="font-serif text-xl text-[#2D5016] mb-3">E-Recording (Recommended for Most Filers)</h3>
+    <p class="text-[#2C2C2A] leading-relaxed mb-3">Harris County accepts electronic recording through three authorized services:</p>
+    <ul class="text-sm text-[#2C2C2A] space-y-2 mb-4 list-disc list-inside pl-2">
+      <li><strong>Simplifile</strong> (simplifile.com) — most commonly used by Houston-area attorneys and title companies</li>
+      <li><strong>CSC</strong> (erecording.com)</li>
+      <li><strong>ePN</strong> (epndirect.com)</li>
+    </ul>
+    <p class="text-[#2C2C2A] leading-relaxed mb-6">E-recording submissions are typically processed within 1–2 business days — faster than in-person during busy periods. The affidavit must still be physically notarized before e-recording. Upload the final notarized version — not a draft.</p>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">What to Bring to the Harris County Clerk</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div class="bg-[#EEF4E8] border border-[#2D5016] rounded-xl p-5">
+        <h3 class="font-medium text-[#2D5016] mb-2">Required:</h3>
+        <ul class="text-sm text-[#2C2C2A] space-y-1">
+          <li>• <strong>Original notarized affidavit</strong> (the clerk records the original)</li>
+          <li>• <strong>Certified copy of the death certificate</strong> (photocopy not accepted)</li>
+          <li>• <strong>Photo ID</strong></li>
+          <li>• Payment: cash, check, money order, or major credit/debit card</li>
+        </ul>
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5">
+        <h3 class="font-medium text-[#2D5016] mb-2">Helpful (not always required):</h3>
+        <ul class="text-sm text-[#2C2C2A] space-y-1">
+          <li>• Two extra copies of the affidavit (for certified copies after recording — $5/page)</li>
+          <li>• County appraisal district property record (if clerk has questions about property identification)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Common Mistakes That Get This Document Rejected</h2>
+    <div class="space-y-3 mb-8">
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Recording in the wrong county.</strong> The affidavit must be recorded in the county where the property is located. A Houston homeowner's heir filing in Dallas County gets a Dallas County recording that has zero effect on a Harris County title search.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Sending a fax or scan of the original for in-person or mail filing.</strong> Harris County requires the original notarized document for in-person and mail submissions. (E-recording accepts PDFs because the system is designed for digital documents.)
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Not including the legal description of the property.</strong> The affidavit must contain the legal description — metes-and-bounds or lot-and-block — not just a street address. Harris County deed records are indexed by legal description.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Using one witness instead of two.</strong> Texas Estates Code § 203.001 requires two disinterested witnesses on a real property heirship affidavit. Harris County enforces the same two-witness rule as every other Texas county.
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">The "5-Year Waiting Period" Myth</h2>
+    <p class="text-[#2C2C2A] leading-relaxed mb-4">
+      Some online resources claim that a Texas affidavit of heirship is not legally effective until five years after recording. <strong>This is not accurate.</strong> Texas law does not impose a mandatory five-year waiting period. The affidavit becomes effective when recorded.
+    </p>
+    <p class="text-[#2C2C2A] leading-relaxed mb-6">
+      The five-year figure is a practitioner risk-management recommendation regarding title insurance — not a statutory requirement. Recording the affidavit with the Harris County Clerk immediately establishes it in the deed records.
+    </p>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">What Practitioners Know That Most Guides Skip</h2>
+    <div class="space-y-3 mb-8">
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">E-recording through Simplifile issues a recording confirmation number immediately.</strong> Many banks accept this as proof of recording before the certified copy arrives — useful for heirs dealing with time-sensitive banking matters. Ask the bank's estate services department whether they accept the confirmation number as preliminary evidence.
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">If the decedent owned multiple properties in Harris County, a single affidavit covering all properties can be recorded once.</strong> The legal description section should list each property. Harris County indexes by grantor name — one filing covers all named properties in the county.
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">Harris County's deed records for certain Houston neighborhoods have complicated title chains due to mid-century informal transfers.</strong> Properties in historically underserved areas of east, north, and south Houston sometimes have 2–4 prior informal heirship affidavits in the chain. A title company reviewing a sale may require an attorney to clean up the chain before insuring.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FAQ -->
+  <section class="max-w-4xl mx-auto px-6 pb-16">
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-8">Frequently asked questions</h2>
+    <div class="space-y-4">
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Where do I record an affidavit of heirship in Harris County?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          File at the Harris County Clerk's Real Property Division, Civil Courthouse Annex, 201 Caroline Street, Houston, TX 77002. Hours are Monday through Friday, 8:00 a.m. to 4:30 p.m. E-recording is available through Simplifile, CSC, and ePN and is often faster.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          What is the recording fee?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          As of 2024–2025, Harris County charges $25 for the first page and $4 for each additional page. A typical 3–5 page affidavit costs $33–$41 to record. Certified copies cost $5 per page.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Can I e-record in Harris County?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          Yes. Harris County accepts e-recording through Simplifile, CSC, and ePN. Upload the signed, notarized affidavit as a PDF along with the certified death certificate. Processing typically takes 1–2 business days. The affidavit must still be physically notarized before e-recording.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Do I file in Harris County if the deceased lived there?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          Only if the property is in Harris County. The affidavit must be filed in the county where the real property is located — not necessarily where the deceased lived. If the estate includes property in multiple counties, file in each county separately.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Is there a waiting period after recording?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          No. Texas law does not impose a mandatory waiting period for an affidavit of heirship to be effective after recording. It becomes part of the deed records immediately. The five-year figure sometimes cited online is a practitioner risk-management guideline for title insurance purposes, not a legal requirement.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Internal links -->
+  <div class="max-w-4xl mx-auto px-6 pb-12 text-sm text-[#6B6560]">
+    Related: <a href="/affidavit-of-heirship/texas/" class="text-[#8B6914] hover:underline">Texas Affidavit of Heirship hub</a> | <a href="/affidavit-of-heirship/texas/form/" class="text-[#8B6914] hover:underline">What the Affidavit of Heirship Form Must Contain</a> | <a href="/affidavit-of-heirship/texas/vehicle/" class="text-[#8B6914] hover:underline">Texas Vehicle Heirship Affidavit (VTR-262)</a> | <a href="/" class="text-[#8B6914] hover:underline">Homepage</a>
+  </div>
+
+</StatePage>

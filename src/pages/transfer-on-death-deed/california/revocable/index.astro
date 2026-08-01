@@ -1,0 +1,337 @@
+---
+export const prerender = true;
+import StatePage from '../../../../layouts/StatePage.astro';
+import AffidavitFormApp from '../../../../components/AffidavitFormApp';
+
+const articleSchema = `{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "California Transfer on Death Deed: How Revocability Works and How to Revoke One",
+  "description": "California's TOD deed is 100% revocable until death. Learn how to revoke it, what doesn't revoke it (marriage, divorce, a new will), and how revocability protects you.",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-31",
+  "author": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  }
+}`;
+
+const faqSchema = `{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is a California Transfer on Death Deed revocable?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Under California Probate Code § 5600, a TOD deed is completely revocable at any time before the grantor's death. The grantor retains full ownership and control of the property during their lifetime. The deed has no legal effect until death."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I revoke a California Transfer on Death Deed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Record a Revocation of Transfer on Death Deed with the county recorder in the county where the property is located, before your death. The revocation must be notarized and recorded — an unrecorded revocation has no legal effect. Alternatively, record a new TOD deed naming different beneficiaries, which automatically supersedes the earlier one."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a new will override a California TOD deed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. A California TOD deed operates independently of any will. The deed controls disposition of the specific real property it covers regardless of what a will says. To change the beneficiary, you must record a revocation or a new TOD deed — a will provision purporting to override the deed is legally ineffective."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does selling the property revoke a California TOD deed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not automatically. If a sale closes and title transfers to a buyer, the TOD deed becomes practically moot because the grantor no longer owns the property. But the deed remains in the public record. To be safe, record a formal revocation as part of any sale transaction. Title companies often require this as a condition of closing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does divorce revoke a California TOD deed naming an ex-spouse?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not automatically. Divorce alone does not revoke a recorded TOD deed in California. If the deed names an ex-spouse and you do not record a formal revocation after divorce, the ex-spouse may still receive the property at your death. Always review and update TOD deeds after a divorce."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the 120-day period after death for a California TOD deed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Under California Probate Code § 5696, the 120-day period after the grantor's death is the window during which creditors of the estate, a surviving spouse, and other interested parties may assert claims against the property. After 120 days, the beneficiary can record an Affidavit of Death to formally take title."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does marriage revoke a California TOD deed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. A subsequent marriage does not automatically revoke a previously recorded California TOD deed. If you marry after recording a TOD deed, the deed remains in effect with its original beneficiary unless you record a revocation or a new deed. Review and update estate planning documents after any major life change."
+      }
+    }
+  ]
+}`;
+
+const breadcrumbSchema = `{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://smallestateform.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Transfer on Death Deed",
+      "item": "https://smallestateform.com/transfer-on-death-deed/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "California",
+      "item": "https://smallestateform.com/transfer-on-death-deed/california/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Revocable",
+      "item": "https://smallestateform.com/transfer-on-death-deed/california/revocable/"
+    }
+  ]
+}`;
+---
+
+<StatePage
+  title="Revocable Transfer on Death Deed California: How Revocation Works"
+  description="California's TOD deed is 100% revocable until death. Learn how to revoke it, what doesn't revoke it (marriage, divorce, a new will), and how revocability protects you."
+  canonicalUrl="https://smallestateform.com/transfer-on-death-deed/california/revocable/"
+  jsonLd={[articleSchema, faqSchema, breadcrumbSchema]}
+>
+
+  <div class="max-w-4xl mx-auto px-6 mt-8 mb-4">
+    <a href="/transfer-on-death-deed/california/" class="text-[#8B6914] hover:underline text-sm font-medium">← California Transfer on Death Deed (main guide)</a>
+  </div>
+
+  <!-- Featured snippet -->
+  <div class="bg-[#EEE9E1] border-l-4 border-[#8B6914] p-6 mb-4 max-w-4xl mx-auto">
+    <p class="font-medium text-[#2D5016] leading-relaxed">
+      Yes — a California Transfer on Death Deed is completely revocable at any time before the grantor's death. Under California Probate Code § 5600, the grantor retains full ownership and control of the property during their lifetime, and the deed has no legal effect until death. To revoke one, record a Revocation of Transfer on Death Deed with the county recorder before death. An unrecorded revocation has no legal effect.
+    </p>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="bg-[#F7F4EF] border border-[#D4CCC0] rounded-lg p-4 mb-8 max-w-4xl mx-auto text-sm text-[#6B6560]">
+    <strong class="text-[#2C2C2A]">Legal information, not legal advice.</strong> This page reflects California Probate Code §§ 5600–5696 as of July 2026. Laws change. Consult a licensed California attorney for advice specific to your situation, particularly regarding estate planning coordination between a TOD deed, trust, and will.
+  </div>
+
+  <!-- H1 -->
+  <div class="max-w-4xl mx-auto px-6 mb-8">
+    <h1 class="italic font-serif text-4xl text-[#2D5016] leading-tight">
+      California Transfer on Death Deed: How Revocability Works and How to Revoke One
+    </h1>
+  </div>
+
+  <!-- Form app -->
+  <div class="max-w-4xl mx-auto px-6">
+    <AffidavitFormApp
+      client:load
+      documentType="transfer-on-death-deed"
+      state="California"
+      waitingDays={0}
+      statutoryReference="California Probate Code § 5600–5696"
+    />
+  </div>
+
+  <!-- Body content -->
+  <div class="max-w-4xl mx-auto px-6 py-12">
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Real-World Example: Sandra Changes Her Beneficiary After Divorce</h2>
+    <p class="text-[#2C2C2A] leading-relaxed mb-4">
+      Sandra recorded a TOD deed in 2021 naming her daughter as the sole beneficiary of her home in Sacramento County. In 2023, she divorced. Sandra assumed her divorce had automatically changed her estate plan. It had not — under California law, divorce alone does not revoke a recorded TOD deed.
+    </p>
+    <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5 mb-6">
+      <h3 class="font-medium text-[#2D5016] mb-3">What Sandra did to fix it:</h3>
+      <ol class="text-sm text-[#2C2C2A] space-y-2 list-decimal list-inside">
+        <li>Pulled the original TOD deed from Sacramento County Recorder's records to confirm the document number and recording date.</li>
+        <li>Prepared a Revocation of Transfer on Death Deed (Judicial Council Form DE-400) referencing the original deed's document number.</li>
+        <li>Had the revocation notarized.</li>
+        <li>Recorded the revocation at the Sacramento County Recorder's office. Fee: $21 for the first page.</li>
+        <li>Prepared a new TOD deed naming her son as beneficiary, had it notarized, and recorded it at the same office.</li>
+      </ol>
+      <p class="text-sm text-[#6B6560] mt-3"><strong>Result:</strong> The original 2021 deed was fully superseded. Her son is now the beneficiary of record. Her daughter has no claim to the property at Sandra's death.</p>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Should You Revoke, Amend, or Do Nothing?</h2>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#2D5016] text-[#F7F4EF]">
+            <th class="p-3 text-left">Your Situation</th>
+            <th class="p-3 text-left">Recommended Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Want to change the beneficiary entirely</td>
+            <td class="p-3 text-[#2D5016] font-medium">Revoke the existing deed, then record a new TOD deed</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">Want to add a beneficiary alongside the existing one</td>
+            <td class="p-3 text-[#2D5016] font-medium">Record a new TOD deed naming all beneficiaries</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Relationship with beneficiary has soured (divorce, estrangement)</td>
+            <td class="p-3 text-[#2C2C2A]">Revoke immediately — do not assume divorce or other life events automatically revoke it</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">Property will be sold</td>
+            <td class="p-3 text-[#2C2C2A]">Record a formal revocation — title companies often require it</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Considering putting the property in a trust instead</td>
+            <td class="p-3 text-[#2C2C2A]">Revoke the TOD deed after the trust is funded — having both creates conflict</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">No change in plans</td>
+            <td class="p-3 text-[#2D5016] font-medium">Do nothing — the deed remains fully effective and requires no maintenance</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Two Valid Ways to Revoke a California TOD Deed</h2>
+
+    <div class="space-y-4 mb-8">
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5">
+        <h3 class="font-medium text-[#2D5016] mb-2">Method 1: Record a Revocation of Transfer on Death Deed</h3>
+        <p class="text-sm text-[#2C2C2A] mb-3">The revocation instrument must: identify you by name, reference the original TOD deed (recording date and document number), state clearly that the TOD deed is revoked, be signed before a notary public, and be recorded with the county recorder before your death.</p>
+        <p class="text-sm text-[#8B6914]"><strong>Critical:</strong> The recording must happen before death. If you sign a revocation but die before it reaches the recorder's office, the revocation fails — the original TOD deed controls.</p>
+        <p class="text-sm text-[#2C2C2A] mt-2"><strong>Cost:</strong> Recording fees vary by county. Los Angeles County: approximately $21 per page. San Francisco: approximately $15 per page.</p>
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5">
+        <h3 class="font-medium text-[#2D5016] mb-2">Method 2: Record a New TOD Deed</h3>
+        <p class="text-sm text-[#2C2C2A]">A subsequent TOD deed automatically supersedes the earlier one under California Probate Code § 5628. You do not need to explicitly revoke the first deed — recording a new one that covers the same property accomplishes the revocation by implication. However, recording both a revocation and a new deed creates a cleaner title record.</p>
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Common Mistakes</h2>
+    <div class="space-y-3 mb-8">
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Thinking a will overrides the TOD deed.</strong> A will has no effect on real property covered by a recorded TOD deed. The deed operates entirely outside the will and the probate process. Even a will provision that explicitly names the property is legally ineffective against the deed.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Not recording the revocation before death.</strong> An unrecorded revocation is legally worthless. The grantor can sign, date, and notarize a revocation — but if the grantor dies before the document is actually recorded, the revocation fails entirely.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Assuming divorce automatically revokes the deed in California.</strong> California law does not provide for automatic revocation of a TOD deed upon divorce. If you named your spouse as beneficiary and later divorced, the deed still names your ex-spouse. File a revocation immediately after any divorce.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ A power of attorney agent trying to revoke without explicit POA authority.</strong> A general or durable power of attorney does not automatically authorize an agent to revoke a TOD deed. The POA document must explicitly grant that specific authority.
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">What Does NOT Revoke a California TOD Deed</h2>
+    <div class="space-y-3 mb-8">
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">Selling the property does NOT automatically revoke the deed.</strong> If a sale closes and title transfers to a buyer, the TOD deed becomes practically moot. But the deed remains in the public record. Title companies handling a sale with a recorded TOD deed will often require a recorded revocation as a condition of closing.
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">Marriage after recording does NOT revoke a California TOD deed.</strong> California's TOD deed is not revoked by the grantor's subsequent marriage. Review and update estate planning documents after any major life event.
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">Divorce alone does NOT revoke a California TOD deed.</strong> Unlike some states, California does not provide for automatic revocation of a TOD deed upon divorce. The deed requires affirmative revocation — a recorded revocation instrument.
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">A new will does NOT override a California TOD deed.</strong> California Probate Code § 5600(b) makes clear that the TOD deed operates independently of any will. A will can express any intention the testator wishes — but if that property is covered by a recorded TOD deed, the deed controls at death.
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">After Death: The 120-Day Claim Period</h2>
+    <p class="text-[#2C2C2A] leading-relaxed mb-4">
+      Once the grantor dies, California Probate Code § 5696 provides a <strong>120-day period</strong> during which the property is subject to potential claims by the deceased's creditors, the surviving spouse, or others with rights in the estate. After the 120-day period passes, the beneficiary can record an Affidavit of Death to formally place title in their name.
+    </p>
+    <p class="text-[#2C2C2A] leading-relaxed mb-6">
+      Most county recorders require this affidavit plus a certified death certificate and a copy of the TOD deed. Beneficiaries who re-sell the property before the 120 days have passed can inadvertently create title defects if creditor claims surface after the sale closes.
+    </p>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Why Revocability Is a Feature, Not a Risk</h2>
+    <p class="text-[#2C2C2A] leading-relaxed mb-4">
+      As long as the grantor is alive and has legal capacity, the TOD deed can be revoked without the beneficiary's agreement, notification, or consent. The beneficiary has no present ownership interest that can be litigated or disputed during the grantor's lifetime. This complete grantor control is what makes the California TOD deed an appropriate planning tool for most homeowners who want a simple, low-cost way to pass real property to a named beneficiary without probate.
+    </p>
+
+  </div>
+
+  <!-- FAQ -->
+  <section class="max-w-4xl mx-auto px-6 pb-16">
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-8">Frequently asked questions</h2>
+    <div class="space-y-4">
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Is a California Transfer on Death Deed revocable?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          Yes. Under California Probate Code § 5600, a TOD deed is completely revocable at any time before the grantor's death. The grantor retains full ownership and control of the property during their lifetime. The deed has no legal effect until death.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          How do I revoke a California Transfer on Death Deed?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          Record a Revocation of Transfer on Death Deed with the county recorder in the county where the property is located, before your death. The revocation must be notarized and recorded — an unrecorded revocation has no legal effect. Alternatively, record a new TOD deed naming different beneficiaries, which automatically supersedes the earlier one.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Does a new will override a California TOD deed?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          No. A California TOD deed operates independently of any will. The deed controls disposition of the specific real property it covers regardless of what a will says. To change the beneficiary, you must record a revocation or a new TOD deed.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Does divorce revoke a California TOD deed naming an ex-spouse?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          Not automatically. Divorce alone does not revoke a recorded TOD deed in California. If the deed names an ex-spouse and you do not record a formal revocation after divorce, the ex-spouse may still receive the property at your death. Always review and update TOD deeds after a divorce.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          What is the 120-day period after death?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          Under California Probate Code § 5696, the 120-day period after the grantor's death is the window during which creditors, a surviving spouse, and other interested parties may assert claims against the property. After 120 days, the beneficiary can record an Affidavit of Death to formally take title.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Internal links -->
+  <div class="max-w-4xl mx-auto px-6 pb-12 text-sm text-[#6B6560]">
+    Related: <a href="/transfer-on-death-deed/california/" class="text-[#8B6914] hover:underline">California Transfer on Death Deed (main guide)</a> | <a href="/small-estate-affidavit/" class="text-[#8B6914] hover:underline">Small Estate Affidavit Hub</a> | <a href="/" class="text-[#8B6914] hover:underline">Homepage</a>
+  </div>
+
+</StatePage>

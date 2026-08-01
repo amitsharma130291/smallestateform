@@ -1,0 +1,399 @@
+---
+export const prerender = true;
+import StatePage from '../../../../layouts/StatePage.astro';
+import AffidavitFormApp from '../../../../components/AffidavitFormApp';
+
+const articleSchema = `{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Small Estate Affidavit in Cook County, Illinois: Local Filing Guide for 2026",
+  "description": "File a small estate affidavit in Cook County, IL at the Daley Center Probate Division. Threshold, fees, required documents, and local tips for Chicago-area estates.",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-31",
+  "author": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  }
+}`;
+
+const faqSchema = `{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Where do I file a small estate affidavit in Cook County, Illinois?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "File at the Richard J. Daley Center, 50 W. Washington Street, Chicago, IL 60602, Probate Division, Room 1202. Hours are Monday through Friday, 8:30 a.m. to 4:30 p.m. Bring the original affidavit, certified death certificate, and photo ID."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the small estate threshold in Cook County, Illinois?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Two thresholds apply. For bank-level affidavits presented directly to financial institutions, the statewide limit is $150,000 after the August 2025 amendment. For court filings in Cook County, a separate formula applies: $20,000 base plus $10,000 for each surviving minor child of the deceased."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use a small estate affidavit for real estate in Cook County?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Illinois's small estate affidavit process does not transfer real property. Real estate in Cook County requires either a previously executed Transfer on Death Instrument, joint tenancy with right of survivorship, or formal probate. The affidavit covers financial accounts and personal property only."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long is the waiting period for an Illinois Small Estate Affidavit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "30 days from the date of death. This is a statutory requirement under 755 ILCS 5/25-1 that applies across all Illinois counties including Cook County. No institution can process the affidavit before the 30-day period has passed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does it cost to file a small estate affidavit at the Cook County Daley Center?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Filing fees at the Cook County Circuit Court Probate Division are approximately $50–$100 depending on the proceeding type, as of 2025–2026. Fees are subject to change. Bring a check or money order payable to 'Clerk of the Circuit Court.' The bank-level affidavit (no court filing) has no court fee."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a bank account with a payable-on-death beneficiary count toward the $150,000 threshold?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Accounts with a named payable-on-death (POD) beneficiary pass directly to that beneficiary outside the estate. They do not count toward the $150,000 threshold and do not require a small estate affidavit. Only accounts without a POD designation are included in the threshold calculation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What changed in Illinois small estate law in August 2025?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The August 2025 amendment to 755 ILCS 5/25-1 raised the statewide small estate threshold to $150,000, allowing more Illinois families to avoid formal probate. The Cook County court formula ($20,000 plus $10,000 per minor child) remained in place for court proceedings."
+      }
+    }
+  ]
+}`;
+
+const breadcrumbSchema = `{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://smallestateform.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Small Estate Affidavit",
+      "item": "https://smallestateform.com/small-estate-affidavit/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Illinois",
+      "item": "https://smallestateform.com/small-estate-affidavit/illinois/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Cook County",
+      "item": "https://smallestateform.com/small-estate-affidavit/illinois/cook-county/"
+    }
+  ]
+}`;
+---
+
+<StatePage
+  title="Small Estate Affidavit Cook County Illinois: Where to File & Fees"
+  description="File a small estate affidavit in Cook County, IL at the Daley Center Probate Division. Threshold, fees, required documents, and local tips for Chicago-area estates."
+  canonicalUrl="https://smallestateform.com/small-estate-affidavit/illinois/cook-county/"
+  jsonLd={[articleSchema, faqSchema, breadcrumbSchema]}
+>
+
+  <div class="max-w-4xl mx-auto px-6 mt-8 mb-4">
+    <a href="/small-estate-affidavit/illinois/" class="text-[#8B6914] hover:underline text-sm font-medium">← Illinois Small Estate Affidavit (statewide)</a>
+  </div>
+
+  <!-- Featured snippet -->
+  <div class="bg-[#EEE9E1] border-l-4 border-[#8B6914] p-6 mb-4 max-w-4xl mx-auto">
+    <p class="font-medium text-[#2D5016] leading-relaxed">
+      In Cook County, file a small estate affidavit at the Richard J. Daley Center, 50 W. Washington Street, Chicago, IL 60602 — Probate Division, Room 1202. The statewide threshold is $150,000 after the August 2025 amendment to 755 ILCS 5/25-1. Cook County uses a separate lower formula for court proceedings: $20,000 base plus $10,000 per surviving minor child. The 30-day waiting period after death applies statewide. Filing fees are approximately $50–$100 depending on the asset type.
+    </p>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="bg-[#F7F4EF] border border-[#D4CCC0] rounded-lg p-4 mb-8 max-w-4xl mx-auto text-sm text-[#6B6560]">
+    <strong class="text-[#2C2C2A]">Legal information, not legal advice.</strong> This page reflects 755 ILCS 5/25-1 as amended August 2025 and Cook County Circuit Court procedures as of July 2026. Laws and local procedures change. Consult a licensed Illinois attorney for advice specific to your situation.
+  </div>
+
+  <!-- H1 -->
+  <div class="max-w-4xl mx-auto px-6 mb-8">
+    <h1 class="italic font-serif text-4xl text-[#2D5016] leading-tight">
+      Small Estate Affidavit in Cook County, Illinois: Local Filing Guide for 2026
+    </h1>
+  </div>
+
+  <!-- Form app -->
+  <div class="max-w-4xl mx-auto px-6">
+    <AffidavitFormApp
+      client:load
+      documentType="small-estate-affidavit"
+      state="Illinois"
+      county="Cook"
+      eligibilityThreshold={150000}
+      waitingDays={30}
+      statutoryReference="755 ILCS 5/25-1 (amended August 2025)"
+    />
+  </div>
+
+  <!-- Body content -->
+  <div class="max-w-4xl mx-auto px-6 py-12">
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Real-World Example: The Nguyen Family, Evanston, Cook County</h2>
+    <p class="text-[#2C2C2A] leading-relaxed mb-4">
+      The Nguyen family's mother died in Evanston, leaving a Chase Bank savings account with a balance of $28,000. She had no real property. Total qualifying estate value: $28,000 — well under the $150,000 statewide threshold.
+    </p>
+    <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5 mb-6">
+      <h3 class="font-medium text-[#2D5016] mb-3">What they did:</h3>
+      <ol class="text-sm text-[#2C2C2A] space-y-2 list-decimal list-inside">
+        <li>Waited 30 days from the date of death (the statutory minimum under 755 ILCS 5/25-1).</li>
+        <li>Ordered four certified death certificates from the Cook County Clerk's Vital Records division ($19 each).</li>
+        <li>Filed the original affidavit and a certified death certificate at the Daley Center Probate Division, Room 1202. Filing fee: $62.</li>
+        <li>Presented a file-stamped certified copy of the affidavit and a certified death certificate to Chase Bank's estate services department.</li>
+        <li>Received the account balance distributed equally to the three heirs approximately six weeks after the initial filing.</li>
+      </ol>
+      <p class="text-sm text-[#6B6560] mt-3"><strong>Total time from death to distribution:</strong> approximately nine weeks. No probate opened. No attorney required.</p>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Should You Use the Small Estate Affidavit? Decision Framework</h2>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#2D5016] text-[#F7F4EF]">
+            <th class="p-3 text-left">Your Situation</th>
+            <th class="p-3 text-left">Best Path</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Financial accounts only, total under $150,000, 30+ days since death</td>
+            <td class="p-3 text-[#2D5016] font-medium">Small Estate Affidavit — present directly to the bank, no court filing needed</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">Financial accounts, need court documentation, under Cook County formula</td>
+            <td class="p-3 text-[#2D5016] font-medium">Cook County SEA filing at Daley Center Room 1202</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Estate includes real property in Illinois</td>
+            <td class="p-3 text-[#2C2C2A]">Probate required for real estate — SEA handles personal property only</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">Total estate value exceeds $150,000</td>
+            <td class="p-3 text-[#2C2C2A]">Formal probate — SEA threshold not met</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Accounts have named POD/TOD beneficiaries</td>
+            <td class="p-3 text-[#2C2C2A]">No affidavit needed — those accounts pass directly to beneficiaries</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">Death occurred fewer than 30 days ago</td>
+            <td class="p-3 text-[#8B6914] font-medium">Wait — the 30-day statutory period cannot be waived</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">The Two Illinois Thresholds — Which One Applies to You</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div class="border border-[#2D5016] rounded-xl p-5 bg-[#EEF4E8]">
+        <h3 class="font-medium text-[#2D5016] mb-2">Statewide Threshold: $150,000</h3>
+        <p class="text-sm text-[#2C2C2A]">For bank-level affidavits presented directly to financial institutions. Applies across all Illinois counties including Cook. No court filing required if total qualifying estate is at or below $150,000 and 30-day waiting period has passed.</p>
+      </div>
+      <div class="border border-[#8B6914] rounded-xl p-5 bg-[#FFF8E8]">
+        <h3 class="font-medium text-[#2D5016] mb-2">Cook County Court Formula</h3>
+        <p class="text-sm text-[#2C2C2A] mb-2">For court proceedings: <strong>$20,000 base + $10,000 per surviving minor child.</strong></p>
+        <ul class="text-sm text-[#2C2C2A] space-y-1">
+          <li>• No minor children: $20,000</li>
+          <li>• One minor child: $30,000</li>
+          <li>• Three minor children: $50,000</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bg-[#FEF2F2] border-l-4 border-[#C0392B] p-4 mb-8">
+      <strong class="text-[#C0392B]">Important: Small Estate Affidavits Do NOT Transfer Real Estate in Illinois.</strong>
+      <p class="text-sm text-[#2C2C2A] mt-2">An Illinois small estate affidavit does not transfer real property, regardless of its value. If the estate includes a house or condo in Cook County, formal probate is required for that real estate. The small estate affidavit can still handle financial accounts; the real estate is handled separately.</p>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Where to File in Cook County</h2>
+    <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-6 mb-6">
+      <h3 class="font-serif text-xl text-[#2D5016] mb-4">Richard J. Daley Center — Probate Division</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2 text-sm text-[#2C2C2A]">
+          <div><strong class="text-[#2D5016]">Address:</strong> 50 W. Washington Street, Chicago, IL 60602</div>
+          <div><strong class="text-[#2D5016]">Division:</strong> Probate Division, Room 1202</div>
+          <div><strong class="text-[#2D5016]">Hours:</strong> Monday–Friday, 8:30 a.m. – 4:30 p.m.</div>
+          <div><strong class="text-[#2D5016]">Transit:</strong> Blue Line Washington stop, or Brown/Orange/Pink/Purple Line Washington stop</div>
+        </div>
+        <div class="space-y-2 text-sm text-[#2C2C2A]">
+          <div class="font-medium text-[#2D5016]">Filing fees (2025–2026):</div>
+          <div>• Small estate affidavit filing: ~$50–$75</div>
+          <div>• Petition for small estate administration: ~$75–$120</div>
+          <div class="mt-2 text-[#6B6560]">Bring a check or money order payable to "Clerk of the Circuit Court."</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="font-serif text-xl text-[#2D5016] mb-3">What to Bring</h3>
+    <ul class="text-sm text-[#2C2C2A] space-y-2 mb-8 list-disc list-inside pl-2">
+      <li>Original affidavit (the court keeps the original)</li>
+      <li>At least two additional certified copies (you'll need them for banks and other institutions)</li>
+      <li>Certified copy of the death certificate</li>
+      <li>Photo ID</li>
+      <li>Payment for filing fees (check or money order — card acceptance varies)</li>
+    </ul>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Common Mistakes That Get This Document Rejected</h2>
+    <div class="space-y-3 mb-8">
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Filing before 30 days have passed since death.</strong> The 30-day waiting period is a hard statutory requirement. No bank, court, or institution can waive it. Filing on day 29 means the affidavit will be returned.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Using a statewide form when Cook County clerks expect their local format.</strong> A bare-bones affidavit that satisfies the statute's minimum text but omits structural elements the local clerks expect may be returned for correction. Use a form built specifically for Illinois, not a generic multi-state template.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Attempting to use the affidavit to claim real property.</strong> Illinois's small estate affidavit does not transfer real estate under any circumstances. Including a house or condo in the affidavit is a legally defective document.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Bringing a photocopy of the death certificate instead of a certified copy.</strong> The Daley Center Probate Division requires a certified death certificate with the county seal or state vital statistics embossed stamp.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Going to the wrong room at the Daley Center.</strong> The Probate Division is in Room 1202. Other civil and county clerk functions are in different rooms. The main clerk windows on the ground floor do not handle probate filings.
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Timeline from Death to Distribution</h2>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#2D5016] text-[#F7F4EF]">
+            <th class="p-3 text-left">Step</th>
+            <th class="p-3 text-left">Typical Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">30-day mandatory waiting period</td>
+            <td class="p-3 text-[#2C2C2A]">30 days</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">Gather documents, complete affidavit</td>
+            <td class="p-3 text-[#2C2C2A]">1–2 weeks</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">File at Daley Center (if needed)</td>
+            <td class="p-3 text-[#2C2C2A]">1 day</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">Bank processing</td>
+            <td class="p-3 text-[#2C2C2A]">1–6 weeks</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 font-medium text-[#2D5016]">Total: typical case</td>
+            <td class="p-3 font-medium text-[#2D5016]">7–12 weeks</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Cook County-Specific Tips</h2>
+    <div class="space-y-3 mb-8">
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">Order more death certificates than you think you need.</strong> The Cook County Clerk's Vital Records division issues certified death certificates at approximately $19 per certified copy (2025–2026). Order at least 4–6 copies: one for the court, one for each financial institution, one for any pension or retirement benefit, and one to keep.
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">The Daley Center can be slow on certain days.</strong> Monday mornings and the days after holidays see the longest wait times at the Probate Division counter. Arrive by 8:30 a.m. or aim for Tuesday through Thursday for shorter waits. January and September are peak months — 2–3 week processing backlogs are common.
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">Some Cook County bank branches require a court-certified copy.</strong> Larger national bank branches in the Loop may require a court seal on the affidavit copy. A court-certified copy (obtained by filing the affidavit at the court first) carries an official court stamp that satisfies this requirement.
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">If a bank resists, cite the statute.</strong> Illinois law (755 ILCS 5/25-1) expressly provides that a properly executed small estate affidavit is sufficient evidence for any person owing money or property to the deceased. The institution has a legal obligation to honor it if the requirements are met.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FAQ -->
+  <section class="max-w-4xl mx-auto px-6 pb-16">
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-8">Frequently asked questions</h2>
+    <div class="space-y-4">
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Where do I file a small estate affidavit in Cook County, Illinois?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          File at the Richard J. Daley Center, 50 W. Washington Street, Chicago, IL 60602, Probate Division, Room 1202. Hours are Monday through Friday, 8:30 a.m. to 4:30 p.m. Bring the original affidavit, certified death certificate, and photo ID.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          What is the small estate threshold in Cook County?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          Two thresholds apply. For bank-level affidavits presented directly to financial institutions, the statewide limit is $150,000 (August 2025 amendment). For court filings in Cook County, a separate formula applies: $20,000 base plus $10,000 for each surviving minor child of the deceased.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Can I use a small estate affidavit for real estate in Cook County?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          No. Illinois's small estate affidavit process does not transfer real property. Real estate in Cook County requires either a previously executed Transfer on Death Instrument, joint tenancy with right of survivorship, or formal probate.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          How long is the waiting period?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          30 days from the date of death. This is a statutory requirement under 755 ILCS 5/25-1 that applies across all Illinois counties including Cook County. No institution can process the affidavit before the 30-day period has passed.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          What changed in Illinois small estate law in August 2025?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          The August 2025 amendment to 755 ILCS 5/25-1 raised the statewide small estate threshold to $150,000, allowing more Illinois families to avoid formal probate. The Cook County court formula ($20,000 plus $10,000 per minor child) remained in place for court proceedings.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Internal links -->
+  <div class="max-w-4xl mx-auto px-6 pb-12 text-sm text-[#6B6560]">
+    Related: <a href="/small-estate-affidavit/illinois/" class="text-[#8B6914] hover:underline">Illinois Small Estate Affidavit (statewide)</a> | <a href="/small-estate-affidavit/" class="text-[#8B6914] hover:underline">Small Estate Affidavit Hub</a> | <a href="/" class="text-[#8B6914] hover:underline">Homepage</a>
+  </div>
+
+</StatePage>

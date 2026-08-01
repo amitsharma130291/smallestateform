@@ -1,0 +1,399 @@
+---
+export const prerender = true;
+import StatePage from '../../../../layouts/StatePage.astro';
+import AffidavitFormApp from '../../../../components/AffidavitFormApp';
+
+const articleSchema = `{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Texas Affidavit of Heirship Form: What It Looks Like and How to Complete It",
+  "description": "No single Texas heirship affidavit form exists — here's what the document must include, how to fill it correctly, and the most common errors that invalidate it.",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-31",
+  "author": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  }
+}`;
+
+const faqSchema = `{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there an official Texas state form for an Affidavit of Heirship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Texas does not publish an official state form for real property Affidavits of Heirship. Texas Estates Code § 203.001 sets the legal requirements, but the document itself is practitioner-drafted. Any properly executed affidavit that meets the statutory requirements will be accepted by county clerks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many witnesses does a Texas Affidavit of Heirship require?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Two disinterested witnesses are required. Each witness must personally know the deceased and must have no financial interest in the estate — meaning they cannot be heirs, beneficiaries, or creditors. An affidavit with only one witness, or with a witness who is also an heir, does not satisfy Texas Estates Code § 203.001."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a family member be a witness on a Texas Affidavit of Heirship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if that family member has no financial interest in the estate. A distant relative who will not inherit anything and who knew the deceased qualifies. A child, sibling, or surviving spouse who will inherit — or whose spouse will inherit — does not qualify as a disinterested witness."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a Texas Affidavit of Heirship need to be recorded?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Recording with the county clerk in the county where the property is located is required to make the affidavit effective against third parties. An unrecorded affidavit may be accepted by some banks but provides no title protection for real property and will not satisfy a title company reviewing a future sale."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What property description is required on a Texas Affidavit of Heirship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The legal description from the deed — not a street address. The legal description typically appears on the existing deed and in the county appraisal district records. It must match the description in the deed records exactly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to complete a Texas Affidavit of Heirship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gathering the required information — marital history, children's names and addresses, legal property description, finding two qualifying witnesses — typically takes 1–2 weeks. Completing and notarizing the form takes another 1–3 days. Filing with the county clerk can be done the same day as notarization."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the filing fee for a Texas Affidavit of Heirship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Major Texas counties charge $25 for the first page plus $4 per additional page. A typical affidavit runs 2–5 pages, putting the total filing fee at approximately $29–$41. Confirm current fees with the specific county clerk before filing."
+      }
+    }
+  ]
+}`;
+
+const breadcrumbSchema = `{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://smallestateform.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Affidavit of Heirship",
+      "item": "https://smallestateform.com/affidavit-of-heirship/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Texas",
+      "item": "https://smallestateform.com/affidavit-of-heirship/texas/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Form",
+      "item": "https://smallestateform.com/affidavit-of-heirship/texas/form/"
+    }
+  ]
+}`;
+---
+
+<StatePage
+  title="Affidavit of Heirship Form Texas: What It Contains & How to Fill It Out"
+  description="No single Texas heirship affidavit form exists — here's what the document must include, how to fill it correctly, and the most common errors that invalidate it."
+  canonicalUrl="https://smallestateform.com/affidavit-of-heirship/texas/form/"
+  jsonLd={[articleSchema, faqSchema, breadcrumbSchema]}
+>
+
+  <div class="max-w-4xl mx-auto px-6 mt-8 mb-4">
+    <a href="/affidavit-of-heirship/texas/" class="text-[#8B6914] hover:underline text-sm font-medium">← Texas Affidavit of Heirship hub</a>
+  </div>
+
+  <!-- Featured snippet -->
+  <div class="bg-[#EEE9E1] border-l-4 border-[#8B6914] p-6 mb-4 max-w-4xl mx-auto">
+    <p class="font-medium text-[#2D5016] leading-relaxed">
+      A Texas Affidavit of Heirship is a practitioner-drafted legal document — there is no single official state form — that contains the deceased person's identifying information, a complete marital and family history, an identification of all heirs and their shares, and sworn statements by two disinterested witnesses who knew the deceased personally. It must be notarized and recorded with the county clerk's deed records to be legally effective.
+    </p>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="bg-[#F7F4EF] border border-[#D4CCC0] rounded-lg p-4 mb-8 max-w-4xl mx-auto text-sm text-[#6B6560]">
+    <strong class="text-[#2C2C2A]">Legal information, not legal advice.</strong> This page reflects Texas Estates Code Chapter 203 as of July 2026. Laws change. Consult a licensed Texas attorney for advice specific to your situation, particularly if the estate involves contested heirship, multiple marriages, or substantial real property.
+  </div>
+
+  <!-- H1 -->
+  <div class="max-w-4xl mx-auto px-6 mb-8">
+    <h1 class="italic font-serif text-4xl text-[#2D5016] leading-tight">
+      Texas Affidavit of Heirship Form: What It Looks Like and How to Complete It
+    </h1>
+  </div>
+
+  <!-- Form app -->
+  <div class="max-w-4xl mx-auto px-6">
+    <AffidavitFormApp
+      client:load
+      documentType="affidavit-of-heirship"
+      state="Texas"
+      waitingDays={0}
+      statutoryReference="Texas Estates Code § 203.001"
+    />
+  </div>
+
+  <!-- Body content -->
+  <div class="max-w-4xl mx-auto px-6 py-12">
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">There Is No Official Texas State Form — Why That Matters</h2>
+    <p class="text-[#2C2C2A] leading-relaxed mb-4">
+      When most people search for an "affidavit of heirship form Texas," they expect to find a government-issued PDF they can fill in and sign. That form does not exist — and understanding why is the first step to completing the process correctly.
+    </p>
+    <p class="text-[#2C2C2A] leading-relaxed mb-4">
+      Texas law (Texas Estates Code § 203.001) describes the <strong>legal requirements</strong> that an Affidavit of Heirship must satisfy, but the state does not prescribe a mandatory template. This is different from vehicle transfers, where TxDMV publishes Form VTR-262 (a specific form that must be used). For real property heirship, practitioners draft forms that meet the statutory requirements — and county recorders accept any affidavit that satisfies them.
+    </p>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Should You Use This Form? Decision Framework</h2>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#2D5016] text-[#F7F4EF]">
+            <th class="p-3 text-left">Your Situation</th>
+            <th class="p-3 text-left">What You Need</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Property in Texas, no will or will not probated</td>
+            <td class="p-3 text-[#2D5016] font-medium">Texas Affidavit of Heirship under § 203.001 — this form</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">Vehicle only (no real property)</td>
+            <td class="p-3 text-[#2C2C2A]">TxDMV Form VTR-262 — different form entirely</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Estate value under $75,000, no real property</td>
+            <td class="p-3 text-[#2C2C2A]">Small estate affidavit may apply</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">Will exists and was admitted to probate</td>
+            <td class="p-3 text-[#2C2C2A]">Executor handles transfers through probate — affidavit not needed</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Heirship disputed between family members</td>
+            <td class="p-3 text-[#2C2C2A]">Probate court — affidavit requires undisputed clear heirship</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">What a Texas Affidavit of Heirship Must Contain</h2>
+    <p class="text-[#2C2C2A] leading-relaxed mb-4">Under Texas Estates Code § 203.001 and established county recorder practice, a legally sufficient Texas Affidavit of Heirship contains the following sections:</p>
+
+    <div class="space-y-4 mb-8">
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5">
+        <h3 class="font-medium text-[#2D5016] mb-2">1. Identification of the Deceased</h3>
+        <ul class="text-sm text-[#2C2C2A] space-y-1 list-disc list-inside pl-2">
+          <li>Full legal name (including aliases or maiden names)</li>
+          <li>Date of birth and date of death</li>
+          <li>County where death occurred and county where property is located</li>
+          <li>Whether the deceased died with or without a will, and whether it was probated</li>
+        </ul>
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5">
+        <h3 class="font-medium text-[#2D5016] mb-2">2. Complete Marital History</h3>
+        <p class="text-sm text-[#2C2C2A] mb-2">Every marriage the deceased ever had — not just the most recent one. For each marriage, state: name of spouse, date and place of marriage, how the marriage ended, and if by divorce: date and county of the divorce decree.</p>
+        <p class="text-sm text-[#8B6914]">This is the section most families get wrong. Missing a prior marriage is one of the most common reasons a heirship affidavit fails title review years later.</p>
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5">
+        <h3 class="font-medium text-[#2D5016] mb-2">3. Children and Other Heirs</h3>
+        <p class="text-sm text-[#2C2C2A] mb-2">All known children including biological, adopted, and deceased children. For each: full name and current address, whether living or deceased, and if deceased: when they died and who their heirs are.</p>
+        <p class="text-sm text-[#8B6914]">Children who predeceased the decedent are particularly important — their share passes to their own descendants, not back to surviving siblings.</p>
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5">
+        <h3 class="font-medium text-[#2D5016] mb-2">4. Description of the Property</h3>
+        <p class="text-sm text-[#2C2C2A]">The legal description of the property — metes-and-bounds or lot-and-block number from the county appraisal records. A street address alone is insufficient.</p>
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5">
+        <h3 class="font-medium text-[#2D5016] mb-2">5. Disinterested Witness Statements</h3>
+        <p class="text-sm text-[#2C2C2A]">Two disinterested witnesses must each sign a sworn statement. Each statement includes: witness's name and address, that the witness personally knew the deceased, that the witness has no financial interest in the estate, and the witness's sworn account of the deceased's family history.</p>
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5">
+        <h3 class="font-medium text-[#2D5016] mb-2">6. Notarization Block</h3>
+        <p class="text-sm text-[#2C2C2A]">The affidavit must be notarized after both witnesses have signed. Includes the notary's name, county, commission expiration date, date of notarization, and the notary's seal and signature.</p>
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">What "Disinterested Witness" Means</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div class="bg-[#EEF4E8] border border-[#2D5016] rounded-lg p-4">
+        <h4 class="font-medium text-[#2D5016] mb-2">Who qualifies:</h4>
+        <ul class="text-sm text-[#2C2C2A] space-y-1">
+          <li>• Neighbors who knew the family for years</li>
+          <li>• Former coworkers or business associates</li>
+          <li>• Friends from church, clubs, or community organizations</li>
+          <li>• Former employers or employees</li>
+        </ul>
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4">
+        <h4 class="font-medium text-[#C0392B] mb-2">Who does NOT qualify:</h4>
+        <ul class="text-sm text-[#2C2C2A] space-y-1">
+          <li>• Any heir named in the affidavit</li>
+          <li>• The person filing the affidavit</li>
+          <li>• Anyone who receives a bequest under a will</li>
+          <li>• Anyone owed money by the estate</li>
+          <li>• A spouse of an heir</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Real Property vs. Vehicle: Which Form Applies?</h2>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#2D5016] text-[#F7F4EF]">
+            <th class="p-3 text-left">Situation</th>
+            <th class="p-3 text-left">Form to Use</th>
+            <th class="p-3 text-left">Filed With</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Transferring real property (land, house, mineral rights)</td>
+            <td class="p-3 text-[#2D5016] font-medium">Practitioner-drafted under Texas Estates Code § 203.001</td>
+            <td class="p-3 text-[#2C2C2A]">County Clerk deed records</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">Transferring a motor vehicle</td>
+            <td class="p-3 text-[#2D5016] font-medium">TxDMV Form VTR-262</td>
+            <td class="p-3 text-[#2C2C2A]">County Tax Assessor-Collector</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-[#2C2C2A] leading-relaxed mb-6">
+      For the vehicle process, see the <a href="/affidavit-of-heirship/texas/vehicle/" class="text-[#8B6914] hover:underline">Texas Vehicle Heirship Affidavit (TxDMV Form VTR-262) guide</a>.
+    </p>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Common Mistakes That Get This Document Rejected</h2>
+    <div class="space-y-3 mb-8">
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Only one witness signed.</strong> Texas law requires exactly two disinterested witnesses. An affidavit with one witness does not satisfy § 203.001. The county clerk will reject it at the counter — there is no cure short of drafting and re-executing a new affidavit.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ A witness is also a named heir or beneficiary.</strong> This is the single most common error. The affidavit may appear valid, but any title company doing a proper review will challenge it.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ The marital history section is missing or incomplete.</strong> Every marriage in the deceased's lifetime must be listed. Title companies will require gaps to be resolved before insuring any future sale.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Photocopied or laser-printed notary seal instead of a wet ink or embossed seal.</strong> Harris County and other major Texas counties will reject affidavits with photocopied notary seals.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Incomplete deceased information.</strong> An affidavit that omits the deceased's date of birth or the county where death occurred creates an ambiguity that can delay recording or cause rejection.
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">After the Form Is Complete: Filing and Recording</h2>
+    <p class="text-[#2C2C2A] leading-relaxed mb-4">
+      File the affidavit with the <strong>county clerk in the county where the property is located</strong> — not the county where the deceased lived. For Harris County-specific filing procedures and fees, see the <a href="/affidavit-of-heirship/texas/harris-county/" class="text-[#8B6914] hover:underline">Harris County recording guide</a>.
+    </p>
+    <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5 mb-6">
+      <h3 class="font-medium text-[#2D5016] mb-3">What to bring:</h3>
+      <ul class="text-sm text-[#2C2C2A] space-y-1 list-disc list-inside pl-2">
+        <li>Original notarized affidavit (the county clerk records the original)</li>
+        <li>Photo ID</li>
+        <li>Payment for recording fees ($25 for the first page + $4 per additional page at most major Texas counties)</li>
+      </ul>
+      <p class="text-sm text-[#8B6914] mt-3">After recording: request <strong>certified copies</strong> before leaving. Banks, title companies, and other institutions require certified copies bearing the clerk's seal and recording reference number.</p>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">What Practitioners Know That Most Guides Skip</h2>
+    <div class="space-y-3 mb-8">
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">Harris County clerks will reject affidavits with photocopied or laser-printed notary seals.</strong> Only wet ink or embossed seals are accepted. If your notary used a rubber stamp with ink pad, that is wet ink and acceptable. A digital seal printed on a laser printer will be rejected in Harris County.
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">If the decedent died in another state but owned Texas property, the affidavit must comply with Texas law.</strong> A New York resident who owned land in Grimes County needs a Texas-compliant affidavit filed with the Grimes County Clerk. The two-witness requirement and marital history sections still apply.
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">An affidavit of heirship does not extinguish an unknown child's potential claim.</strong> If the deceased had a biological child who was unaware of their parentage, that child retains inheritance rights under Texas intestate succession regardless of what the affidavit says. The affidavit is a sworn declaration of known heirs, not a judicial determination.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FAQ -->
+  <section class="max-w-4xl mx-auto px-6 pb-16">
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-8">Frequently asked questions</h2>
+    <div class="space-y-4">
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Is there an official Texas state form for an Affidavit of Heirship?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          No. Texas does not publish an official state form for real property Affidavits of Heirship. Texas Estates Code § 203.001 sets the legal requirements, but the document itself is practitioner-drafted. Any properly executed affidavit that meets the statutory requirements will be accepted by county clerks.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          How many witnesses does a Texas Affidavit of Heirship require?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          Two disinterested witnesses are required. Each must personally know the deceased and have no financial interest in the estate. An affidavit with only one witness does not satisfy Texas Estates Code § 203.001.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Can a family member be a witness?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          Only if that family member has no financial interest in the estate. A distant relative who will not inherit and who knew the deceased qualifies. A child, sibling, or surviving spouse who will inherit — or whose spouse will inherit — does not qualify as a disinterested witness.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Does a Texas Affidavit of Heirship need to be recorded?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          Yes. Recording with the county clerk in the county where the property is located is required to make the affidavit effective against third parties. An unrecorded affidavit will not satisfy a title company reviewing a future sale.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          What is the filing fee?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          Major Texas counties charge $25 for the first page plus $4 per additional page. A typical affidavit runs 2–5 pages, putting the total filing fee at approximately $29–$41. Confirm current fees with the specific county clerk before filing.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Internal links -->
+  <div class="max-w-4xl mx-auto px-6 pb-12 text-sm text-[#6B6560]">
+    Related: <a href="/affidavit-of-heirship/texas/" class="text-[#8B6914] hover:underline">Texas Affidavit of Heirship hub</a> | <a href="/affidavit-of-heirship/texas/vehicle/" class="text-[#8B6914] hover:underline">Texas Vehicle Heirship Affidavit (TxDMV Form VTR-262)</a> | <a href="/affidavit-of-heirship/texas/harris-county/" class="text-[#8B6914] hover:underline">Recording in Harris County</a> | <a href="/" class="text-[#8B6914] hover:underline">Homepage</a>
+  </div>
+
+</StatePage>

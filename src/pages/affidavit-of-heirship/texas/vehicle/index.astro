@@ -1,0 +1,458 @@
+---
+export const prerender = true;
+import StatePage from '../../../../layouts/StatePage.astro';
+import AffidavitFormApp from '../../../../components/AffidavitFormApp';
+
+const articleSchema = `{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Texas Vehicle Heirship Affidavit: How to Transfer a Car Title After Death",
+  "description": "Transfer a car title in Texas after death using TxDMV Form VTR-262. No probate needed. Step-by-step guide to the vehicle heirship affidavit process.",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-31",
+  "author": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "smallestateform.com",
+    "url": "https://smallestateform.com"
+  }
+}`;
+
+const howToSchema = `{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Transfer a Vehicle Title in Texas Using a Heirship Affidavit",
+  "description": "Use TxDMV Form VTR-262 to transfer a car title to an heir in Texas without probate.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Obtain Form VTR-262",
+      "text": "Download the current version of Form VTR-262 from the official TxDMV website at txdmv.gov. Do not use third-party versions."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Complete the form",
+      "text": "Fill in all vehicle information (year, make, model, VIN, license plate), deceased owner information (name, date of death, address), and heir information (name, address, relationship)."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Notarize the form",
+      "text": "Sign the completed form before a notary public. The notary fee is typically $6–$10. No witnesses are required for this form."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Gather required documents",
+      "text": "Collect the original vehicle title, a certified copy of the death certificate, and a government-issued photo ID."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Submit to the county tax assessor-collector",
+      "text": "File the notarized VTR-262, original title, and certified death certificate at the county tax assessor-collector's office. Pay the applicable title transfer fee (approximately $28–$33)."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Receive the new title",
+      "text": "The new title in the heir's name will be issued within 1–3 business days for in-person filings or 2–4 weeks for mail submissions."
+    }
+  ]
+}`;
+
+const faqSchema = `{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is TxDMV Form VTR-262?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Form VTR-262 is the Texas Department of Motor Vehicles' Affidavit of Heirship for a Motor Vehicle. It allows an heir to transfer a vehicle title after the owner's death without probate, provided there is no lienholder and heirship is clear. It is governed by Texas Transportation Code § 501.976."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need witnesses to sign a Texas vehicle heirship affidavit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Form VTR-262 requires only the heir's notarized signature. The two-disinterested-witness requirement applies to real property Affidavits of Heirship under Texas Estates Code § 203.001, not to vehicle heirship affidavits. This is one of the key differences between the two documents."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use a Texas vehicle heirship affidavit if there is a lien on the car?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Form VTR-262 is only available for vehicles with no outstanding lienholder. If a lender holds a lien, you must first obtain a lien release from the lender before any heirship transfer can proceed. Contact the lender with a copy of the death certificate and request a payoff letter or lien release."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do I file Form VTR-262 in Texas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "File VTR-262 at the county tax assessor-collector's office — not the county clerk. Bring the original title, a certified death certificate, and a notarized copy of the completed form. Many counties accept mail submissions as well."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a vehicle heirship affidavit the same as an affidavit of heirship for real property in Texas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. They are separate documents. The vehicle affidavit (Form VTR-262) is governed by Texas Transportation Code § 501.976 and filed with the county tax assessor-collector. The real property affidavit is governed by Texas Estates Code § 203.001 and recorded in county deed records. The two forms are not interchangeable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to transfer a vehicle title in Texas using a heirship affidavit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In-person submissions are typically processed in 1–3 business days. Mail submissions take 2–4 weeks. Once the new title is issued in the heir's name, the transfer is complete."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to pay sales tax when I inherit a vehicle in Texas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Generally, no. Transfers of a vehicle to an heir through an affidavit of heirship are exempt from Texas motor vehicle sales tax under Texas Tax Code § 152.025. Confirm the current exemption with the county tax assessor-collector at the time of filing, as exemption requirements can change."
+      }
+    }
+  ]
+}`;
+
+const breadcrumbSchema = `{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://smallestateform.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Affidavit of Heirship",
+      "item": "https://smallestateform.com/affidavit-of-heirship/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Texas",
+      "item": "https://smallestateform.com/affidavit-of-heirship/texas/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Vehicle",
+      "item": "https://smallestateform.com/affidavit-of-heirship/texas/vehicle/"
+    }
+  ]
+}`;
+---
+
+<StatePage
+  title="Vehicle Heirship Affidavit Texas: TxDMV Form VTR-262 Guide"
+  description="Transfer a car title in Texas after death using TxDMV Form VTR-262. No probate needed. Step-by-step guide to the vehicle heirship affidavit process."
+  canonicalUrl="https://smallestateform.com/affidavit-of-heirship/texas/vehicle/"
+  jsonLd={[articleSchema, howToSchema, faqSchema, breadcrumbSchema]}
+>
+
+  <div class="max-w-4xl mx-auto px-6 mt-8 mb-4">
+    <a href="/affidavit-of-heirship/texas/" class="text-[#8B6914] hover:underline text-sm font-medium">← Texas Affidavit of Heirship (all types)</a>
+  </div>
+
+  <!-- Featured snippet -->
+  <div class="bg-[#EEE9E1] border-l-4 border-[#8B6914] p-6 mb-4 max-w-4xl mx-auto">
+    <p class="font-medium text-[#2D5016] leading-relaxed">
+      A Texas Vehicle Heirship Affidavit (TxDMV Form VTR-262) is a notarized document that allows an heir to transfer ownership of a motor vehicle after the owner's death — without opening a probate case. It applies only to vehicles with no outstanding lienholder, costs approximately $10 to notarize, and is submitted to the county tax assessor-collector along with the original title and a certified death certificate.
+    </p>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="bg-[#F7F4EF] border border-[#D4CCC0] rounded-lg p-4 mb-8 max-w-4xl mx-auto text-sm text-[#6B6560]">
+    <strong class="text-[#2C2C2A]">Legal information, not legal advice.</strong> This page reflects Texas Transportation Code § 501.976 and TxDMV procedures as of July 2026. Laws and agency procedures change. Consult a licensed Texas attorney for advice specific to your situation.
+  </div>
+
+  <!-- H1 -->
+  <div class="max-w-4xl mx-auto px-6 mb-8">
+    <h1 class="italic font-serif text-4xl text-[#2D5016] leading-tight">
+      Texas Vehicle Heirship Affidavit: How to Transfer a Car Title After Death
+    </h1>
+  </div>
+
+  <!-- Form app -->
+  <div class="max-w-4xl mx-auto px-6">
+    <AffidavitFormApp
+      client:load
+      documentType="affidavit-of-heirship"
+      state="Texas"
+      county="Vehicle"
+      waitingDays={0}
+      statutoryReference="Texas Transportation Code § 501.976 / TxDMV Form VTR-262"
+    />
+  </div>
+
+  <!-- Body content -->
+  <div class="max-w-4xl mx-auto px-6 py-12">
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Real-World Example: Two Vehicles, No Probate, Bexar County</h2>
+    <p class="text-[#2C2C2A] leading-relaxed mb-4">
+      Carlos's father died in San Antonio without a will. He left two vehicles: a 2019 Ford F-150 and a 2016 Honda Civic, both titled in his name with no lienholder listed on either title. Carlos is the sole heir.
+    </p>
+    <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-xl p-5 mb-6">
+      <h3 class="font-medium text-[#2D5016] mb-3">What Carlos did:</h3>
+      <ol class="text-sm text-[#2C2C2A] space-y-2 list-decimal list-inside">
+        <li>Downloaded Form VTR-262 from txdmv.gov — two copies, one for each vehicle.</li>
+        <li>Completed each form with the vehicle's VIN, the date of his father's death, and his own name and address as heir.</li>
+        <li>Had both forms notarized at a UPS Store for $8 each.</li>
+        <li>Gathered the original titles, two certified death certificates ($21 each), and his driver's license.</li>
+        <li>Filed both forms at the Bexar County Tax Assessor-Collector's office in a single visit.</li>
+        <li>Paid the title transfer fee ($33 per vehicle) and received confirmation.</li>
+        <li>Received the new titles in his name by mail 10 days later.</li>
+      </ol>
+      <p class="text-sm text-[#6B6560] mt-3"><strong>Total cost:</strong> Under $130 for both vehicles. <strong>Total probate avoided:</strong> entirely.</p>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Vehicle vs. Real Property Heirship: Key Differences</h2>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#2D5016] text-[#F7F4EF]">
+            <th class="p-3 text-left">Document</th>
+            <th class="p-3 text-left">Governs</th>
+            <th class="p-3 text-left">Filed With</th>
+            <th class="p-3 text-left">Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Affidavit of Heirship (real property)</td>
+            <td class="p-3 text-[#2C2C2A]">Texas Estates Code § 203.001</td>
+            <td class="p-3 text-[#2C2C2A]">County Clerk deed records</td>
+            <td class="p-3 text-[#2C2C2A]">Land, mineral rights, real estate</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 font-medium text-[#2D5016]">VTR-262 (motor vehicle)</td>
+            <td class="p-3 text-[#2C2C2A]">Texas Transportation Code § 501.976</td>
+            <td class="p-3 text-[#2C2C2A]">County Tax Assessor-Collector</td>
+            <td class="p-3 text-[#2C2C2A]">Transfer vehicle title to heir</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-[#2C2C2A] leading-relaxed mb-6">
+      This page covers vehicles only. If the estate includes real property, see the <a href="/affidavit-of-heirship/texas/" class="text-[#8B6914] hover:underline">Texas Affidavit of Heirship guide</a> — the forms and filing process are completely different.
+    </p>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Should You Use Form VTR-262? Decision Framework</h2>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#2D5016] text-[#F7F4EF]">
+            <th class="p-3 text-left">Situation</th>
+            <th class="p-3 text-left">Best Path</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Vehicle has no lienholder, sole heir is clear</td>
+            <td class="p-3 text-[#2D5016] font-medium">VTR-262 — straightforward</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">Vehicle has no lienholder, multiple heirs agree on one person</td>
+            <td class="p-3 text-[#2D5016] font-medium">VTR-262 — one heir files, others sign off</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Vehicle has an outstanding lien</td>
+            <td class="p-3 text-[#2C2C2A]">Obtain lien release first, then VTR-262</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">Heirship is disputed between family members</td>
+            <td class="p-3 text-[#2C2C2A]">Probate — court determines rightful heir</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 text-[#2C2C2A]">Surviving spouse is sole heir (community property vehicle)</td>
+            <td class="p-3 text-[#2C2C2A]">VTR-431 may apply — faster process</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 text-[#2C2C2A]">Vehicle titled in another state</td>
+            <td class="p-3 text-[#2C2C2A]">Follow that state's process — VTR-262 does not apply</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Common Mistakes That Get This Document Rejected</h2>
+    <div class="space-y-3 mb-8">
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Using the general real property heirship affidavit instead of VTR-262.</strong> The county tax assessor-collector will return it. The VTR-262 is a TxDMV-specific form and the only document accepted for vehicle title transfers.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Vehicle has outstanding registration fees.</strong> TxDMV can reject the VTR-262 if the vehicle has unpaid registration fees — even when there is no lienholder. Call the county tax assessor-collector to check registration status before filing.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Bringing a photocopy of the death certificate instead of a certified copy.</strong> County offices require a certified copy issued by the vital records office. A photocopy will be rejected at the counter.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Filing at the county clerk's office instead of the county tax assessor-collector.</strong> These are two different offices. The county clerk handles real property records. The county tax assessor-collector handles vehicle title transfers.
+      </div>
+      <div class="bg-[#FEF2F2] border border-[#C0392B] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong>❌ Transcription errors in the VIN.</strong> A single digit off in the 17-character VIN causes a mismatch and rejection. Copy the VIN directly from the title document or the vehicle's dashboard.
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Step-by-Step: How to Transfer a Vehicle Title Using VTR-262</h2>
+    <div class="space-y-4 mb-8">
+      <div class="flex gap-4 p-4 bg-[#EEE9E1] rounded-lg border border-[#D4CCC0]">
+        <div class="w-8 h-8 bg-[#2D5016] text-[#F7F4EF] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">1</div>
+        <div>
+          <strong class="text-[#2D5016]">Obtain Form VTR-262</strong>
+          <p class="text-[#2C2C2A] text-sm mt-1">Download Form VTR-262 from the official TxDMV website at txdmv.gov. The form is free. Do not use third-party versions — use only the current official form, as TxDMV updates forms periodically and county offices will reject outdated versions.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#EEE9E1] rounded-lg border border-[#D4CCC0]">
+        <div class="w-8 h-8 bg-[#2D5016] text-[#F7F4EF] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">2</div>
+        <div>
+          <strong class="text-[#2D5016]">Complete the form</strong>
+          <p class="text-[#2C2C2A] text-sm mt-1">Fill in vehicle information (year, make, model, body style, VIN, license plate), deceased owner information (full legal name, date of death, address at time of death), and heir information (your full legal name, address, relationship to the deceased).</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#EEE9E1] rounded-lg border border-[#D4CCC0]">
+        <div class="w-8 h-8 bg-[#2D5016] text-[#F7F4EF] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">3</div>
+        <div>
+          <strong class="text-[#2D5016]">Have the form notarized</strong>
+          <p class="text-[#2C2C2A] text-sm mt-1">Sign the completed form before a notary public. The notary fee is typically $6–$10. Unlike the real property Affidavit of Heirship, Form VTR-262 does not require two disinterested witnesses — the heir's own signature before a notary is sufficient.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#EEE9E1] rounded-lg border border-[#D4CCC0]">
+        <div class="w-8 h-8 bg-[#2D5016] text-[#F7F4EF] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">4</div>
+        <div>
+          <strong class="text-[#2D5016]">Gather required documents</strong>
+          <p class="text-[#2C2C2A] text-sm mt-1">Bring: completed notarized VTR-262, original title (not a copy), certified copy of the death certificate, and photo ID. If the original title is lost, file for a duplicate title (Form VTR-34) before attempting the heirship transfer.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#EEE9E1] rounded-lg border border-[#D4CCC0]">
+        <div class="w-8 h-8 bg-[#2D5016] text-[#F7F4EF] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">5</div>
+        <div>
+          <strong class="text-[#2D5016]">Submit at the county tax assessor-collector</strong>
+          <p class="text-[#2C2C2A] text-sm mt-1">The county tax assessor-collector's office processes vehicle title transfers — not the county clerk. Title transfer fees are approximately $28–$33. Heirship transfers are generally exempt from motor vehicle sales tax under Texas Tax Code § 152.025 — confirm with the county.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-[#EEE9E1] rounded-lg border border-[#D4CCC0]">
+        <div class="w-8 h-8 bg-[#2D5016] text-[#F7F4EF] rounded-full flex items-center justify-center font-serif text-sm shrink-0 mt-0.5">6</div>
+        <div>
+          <strong class="text-[#2D5016]">Receive the new title</strong>
+          <p class="text-[#2C2C2A] text-sm mt-1">Processing time is typically 1–3 business days for in-person submissions and 2–4 weeks by mail. The new title will be issued in your name as the heir.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">Cost Comparison: VTR-262 vs. Probate</h2>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-[#2D5016] text-[#F7F4EF]">
+            <th class="p-3 text-left">Method</th>
+            <th class="p-3 text-left">Typical Cost</th>
+            <th class="p-3 text-left">Timeline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 font-medium text-[#2D5016]">Form VTR-262 (heirship affidavit)</td>
+            <td class="p-3 text-[#2C2C2A]">$10–$50 (notary + title fees)</td>
+            <td class="p-3 text-[#2C2C2A]">1–4 weeks</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0] bg-[#F7F4EF]">
+            <td class="p-3 font-medium text-[#2D5016]">Muniment of title (probate)</td>
+            <td class="p-3 text-[#2C2C2A]">$500–$2,000 attorney fees</td>
+            <td class="p-3 text-[#2C2C2A]">2–4 months</td>
+          </tr>
+          <tr class="border-b border-[#D4CCC0]">
+            <td class="p-3 font-medium text-[#2D5016]">Full probate</td>
+            <td class="p-3 text-[#2C2C2A]">$3,000–$10,000+</td>
+            <td class="p-3 text-[#2C2C2A]">6–24 months</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-4">What Practitioners Know That Most Guides Skip</h2>
+    <div class="space-y-3 mb-8">
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">Outstanding registration fees can derail a clean VTR-262.</strong> TxDMV can reject the transfer if the vehicle has unpaid registration fees — even with no lienholder and a perfectly completed form. Before going to the office, call the county tax assessor-collector to check the vehicle's registration status.
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">If the vehicle was community property and the surviving spouse is the sole heir, a faster process may apply.</strong> Form VTR-431 (Surviving Spouse's Affidavit of Heirship) is designed specifically for this situation. Ask the county tax assessor-collector whether VTR-431 is the right form before filing VTR-262.
+      </div>
+      <div class="bg-[#EEE9E1] border border-[#D4CCC0] rounded-lg p-4 text-sm text-[#2C2C2A]">
+        <strong class="text-[#2D5016]">Multiple vehicles each require their own form.</strong> There is no batch filing for VTR-262 — each vehicle has its own form, its own notarization, and its own title transfer fee. If an estate includes three vehicles, bring three completed, notarized forms.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FAQ -->
+  <section class="max-w-4xl mx-auto px-6 pb-16">
+    <h2 class="font-serif text-2xl text-[#2D5016] mb-8">Frequently asked questions</h2>
+    <div class="space-y-4">
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          What is TxDMV Form VTR-262?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          Form VTR-262 is the Texas Department of Motor Vehicles' Affidavit of Heirship for a Motor Vehicle. It allows an heir to transfer a vehicle title after the owner's death without probate, provided there is no lienholder and heirship is clear. It is governed by Texas Transportation Code § 501.976.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Do I need witnesses to sign a Texas vehicle heirship affidavit?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          No. Form VTR-262 requires only the heir's notarized signature. The two-disinterested-witness requirement applies to real property Affidavits of Heirship under Texas Estates Code § 203.001, not to vehicle heirship affidavits.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Can I use a Texas vehicle heirship affidavit if there is a lien on the car?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          No. Form VTR-262 is only available for vehicles with no outstanding lienholder. If a lender holds a lien, you must first obtain a lien release from the lender before any heirship transfer can proceed.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Where do I file Form VTR-262 in Texas?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          File VTR-262 at the county tax assessor-collector's office — not the county clerk. Bring the original title, a certified death certificate, and a notarized copy of the completed form. Many counties accept mail submissions as well.
+        </div>
+      </details>
+      <details class="bg-[#EEE9E1] rounded-xl border border-[#D4CCC0]">
+        <summary class="p-6 font-medium text-[#2D5016] cursor-pointer list-none flex items-center justify-between">
+          Do I have to pay sales tax when I inherit a vehicle in Texas?
+          <span class="text-[#8B6914] text-xl">+</span>
+        </summary>
+        <div class="px-6 pb-6 text-[#2C2C2A] leading-relaxed text-sm">
+          Generally, no. Transfers of a vehicle to an heir through an affidavit of heirship are exempt from Texas motor vehicle sales tax under Texas Tax Code § 152.025. Confirm the current exemption with the county tax assessor-collector at the time of filing.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Internal links -->
+  <div class="max-w-4xl mx-auto px-6 pb-12 text-sm text-[#6B6560]">
+    Related: <a href="/affidavit-of-heirship/texas/" class="text-[#8B6914] hover:underline">Texas Affidavit of Heirship (real property)</a> | <a href="/affidavit-of-heirship/texas/form/" class="text-[#8B6914] hover:underline">What the Affidavit of Heirship Form Must Contain</a> | <a href="/affidavit-of-heirship/texas/harris-county/" class="text-[#8B6914] hover:underline">Recording in Harris County</a> | <a href="/" class="text-[#8B6914] hover:underline">Homepage</a>
+  </div>
+
+</StatePage>
